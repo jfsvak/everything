@@ -1,0 +1,31 @@
+@import "./variables";
+.loader-holder {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 101;
+    background-color: @transparent-black;
+    .loader {
+        border: 10px solid @white;
+        border-top: 10px solid @light-blue;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 1s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -40px;
+        margin-left: -40px;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

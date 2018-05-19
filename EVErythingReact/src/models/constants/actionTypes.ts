@@ -1,0 +1,7 @@
+export const LANG_RESOURCE_ACTION = 'LANG_RESOURCE_ACTION';
+export const BEGIN_AJAX_CALL = 'BEGIN_AJAX_CALL';
+export const END_AJAX_CALL = 'END_AJAX_CALL';
+export const AJAX_CALL_ERROR = 'AJAX_CALL_ERROR';
+
+export const DUMMY_ACTION = "DUMMY_ACTION"
+export const DUMMY_FAILED = "DUMMY_FAILED"

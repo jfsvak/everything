@@ -1,0 +1,57 @@
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+
+buildscript {
+	ext {
+		swagger_version = '2.3.1'
+	}
+}
+
+repositories {
+	maven {
+			url "https://repo.sebank.se/artifactory/central-cache"
+	}
+}
+
+
+
+configurations {
+    swaggerCompile
+}
+
+dependencies {
+	swaggerCompile group:'io.swagger', name: 'swagger-codegen-cli', version: swagger_version
+}
+
+
+
+task npm_install (type:Exec) {
+	outputs.upToDateWhen { false } 
+
+	workingDir "${rootDir}"
+	if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'npm', 'install'
+	} else {
+		commandLine 'npm', 'install'
+	}
+}
+
+task npm_build (type:Exec, dependsOn: ['npm_install']) {
+	workingDir "${rootDir}"
+	if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'npm', 'run', 'build'
+	} else {
+		commandLine 'npm', 'run', 'build'
+	}
+}
+
+task npm (dependsOn: ['npm_build']) {
+	outputs.upToDateWhen { false } 
+
+	doLast {	
+		ant.copy(todir:"../Ofx.Web/wwwroot" ) {
+			fileset( dir:"${rootDir}/dist" )
+		}
+	}
+}
+
