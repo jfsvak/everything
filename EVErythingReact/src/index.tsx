@@ -6,7 +6,8 @@ import configureStore from './store/configureStore';
 import configs from './configs';
 import App from './components/App';
 import './favicon.ico';
-import './styles/main.less'
+import './styles/main.less';
+import './styles/custom2.css';
 
 // Configure the store and pass it to provider to wrap it
 const store = configureStore();

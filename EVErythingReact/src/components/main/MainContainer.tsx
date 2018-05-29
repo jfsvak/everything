@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PilotsContainer from '../pilots/PilotsContainer';
 import * as routePaths from '../../models/constants/routePaths';
 import Routing from '../Routing';
-import SideMenu from '../sidemenu/SideMenu';
 
 export interface IMainContainerProps {
 
@@ -21,11 +20,9 @@ class MainContainer extends React.Component<IMainContainerProps, IMainContainerS
 
     render() {
         return (
-            <div className="container-float" style={{backgroundColor: 'red', height: '300px'}}>
+            <div className="wrapper" style={{backgroundColor: 'red', height: '300px'}}>
                 This guy should layout the top bar, side menu, footer etc.
                 and then switch the main content with a router depending on the route
-                
-                <SideMenu/>
                 <div className="container" style={{backgroundColor: 'lightblue'}}>
                     <Switch>
                         <Routing path={routePaths.MainRoutes.Pilots} component={PilotsContainer} props={null}/>
