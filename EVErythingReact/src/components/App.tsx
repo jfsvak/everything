@@ -10,9 +10,8 @@ import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
 
 //Here we are asynchronous loading our components based on their path
+const MainContainer = Loadable({ loader: () => import('./main/MainContainer'), loading: () => null});
 const PilotsContainer = Loadable({ loader: () => import('./pilots/PilotsContainer'), loading: () => null });
-const DummyContainer = Loadable({ loader: () => import('./dummyContainer/DummyContainer'), loading: () => null });
-const DummyContainer2 = Loadable({ loader: () => import('./dummyContainer/DummyContainer2'), loading: () => null });
 const NotFound = Loadable({ loader: () => import('./common/NotFound'), loading: () => null });
 
 export interface IAppProps {
@@ -49,18 +48,15 @@ class App extends React.Component<IAppProps, IAppState>  {
             changeLanguage: this.changeLang
         }
         return (
-            <div className="app-container">
-                <div>{this.state.language.shared.title} and number of ajax in progress: {this.props.progress}</div>
+            <div className="app-container" style={{border: 'solid', backgroundColor: 'black'}}>
 
                 <Loader callsInProgress={this.props.progress} />
 
                 <Switch>
-                    <Routing path="/" exact component={PilotsContainer} props={propsToSend} />
-                    <Routing path={routePaths.MainRoutes.Pilots} component={PilotsContainer} props={propsToSend} />
-                    <Routing path={routePaths.MainRoutes.Dummy} component={DummyContainer} props={propsToSend} />
-                    <Routing path={routePaths.MainRoutes.Dummy2} component={DummyContainer2} props={propsToSend} />
+                    <Routing path="/" exact component={MainContainer} props={propsToSend} />
                     <Routing path="*" component={NotFound} props={null} />
                 </Switch>
+                <div className="fixed-bottom">{this.state.language.shared.title} and number of ajax in progress: {this.props.progress}</div>
             </div>
         );
     }
