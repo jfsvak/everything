@@ -4,6 +4,7 @@
 export const enum MainRoutes {
     Dummy = '/dummy',
     Dummy2 = "/dummy2",
+    Accounts = "/accounts",
     Pilots = "/pilots"
 }
 

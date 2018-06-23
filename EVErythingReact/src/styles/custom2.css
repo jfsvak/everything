@@ -8,7 +8,7 @@
     overflow-x: hidden;
   }
   
-  #wrapper {
+  #fullpage-wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -16,17 +16,17 @@
     transition: all 0.5s ease;
   }
   
-  #wrapper.toggled {
-    padding-left: 250px;
+  #fullpage-wrapper.toggled {
+    padding-left: 200px;
   }
   
   #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    left: 200px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -200px;
     overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
@@ -35,8 +35,8 @@
     transition: all 0.5s ease;
   }
   
-  #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+  #fullpage-wrapper.toggled #sidebar-wrapper {
+    width: 200px;
   }
   
   #page-content-wrapper {
@@ -45,7 +45,7 @@
     padding: 15px;
   }
   
-  #wrapper.toggled #page-content-wrapper {
+  #fullpage-wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -250px;
   }
@@ -99,23 +99,23 @@
   }
   
   @media(min-width:768px) {
-    #wrapper {
+    #fullpage-wrapper {
       padding-left: 0;
     }
-    #wrapper.toggled {
+    #fullpage-wrapper.toggled {
       padding-left: 250px;
     }
     #sidebar-wrapper {
       width: 0;
     }
-    #wrapper.toggled #sidebar-wrapper {
+    #fullpage-wrapper.toggled #sidebar-wrapper {
       width: 250px;
     }
     #page-content-wrapper {
       padding: 20px;
       position: relative;
     }
-    #wrapper.toggled #page-content-wrapper {
+    #fullpage-wrapper.toggled #page-content-wrapper {
       position: relative;
       margin-right: 0;
     }

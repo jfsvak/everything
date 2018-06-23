@@ -13,14 +13,30 @@ class SideMenu extends React.Component<ISideMenuProps> {
 
     render() {
         return (
-            <nav className="col-md-3 col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar">
+            <nav id="sidebar-wrapper">
+                <ul className="sidebar-nav">
+                    <li className="sidebar-brand">
+                        <a href="#">EVErything</a>
+                    </li>
+                    <li>
+                        <Link to={routePaths.MainRoutes.Accounts}>Accounts</Link>
+                    </li>
+                    <li>
+                        <Link to={routePaths.MainRoutes.Pilots}>Pilots</Link>
+                    </li>
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                </ul>
+                {/*
+            <nav id="sidebar-wrapper" className="col-md-3 col-xs-1 p-l-0 p-r-0 collapse in" >
                 <div className="sidebar-header">
                     <h3>Side menu</h3>
                 </div>
                 
                 <ul className="list-unstyled components">
                     <li className="active"><a href="#">Home</a></li>
-
+                    
                     <li>
                         <a href="#accountsSubmenu" data-toggle="collapse" aria-expanded="false">Accounts</a>
                         <ul className="collapse list-unstyled" id="accountsSubmenu">
@@ -30,7 +46,8 @@ class SideMenu extends React.Component<ISideMenuProps> {
                     </li>
                     <li><Link to={routePaths.MainRoutes.Pilots}>Pilots</Link></li>
                 </ul>
-
+            </nav>
+                */}
             </nav>
         );
     }
