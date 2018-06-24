@@ -12,6 +12,7 @@ import SideMenu from './sidemenu/SideMenu';
 
 //Here we are asynchronous loading our components based on their path
 const MainContainer = Loadable({ loader: () => import('./main/MainContainer'), loading: () => null});
+const AccountsContainer = Loadable({ loader: () => import('./accounts/AccountsContainer'), loading: () => null });
 const PilotsContainer = Loadable({ loader: () => import('./pilots/PilotsContainer'), loading: () => null });
 const NotFound = Loadable({ loader: () => import('./common/NotFound'), loading: () => null });
 
@@ -69,6 +70,7 @@ class App extends React.Component<IAppProps, IAppState>  {
                     <div className="container-fluid">
                         <Switch>
                             <Routing path="/" exact component={MainContainer} props={propsToSend}/>
+                            <Routing path={routePaths.MainRoutes.Accounts} component={AccountsContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Pilots} component={PilotsContainer} props={propsToSend}/>
                         </Switch>
                     </div>

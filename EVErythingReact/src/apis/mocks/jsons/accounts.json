@@ -1,0 +1,21 @@
+[
+    {
+        "name": "Acc 1",
+        "pilotIds": [
+            "1",
+            4
+        ]
+    },
+    {
+        "name": "Acc 2",
+        "pilotIds": [
+            "2"
+        ]
+    },
+    {
+        "name": "Acc 3",
+        "pilotIds": [
+            "3"
+        ]
+    }
+]

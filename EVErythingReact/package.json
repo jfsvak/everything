@@ -48,6 +48,7 @@
 		"less": "^3.0.4",
 		"less-loader": "^4.1.0",
 		"raw-loader": "^0.5.1",
+		"redux-devtools-extension": "^2.13.5",
 		"redux-immutable-state-invariant": "^2.1.0",
 		"style-loader": "^0.21.0",
 		"sw-precache-webpack-plugin": "^0.11.5",
