@@ -8,7 +8,7 @@ export interface IPilotCardProps {
 class PilotCard extends React.Component<IPilotCardProps> {
     render() {
         return (
-            <span>{this.props.pilot}</span>
+            <span className="card" style={{width: "6rem"}}>{this.props.pilot}</span>
         );
     }
 }

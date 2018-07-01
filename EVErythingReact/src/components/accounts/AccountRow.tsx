@@ -9,9 +9,11 @@ class AccountRow extends React.Component<IAccountRowProps> {
     render() {
         console.log("accountRow. account", this.props.account);
         return (
-            <div>
+            <div className="row">
                 {this.props.account && this.props.account.pilotIds.map((p, index) =>
-                    <PilotCard key={index} pilot={p}/>
+                    <div className="col-sm-6" key={index}>
+                        <PilotCard key={index} pilot={p}/>
+                    </div>
                 )}
             </div>
         );

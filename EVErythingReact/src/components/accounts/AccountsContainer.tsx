@@ -21,7 +21,7 @@ class AccountsContainer extends React.Component<IAccountsContainerProps> {
     render() {
         console.log("AccountsContainer.accounts", this.props.accounts);
         return (
-            <div>
+            <div className="container-fluid">
                 {this.props.accounts && this.props.accounts.map((account, index) => 
                     <AccountRow key={index} account={account}/>
                 )}
