@@ -4,24 +4,16 @@ import * as accountsActions from '../../actions/accountsActions';
 import AccountRow from './AccountRow';
 import { bindActionCreators } from 'redux';
 
-export interface IAccountsContainerProps {
+export interface IAccountListProps {
     accounts: any;
-    accountsActions: any;
 }
 
-class AccountsContainer extends React.Component<IAccountsContainerProps> {
-    componentDidMount() {
-        console.log("In AccountsContainer.componentDidMount:");
-        this.props.accountsActions.getAccounts().then(() => {
-            // do whatever, but its voluntary. 
-            // Data is now already available in props/state if subscribed to in reduc
-        });
-    }
+class AccountList extends React.Component<IAccountListProps> {
 
     render() {
-        console.log("AccountsContainer.accounts", this.props.accounts);
+        console.log("AccountList.accounts", this.props.accounts);
         return (
-            <div className="container-fluid">
+            <div className="account-list">
                 {this.props.accounts && this.props.accounts.map((account, index) => 
                     <AccountRow key={index} account={account}/>
                 )}
@@ -36,10 +28,4 @@ function mapStateToProps(state) {
     };
 };
 
-function mapDispatchToProps(dispatch) {
-    return {
-        accountsActions: bindActionCreators(accountsActions as any, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountsContainer);
+export default connect(mapStateToProps)(AccountList);

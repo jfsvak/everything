@@ -1,5 +1,4 @@
 import * as React from 'react';
-// 
 
 export interface IPilotCardProps {
     pilot: any;
@@ -8,7 +7,10 @@ export interface IPilotCardProps {
 class PilotCard extends React.Component<IPilotCardProps> {
     render() {
         return (
-            <span className="card" style={{width: "6rem"}}>{this.props.pilot}</span>
+            <div className="pilot-card">
+                <p>id: {this.props.pilot.id}</p>
+                <p>Name: {this.props.pilot.name}</p>
+            </div>
         );
     }
 }

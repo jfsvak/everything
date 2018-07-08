@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as Loadable from 'react-loadable';
 import Routing from "./Routing";
 import * as routePaths from '../models/constants/routePaths';
@@ -9,6 +8,8 @@ import Loader from './common/Loader';
 import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
 import SideMenu from './sidemenu/SideMenu';
+
+import * as accountsActions from './../actions/accountsActions';
 
 //Here we are asynchronous loading our components based on their path
 const MainContainer = Loadable({ loader: () => import('./main/MainContainer'), loading: () => null});
@@ -18,6 +19,7 @@ const NotFound = Loadable({ loader: () => import('./common/NotFound'), loading: 
 
 export interface IAppProps {
     progress: number;
+    dispatch: Function;
 }
 
 export interface IAppState {
@@ -40,6 +42,11 @@ class App extends React.Component<IAppProps, IAppState>  {
         this.toggleMenu = this.toggleMenu.bind(this);
 
         this.wrapperDiv = React.createRef();
+    }
+
+    componentDidMount(): void {
+        const { dispatch } = this.props;
+        dispatch(accountsActions.getAccounts());
     }
 
     changeLang(code: string): void {

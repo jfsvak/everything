@@ -23,6 +23,10 @@ export function getJson(type: jsonTypes): any {
     return new Promise((resolve, reject) => { simulateData(resolve, getData(type), 200, configs.delay) });
 }
 
+export function getPromise(data: any): any {
+    return new Promise((resolve, reject) => { simulateData(resolve, data, 200, configs.delay) });
+}
+
 function simulateData(resolve: any, data: any, status: number, timeout: number): any {
     return setTimeout(() => { resolve(Object.assign({}, { status: status, data: data })); }, timeout);
 }

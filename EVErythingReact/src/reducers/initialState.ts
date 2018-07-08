@@ -1,5 +1,6 @@
 export default {
-    ajaxCallsInProgress: 0,
     accounts: [],
+    pilots: [],
+    ajaxCallsInProgress: 0,
     dummyResponse: {}
 };
