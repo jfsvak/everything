@@ -8,9 +8,10 @@ buildscript {
 }
 
 repositories {
-	maven {
-			url "https://repo.sebank.se/artifactory/central-cache"
-	}
+	mavenCentral()
+	//maven {
+	//		url "https://repo.sebank.se/artifactory/central-cache"
+	//}
 }
 
 
@@ -49,9 +50,34 @@ task npm (dependsOn: ['npm_build']) {
 	outputs.upToDateWhen { false } 
 
 	doLast {	
-		ant.copy(todir:"../Ofx.Web/wwwroot" ) {
+		ant.copy(todir:"../EVErything.Web/wwwroot" ) {
 			fileset( dir:"${rootDir}/dist" )
 		}
 	}
+
+task swagger_clean {
+	doLast {
+		new File("${projectDir}/src/apis/generated").deleteDir()
+		new File("${projectDir}/generated").deleteDir()
+		new File("${projectDir}/src/apis/generated").mkdirs()
+	}
+}
+
+task swagger_generate(type:JavaExec, dependsOn: ['swagger_clean']) {
+	main = 'io.swagger.codegen.SwaggerCodegen'
+	classpath = configurations.swaggerCompile
+	args "generate", "-o", "${projectDir}/generated", "-t", "${projectDir}/template/TypescriptNode", "-l", "typescript-node", "-i", "http://localhost:5001/swagger/v1/swagger.json"
+
+}
+
+task swagger(dependsOn: ['swagger_generate']) {
+	doLast {
+		ant.copy(todir:"${projectDir}/src/apis/generated") {
+			fileset(file:"${projectDir}/generated/api.ts")
+		}
+
+		new File("${projectDir}/generated").deleteDir()
+	}
+}
 }
 

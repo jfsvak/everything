@@ -1,4 +1,5 @@
 import configs from '../configs';
+import { AccountViewModel } from './generated/api';
 
 import { getJson, jsonTypes, getPromise } from './mocks/mockService';
 
@@ -14,7 +15,7 @@ class accountsApi {
         if (configs.type === 'LOCAL') {
             return getJson(jsonTypes.GET_ACCOUNTS_API);
         }
-        return {};
+        return ;
     }
 }
 

@@ -27,6 +27,7 @@ namespace EVErything.Web
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EVErything;Trusted_Connection=True;ConnectRetryCount=0"));
 
             services.AddScoped<Repository<Character>>();
+            services.AddScoped<Repository<Account>>();
 
             services.AddSwaggerGen(c =>
             {
@@ -49,6 +50,7 @@ namespace EVErything.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts API v1");
             });
 
+            app.UseStaticFiles();
 
             app.UseMvc();
         }
