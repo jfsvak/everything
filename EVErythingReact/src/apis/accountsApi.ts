@@ -1,5 +1,5 @@
 import configs from '../configs';
-import { AccountViewModel } from './generated/api';
+//import { AccountViewModel } from './generated/api';
 
 import { getJson, jsonTypes, getPromise } from './mocks/mockService';
 

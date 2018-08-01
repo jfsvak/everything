@@ -21,7 +21,7 @@ namespace EVErything.Web.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<AccountViewModel>)]
+        [ProducesResponseType(200, Type = typeof(List<AccountViewModel>))]
         public IActionResult Get()
         {
 
