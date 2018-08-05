@@ -16,7 +16,7 @@ namespace EVErything.Web.Controllers
         public IActionResult Get()
         {
             var charApi = new CharacterApi();
-            charApi.GetCharactersCharacterId();
+            //charApi.GetCharactersCharacterId();
             //ViewBag.Message = "Denne side er til testing ";
 
                 //Server status API
@@ -31,19 +31,19 @@ namespace EVErything.Web.Controllers
             var universeApi = new UniverseApi();
 
             var systemKills = universeApi.GetUniverseSystemKills();
-            foreach (var kill in systemKills)
-            {
-                var system = universeApi.GetUniverseSystemsSystemId(kill.SystemId);
-                // do something with system.Name;
-            }
-            var kills = systemKills;
+            //foreach (var kill in systemKills)
+            //{
+            //    var system = universeApi.GetUniverseSystemsSystemId(kill.SystemId);
+            //    // do something with system.Name;
+            //}
+            //var kills = systemKills;
             //ViewBag.Kills = systemKills;
 
                 //Sorteret kills mere end 10 kills
-            var sortedKills = systemKills.Where(p => p.ShipKills > 10);
+            var filteredKills = systemKills.Where(p => p.ShipKills > 10);
             //ViewBag.SortedKills = sortedKills.ToList();
 
-            return Ok(sortedKills.ToList());
+            return Ok(filteredKills.ToList());
         }
     }
 }
