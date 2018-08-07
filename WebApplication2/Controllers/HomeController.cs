@@ -80,7 +80,8 @@ namespace WebApplication2.Controllers
 
             var model = new VerifyViewModel
             {
-                CharacterID = user.CharacterId
+                CharacterID = user.CharacterId,
+                CharacterName = user.CharacterName
             };
 
             return View(model);

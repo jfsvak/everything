@@ -10,5 +10,8 @@ namespace WebApplication2.Models
     public class ApplicationUser : IdentityUser
     {
         public string CharacterId { get; set; }
+        public string CharacterName { get; set; }
+        public string RefreshToken { get; set; }
+        public string AccessToken { get; set; }
     }
 }

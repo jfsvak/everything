@@ -84,13 +84,26 @@ namespace WebApplication1.Controllers
             Console.WriteLine("character: " + character);
             var verify = JsonConvert.DeserializeObject<VerifyViewModel>(character);
 
-            var user = new ApplicationUser { UserName = verify.CharacterID, CharacterId = verify.CharacterID };
-            var identityResult = await _userManager.CreateAsync(user, verify.CharacterID);
+            var user = await _userManager.FindByNameAsync(verify.CharacterID);
+
+            if (user == null)
+            {
+                // Create the user 
+                user = new ApplicationUser
+                {
+                    UserName = verify.CharacterID,
+                    CharacterId = verify.CharacterID,
+                    AccessToken = token.access_token,
+                    RefreshToken = token.refresh_token,
+                    CharacterName = verify.CharacterName
+                };
+                var identityResult = await _userManager.CreateAsync(user, verify.CharacterID);
+            }
 
             // login
             await _signInManager.SignInAsync(user, false);
 
-            return RedirectToAction(nameof(HomeController.CharacterDetails), "Home");
+            return RedirectToAction(nameof(EVEController.Index), "EVE");
         }
     }
 }
