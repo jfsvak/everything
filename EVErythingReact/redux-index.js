@@ -117,6 +117,10 @@ function addPilot(accountId, pilotId, pilotName) {
     }
 }
 
+const getAccounts = state => {
+    return state.accounts.byId
+}
+
 const store = createStore(rootReducer);
 
 console.log('-----------------------');

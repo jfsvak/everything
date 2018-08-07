@@ -28,21 +28,21 @@ namespace WebApplication1
                     options.DefaultScheme = "Cookies";
                     options.DefaultChallengeScheme = "oidc";
                 })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("odic", options =>
-                {
-                    options.SignInScheme = "Cookies";
-                    options.Authority = "https://sisilogin.testeveonline.com/oauth/";
-                    options.RequireHttpsMetadata = false;
-                    options.ResponseType = "code";
+                .AddCookie("Cookies");
+                //.AddOpenIdConnect("odic", options =>
+                //{
+                //    options.SignInScheme = "Cookies";
+                //    options.Authority = "https://sisilogin.testeveonline.com/";
+                //    options.RequireHttpsMetadata = false;
+                //    options.ResponseType = "code";
 
-                    options.ClientId = "de2dbc0324ec4fc583a1aa0b18cfb08b";
-                    options.ClientSecret = "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn";
-                    options.SaveTokens = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
+                //    options.ClientId = "de2dbc0324ec4fc583a1aa0b18cfb08b";
+                //    options.ClientSecret = "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn";
+                //    options.SaveTokens = true;
+                //    options.GetClaimsFromUserInfoEndpoint = true;
 
-                    options.Scope.Add("characterAccountRead");
-                });
+                //    options.Scope.Add("characterAccountRead");
+                //});
 
             services.AddHttpClient();
         }

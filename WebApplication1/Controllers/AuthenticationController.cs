@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace WebApplication1.Controllers
 {
@@ -46,7 +47,17 @@ namespace WebApplication1.Controllers
                 Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "de2dbc0324ec4fc583a1aa0b18cfb08b", "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn"))));
             //var content = new MultipartFormDataContent();
             //content.Add(new StringContent("grant_type=authorization_code&code=" + code));
-            
+
+            //var clientCredential = new ClientCredential("de2dbc0324ec4fc583a1aa0b18cfb08b", "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn");
+            //var authContext = new AuthenticationContext(
+            //    "https://sisilogin.testeveonline.com/oauth/",
+            //    false);
+            //var result = await authContext.AcquireTokenByAuthorizationCodeAsync(
+            //    code,
+            //    new Uri("https://localhost:5001/esicallback"),
+            //    clientCredential,
+            //    "/token");
+
             HttpResponseMessage response = await client.PostAsync(new Uri("https://sisilogin.testeveonline.com/oauth/token"), new FormUrlEncodedContent(new[]
             {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
