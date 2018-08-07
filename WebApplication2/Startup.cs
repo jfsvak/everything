@@ -11,11 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Services;
-using IdentityServer4;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -23,8 +18,6 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebApplication2
 {
@@ -59,6 +52,39 @@ namespace WebApplication2
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = false;
+            });
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                // If the LoginPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/Login.
+                options.LoginPath = "/Account/Login";
+                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/AccessDenied.
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
 
             //services.AddOidcStateDataFormatterCache("esi");
 
@@ -75,52 +101,52 @@ namespace WebApplication2
             //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             //    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             //})
-            services.AddAuthentication()
+            services.AddAuthentication();
             //.AddCookie()
-            .AddOpenIdConnect("esi", options =>
-                {
-                    //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+            //.AddOpenIdConnect("esi", options =>
+            //    {
+            //        //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
-                    options.Authority = "https://sisilogin.testeveonline.com/";
-                    options.CallbackPath = new PathString("/esicallback");
-                    options.ResponseType = OpenIdConnectResponseType.Code;// "code";
+            //        options.Authority = "https://sisilogin.testeveonline.com/";
+            //        options.CallbackPath = new PathString("/esicallback");
+            //        options.ResponseType = OpenIdConnectResponseType.Code;// "code";
                     
-                    options.SaveTokens = true;
-                    //options.GetClaimsFromUserInfoEndpoint = true;
-                    options.ClientId = "de2dbc0324ec4fc583a1aa0b18cfb08b";
-                    options.ClientSecret = "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn";
-                    //options.ProtocolValidator = null;
-                    //SecurityTokenValidators.Add(new CustomJwtSecurityTokenHandler());
-                    //options.ClaimsIssuer = "esi";
-                    //options.TokenValidationParameters = new TokenValidationParameters
-                    //{
-                    //    ValidateIssuer = false,
-                    //    ValidateActor = false,
-                    //    ValidateIssuerSigningKey = false,
-                    //    ValidateAudience = false,
-                    //    ValidateLifetime = false,
-                    //    ValidateTokenReplay = false,
+            //        options.SaveTokens = true;
+            //        //options.GetClaimsFromUserInfoEndpoint = true;
+            //        options.ClientId = "de2dbc0324ec4fc583a1aa0b18cfb08b";
+            //        options.ClientSecret = "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn";
+            //        //options.ProtocolValidator = null;
+            //        //SecurityTokenValidators.Add(new CustomJwtSecurityTokenHandler());
+            //        //options.ClaimsIssuer = "esi";
+            //        //options.TokenValidationParameters = new TokenValidationParameters
+            //        //{
+            //        //    ValidateIssuer = false,
+            //        //    ValidateActor = false,
+            //        //    ValidateIssuerSigningKey = false,
+            //        //    ValidateAudience = false,
+            //        //    ValidateLifetime = false,
+            //        //    ValidateTokenReplay = false,
 
-                    //    //RoleClaimType = ClaimTypes.Role
-                    //};
+            //        //    //RoleClaimType = ClaimTypes.Role
+            //        //};
 
-                    options.Scope.Clear();
-                    options.Scope.Add("characterAccountRead");
+            //        options.Scope.Clear();
+            //        options.Scope.Add("characterAccountRead");
 
-                    options.Events = new OpenIdConnectEvents
-                    {
-                        //OnAuthorizationCodeReceived = this.OnAuthorizationCodeReceived2,
-                        OnTokenResponseReceived = this.OnTokenResponseReceived
-                        //,
-                        //OnRedirectToIdentityProvider = context =>
-                        //{
-                        //    context.ProtocolMessage.SetParameter("audience", "characterAccountRead");
+            //        options.Events = new OpenIdConnectEvents
+            //        {
+            //            //OnAuthorizationCodeReceived = this.OnAuthorizationCodeReceived2,
+            //            OnTokenResponseReceived = this.OnTokenResponseReceived
+            //            //,
+            //            //OnRedirectToIdentityProvider = context =>
+            //            //{
+            //            //    context.ProtocolMessage.SetParameter("audience", "characterAccountRead");
 
-                        //    return Task.FromResult(0);
-                        //}
+            //            //    return Task.FromResult(0);
+            //            //}
 
-                    };
-                });
+            //        };
+            //    });
                 //.AddJwtBearer(options =>
                 //{
                 //    options.SecurityTokenValidators.Add(new CustomJwtSecurityTokenHandler());
@@ -141,7 +167,7 @@ namespace WebApplication2
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
-            //services.AddHttpClient();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

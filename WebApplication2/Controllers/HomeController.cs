@@ -4,15 +4,26 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
+using WebApplication2.Models.ESIViewModels;
 
 namespace WebApplication2.Controllers
 {
+
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public HomeController(UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
+        }
+
+        public IActionResult Index()
+        { 
             return View();
         }
 
@@ -60,6 +71,19 @@ namespace WebApplication2.Controllers
         public IActionResult Logout()
         {
             return Ok();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> CharacterDetails()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var model = new VerifyViewModel
+            {
+                CharacterID = user.CharacterId
+            };
+
+            return View(model);
         }
     }
 }
