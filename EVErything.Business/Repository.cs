@@ -17,7 +17,6 @@ namespace EVErything.Business
             this.dbSet = context.Set<TEntity>();
         }
 
-
         public virtual IEnumerable<TEntity> Get()
         {
             return dbSet.ToList();

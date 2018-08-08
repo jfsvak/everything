@@ -7,10 +7,15 @@ namespace EVErything.Business.Models
     public class Character
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-        
+        public string ID { get; set; }
         [Required]
         public String Name { get; set; }
+        public Guid CharacterSetID { get; set; }
+        [ForeignKey("CharacterSetID")]
+        public CharacterSet CharacterSet { get; set; }
+        public Token Token { get; set; }
+        public Guid AccountID { get; set; }
+        [ForeignKey("AccountID")]
+        public Account Account { get; set; }
     }
 }

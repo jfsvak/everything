@@ -9,7 +9,7 @@ using WebApplication2.Data;
 
 namespace WebApplication2.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(IdentityDbContext))]
     [Migration("20180807074111_AddTokens")]
     partial class AddTokens
     {

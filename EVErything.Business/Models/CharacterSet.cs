@@ -6,13 +6,13 @@ using System.Text;
 
 namespace EVErything.Business.Models
 {
-    public class Account
+    public class CharacterSet
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
-        [Required]
-        public String Name { get; set; }
-        public List<Character> Characters { get; set; }
+        public string MainCharacterID { get; set; }
+        [ForeignKey("MainCharacterID")]
+        public Character MainCharacter { get; set; }
     }
 }

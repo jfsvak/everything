@@ -4,14 +4,16 @@ using EVErything.Business.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EVErything.Business.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180808032550_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,11 +60,7 @@ namespace EVErything.Business.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("MainCharacterID");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("MainCharacterID");
 
                     b.ToTable("CharacterSets");
                 });
@@ -98,13 +96,6 @@ namespace EVErything.Business.Migrations
                         .WithMany()
                         .HasForeignKey("CharacterSetID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("EVErything.Business.Models.CharacterSet", b =>
-                {
-                    b.HasOne("EVErything.Business.Models.Character", "MainCharacter")
-                        .WithMany()
-                        .HasForeignKey("MainCharacterID");
                 });
 
             modelBuilder.Entity("EVErything.Business.Models.Token", b =>
