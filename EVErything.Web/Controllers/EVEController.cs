@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EVErything.Business.Data;
+using EVErything.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,12 @@ namespace WebApplication2.Controllers
     public class EVEController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly AppDbContext _appDbContext;
 
-        public EVEController(UserManager<ApplicationUser> userManager)
+        public EVEController(UserManager<ApplicationUser> userManager, AppDbContext appDbContext)
         {
             _userManager = userManager;
+            _appDbContext = appDbContext;
         }
 
         [Authorize]
@@ -32,13 +35,15 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> GetCharacters()
         {
             var user = await _userManager.GetUserAsync(User);
+            //var characters = new List<Character>();
 
-            using (var ctx = new AppDbContext())
+            using (_appDbContext)
             {
-                var characters = ctx.Characters.Where(c => c.CharacterSet.MainCharacterID == user.CharacterId).ToList();
-
+                var character = _appDbContext.Characters.Find(user.CharacterId);
+                var characters = _appDbContext.Characters.Where(c => c.CharacterSetID == character.CharacterSetID).ToList();
                 return Ok(characters);
             }
+
         }
     }
 }

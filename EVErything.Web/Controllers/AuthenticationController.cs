@@ -11,6 +11,9 @@ using WebApplication2.Models;
 using Microsoft.Extensions.Logging;
 using WebApplication2.Controllers;
 using WebApplication2.Models.ESIViewModels;
+using EVErything.Business.Data;
+using EVErything.Business.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
@@ -29,66 +32,70 @@ namespace WebApplication1.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
+        private readonly AppDbContext _appDbContext;
 
         public AuthenticationController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<AuthenticationController> logger,
-            IHttpClientFactory clientFactory)
+            IHttpClientFactory clientFactory,
+            AppDbContext appDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _clientFactory = clientFactory;
+            _appDbContext = appDbContext;
         }
 
         [HttpGet]
         [Route("esicallback")]
         public async Task<IActionResult> ESICallback([FromQuery] string code)
         {
-            Console.WriteLine("Code from esi" + code);
-            //var request = new HttpRequestMessage(HttpMethod.Post, "https://sisilogin.testeveonline.com/oauth/token");
-            //request.Headers.Add("Content-Type", "application/json");
-
-            //request.Headers.Add("Host", "sisilogin.testeveonline.com");
-            //request.Content = new StringContent("{\"grant_type\"=\"authorization_code\", \"code\"=\"" + code + "\"}");
+            _logger.LogInformation("Code from esi" + code);
 
             var client = _clientFactory.CreateClient();
-            //client.BaseAddress = new Uri("https://sisilogin.testeveonline.com");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 "Basic",
                 Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "de2dbc0324ec4fc583a1aa0b18cfb08b", "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn"))));
-            //var content = new MultipartFormDataContent();
-            //content.Add(new StringContent("grant_type=authorization_code&code=" + code));
 
+            // Exchange the received auth code for a token list
             HttpResponseMessage response = await client.PostAsync(new Uri("https://sisilogin.testeveonline.com/oauth/token"), new FormUrlEncodedContent(new[]
             {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", code)
                 })).ConfigureAwait(false);
-            //var response = await client.PostAsync("oauth/token", content);
 
             string contentResponse = await response.Content.ReadAsStringAsync();
             var token = JsonConvert.DeserializeObject<AccessToken>(contentResponse);
-            Console.WriteLine("Content: " + contentResponse);
-            Console.WriteLine("Access_token: " + token.access_token);
+            _logger.LogInformation("Content: " + contentResponse);
+            _logger.LogInformation("Access_token: " + token.access_token);
 
+            // Verify token
             var esiclient = _clientFactory.CreateClient();
             esiclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
-            // Iam Outamon2 = 2113547503
-            // Inna Numa = 2113884986
             response = await esiclient.GetAsync("https://esi.evetech.net/verify?datasource=singularity");
 
-            var character = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("character: " + character);
-            var verify = JsonConvert.DeserializeObject<VerifyViewModel>(character);
+            var verifyString = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation("character: " + verifyString);
+
+            var verify = JsonConvert.DeserializeObject<VerifyViewModel>(verifyString);
+
+            // if the verify object at this point contains the CharacterID, I know the auth went well, and I can start the local login flow:
+            // 1. Find the User with verify.CharacterID in my Identity database
+            //   1.a If found, then sign him in:
+            //   1.b If not found, create a new User with that CharacterID.
+            // 2. Find Character with CharacterID
+            //  2.a If not found -> create Character + new CharacterSet and set new Character as Main on set
+            // 3. Update tokens in AppDb
+            // 4. Sign in user as the last thing, so all subsequent requests are Authed against the signed in user, and token is updated
 
             var user = await _userManager.FindByNameAsync(verify.CharacterID);
 
             if (user == null)
             {
-                // Create the user 
+                // If user not found for that CharacterID, create a new user 
                 user = new ApplicationUser
                 {
                     UserName = verify.CharacterID,
@@ -97,12 +104,37 @@ namespace WebApplication1.Controllers
                     RefreshToken = token.refresh_token,
                     CharacterName = verify.CharacterName
                 };
+
                 var identityResult = await _userManager.CreateAsync(user, verify.CharacterID);
             }
 
-            // login
+            using(_appDbContext)
+            {
+                var character = _appDbContext.Characters.Find(verify.CharacterID);
+
+                if (character == null)
+                    character = _appDbContext.Characters.Add(new Character { ID = verify.CharacterID, Name = verify.CharacterName, CharacterSet = new CharacterSet() }).Entity;
+
+                var tokens = _appDbContext.Tokens.Find(character.ID);
+
+                if (tokens == null)
+                {
+                    _appDbContext.Tokens.Add(new Token { Character = character, AccessToken = token.access_token, RefreshToken = token.refresh_token, ExpiresIn = token.expires_in, TokenType = token.token_type});
+                } else
+                {
+                    tokens.AccessToken = token.access_token;
+                    tokens.RefreshToken = token.refresh_token;
+                    tokens.ExpiresIn = token.expires_in;
+                    tokens.TokenType = token.token_type;
+                    _appDbContext.Entry(tokens).State = EntityState.Modified;
+                }
+                _appDbContext.SaveChanges();
+            }
+
+            // sign in user
             await _signInManager.SignInAsync(user, false);
 
+            // Redirect to ReactApp
             return RedirectToAction(nameof(EVEController.Index), "EVE");
         }
     }

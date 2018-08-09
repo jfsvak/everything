@@ -4,16 +4,15 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace EVErything.Business.Data
 {
-    public class EVErythingDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
-    {
-        public AppDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EVErything;Trusted_Connection=True;ConnectRetryCount=0");
+    //public class EVErythingDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    //{
+    //    public AppDbContext CreateDbContext(string[] args)
+    //    {
+    //        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            return new AppDbContext(optionsBuilder.Options);
-        }
-    }
+    //        return new AppDbContext(optionsBuilder.Options);
+    //    }
+    //}
 
     public class AppDbContext : DbContext
     {
@@ -28,13 +27,12 @@ namespace EVErything.Business.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EVErything;Trusted_Connection=True;ConnectRetryCount=0");
-            }
-
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer();
+        //    }
+        //}
     }
 }
