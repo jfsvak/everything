@@ -22,6 +22,9 @@ namespace EVErything.Business.Data
         public DbSet<CharacterSet> CharacterSets { get; set; }
         public DbSet<Token> Tokens { get; set; }
 
+        public AppDbContext() : base()
+        { }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 

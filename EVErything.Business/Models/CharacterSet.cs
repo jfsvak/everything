@@ -11,7 +11,9 @@ namespace EVErything.Business.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
+
         public string MainCharacterID { get; set; }
+
         [ForeignKey("MainCharacterID")]
         public Character MainCharacter { get; set; }
     }

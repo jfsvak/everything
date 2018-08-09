@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EVErything.Business.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,18 +28,17 @@ namespace WebApplication2.Controllers
         }
 
         [Authorize]
-        [HttpGet("/api/character")]
-        public async Task<IActionResult> GetCharacter()
+        [HttpGet("/api/characters")]
+        public async Task<IActionResult> GetCharacters()
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var model = new VerifyViewModel
+            using (var ctx = new AppDbContext())
             {
-                CharacterID = user.CharacterId,
-                CharacterName = user.CharacterName
-            };
+                var characters = ctx.Characters.Where(c => c.CharacterSet.MainCharacterID == user.CharacterId).ToList();
 
-            return Ok(model);
+                return Ok(characters);
+            }
         }
     }
 }

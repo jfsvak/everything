@@ -10,15 +10,19 @@ namespace EVErything.Business.Models
     {
         [Key]
         public string CharacterID { get; set; }
+
         [ForeignKey("CharacterID")]
         public Character Character { get; set; }
 
         [Required]
         public string RefreshToken { get; set; }
+
         [Required]
         public string AccessToken { get; set; }
+
         [Required]
         public string TokenType { get; set; }
-        public int ExpiresIn { get; set; }
+
+        public int? ExpiresIn { get; set; }
     }
 }

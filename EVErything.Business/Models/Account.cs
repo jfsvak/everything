@@ -11,8 +11,10 @@ namespace EVErything.Business.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
+
         [Required]
         public String Name { get; set; }
+
         public List<Character> Characters { get; set; }
     }
 }

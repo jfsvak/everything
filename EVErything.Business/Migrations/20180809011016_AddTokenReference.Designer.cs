@@ -4,14 +4,16 @@ using EVErything.Business.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EVErything.Business.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180809011016_AddTokenReference")]
+    partial class AddTokenReference
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace EVErything.Business.Migrations
                     b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AccountID");
+                    b.Property<Guid>("AccountID");
 
                     b.Property<Guid>("CharacterSetID");
 
@@ -74,7 +76,7 @@ namespace EVErything.Business.Migrations
                     b.Property<string>("AccessToken")
                         .IsRequired();
 
-                    b.Property<int?>("ExpiresIn");
+                    b.Property<int>("ExpiresIn");
 
                     b.Property<string>("RefreshToken")
                         .IsRequired();
@@ -91,7 +93,8 @@ namespace EVErything.Business.Migrations
                 {
                     b.HasOne("EVErything.Business.Models.Account", "Account")
                         .WithMany("Characters")
-                        .HasForeignKey("AccountID");
+                        .HasForeignKey("AccountID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("EVErything.Business.Models.CharacterSet", "CharacterSet")
                         .WithMany()

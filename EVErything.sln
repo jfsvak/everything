@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Web", "EVErything.Web\EVErything.Web.csproj", "{39028B54-19C9-4FD4-B4B7-07D4814891A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Web_OLD", "EVErything.Web_OLD\EVErything.Web_OLD.csproj", "{39028B54-19C9-4FD4-B4B7-07D4814891A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Business", "EVErything.Business\EVErything.Business.csproj", "{CBE47138-C2E6-4221-8E8A-56AC53FB3925}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.ESI.Client", "EV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{F122AFFD-92B7-4E77-8030-B49AE5A8D842}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{5A5CF637-F05A-41F5-ABD7-9373D013033E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Web", "EVErything.Web\EVErything.Web.csproj", "{5A5CF637-F05A-41F5-ABD7-9373D013033E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Test.Business", "EVErything.Test.Business\EVErything.Test.Business.csproj", "{47170F04-79A4-4A5F-A669-E636808CB4C8}"
 	ProjectSection(ProjectDependencies) = postProject
