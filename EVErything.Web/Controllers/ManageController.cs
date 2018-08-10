@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WebApplication2.Models;
-using WebApplication2.Models.ManageViewModels;
-using WebApplication2.Services;
+using EVErything.Web.Models;
+using EVErything.Web.Models.ManageViewModels;
+using EVErything.Web.Services;
 
-namespace WebApplication2.Controllers
+namespace EVErything.Web.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -522,7 +522,7 @@ namespace WebApplication2.Controllers
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("WebApplication2"),
+                _urlEncoder.Encode("EVErything.Web"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

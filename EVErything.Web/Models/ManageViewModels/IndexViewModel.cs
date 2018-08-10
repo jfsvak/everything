@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication2.Models.ManageViewModels
+namespace EVErything.Web.Models.ManageViewModels
 {
     public class IndexViewModel
     {

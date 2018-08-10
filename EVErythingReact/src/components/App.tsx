@@ -9,12 +9,12 @@ import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
 import SideMenu from './sidemenu/SideMenu';
 
-import * as accountsActions from './../actions/accountsActions';
+import * as accountsActions from '../actions/accountsActions';
 
 //Here we are asynchronous loading our components based on their path
 const MainContainer = Loadable({ loader: () => import('./main/MainContainer'), loading: () => null});
 const AccountsContainer = Loadable({ loader: () => import('./accounts/AccountsContainer'), loading: () => null });
-const PilotsContainer = Loadable({ loader: () => import('./pilots/PilotsContainer'), loading: () => null });
+const CharactersContainer = Loadable({ loader: () => import('./characters/CharactersContainer'), loading: () => null });
 const NotFound = Loadable({ loader: () => import('./common/NotFound'), loading: () => null });
 
 export interface IAppProps {
@@ -78,7 +78,7 @@ class App extends React.Component<IAppProps, IAppState>  {
                         <Switch>
                             <Routing path="/" exact component={MainContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Accounts} component={AccountsContainer} props={propsToSend}/>
-                            <Routing path={routePaths.MainRoutes.Pilots} component={PilotsContainer} props={propsToSend}/>
+                            <Routing path={routePaths.MainRoutes.Characters} component={CharactersContainer} props={propsToSend}/>
                         </Switch>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ class SideMenu extends React.Component<ISideMenuProps> {
                         <Link to={routePaths.MainRoutes.Accounts}>Accounts</Link>
                     </li>
                     <li>
-                        <Link to={routePaths.MainRoutes.Pilots}>Pilots</Link>
+                        <Link to={routePaths.MainRoutes.Characters}>Characters</Link>
                     </li>
                     <li>
                         <a href="#">Dashboard</a>
@@ -44,7 +44,7 @@ class SideMenu extends React.Component<ISideMenuProps> {
                                 <li><a href="#">Account 2</a></li>
                             </ul>
                         </li>
-                        <li><Link to={routePaths.MainRoutes.Pilots}>Pilots</Link></li>
+                        <li><Link to={routePaths.MainRoutes.characters}>characters</Link></li>
                     </ul>
                 </nav>
                 */}

@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Models;
-using WebApplication2.Models.ESIViewModels;
+using EVErything.Web.Models;
+using EVErything.Web.Models.ESIViewModels;
 
-namespace WebApplication2.Controllers
+namespace EVErything.Web.Controllers
 {
 
     public class HomeController : Controller

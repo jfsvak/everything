@@ -2,7 +2,8 @@ import configs from '../../configs';
 
 export const enum jsonTypes {
     dummyAPI = "dummyAPI",
-    GET_ACCOUNTS_API = "GET_ACCOUNTS_API"
+    GET_ACCOUNTS_API = "GET_ACCOUNTS_API",
+    GET_CHARACTERS_API = "GET_CHARACTERS_API",
 }
 
 function getData(type: jsonTypes): any {
@@ -13,6 +14,8 @@ function getData(type: jsonTypes): any {
 
             case jsonTypes.GET_ACCOUNTS_API: 
                 return require('./jsons/accounts.json');
+            case jsonTypes.GET_CHARACTERS_API: 
+                return require('./jsons/characters.json');
         }
     }
     return data;

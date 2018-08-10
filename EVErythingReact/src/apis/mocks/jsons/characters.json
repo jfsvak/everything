@@ -1,19 +1,19 @@
 {
-    "pilots": [
+    "characters": [
         {
-            "pilotId": "1",
+            "characterId": "1",
             "name": "Guderian"
         },
         {
-            "pilotId": "2",
+            "characterId": "2",
             "name": "Mulvi"
         },
         {
-            "pilotId": "3",
+            "characterId": "3",
             "name": "Korin"
         },
         {
-            "pilotId": "4",
+            "characterId": "4",
             "name": "Ione Saldana"
         }
     ]

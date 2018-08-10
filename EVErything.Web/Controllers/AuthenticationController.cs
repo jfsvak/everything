@@ -7,15 +7,14 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using WebApplication2.Models;
+using EVErything.Web.Models;
 using Microsoft.Extensions.Logging;
-using WebApplication2.Controllers;
-using WebApplication2.Models.ESIViewModels;
+using EVErything.Web.Models.ESIViewModels;
 using EVErything.Business.Data;
 using EVErything.Business.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Controllers
+namespace EVErything.Web.Controllers
 {
     public class AccessToken
     {

@@ -25,37 +25,13 @@
 import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 
 //let defaultBasePath = 'https://localhost';
-let defaultBasePath = '';
-
-export class CharacterViewModel {
-    'id': string;
-    'name': string;
-
-    static discriminator = undefined;
-
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        }    ];
-
-    static getAttributeTypeMap() {
-        return CharacterViewModel.attributeTypeMap;
-    }
-}
+let defaultBasePath = 'http://localhost:5001';
 
 
 let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
-    "CharacterViewModel": CharacterViewModel,
 }
 
 
@@ -109,10 +85,10 @@ export class VoidAuth implements Authentication {
     }
 }
 
-export enum AccountsApiApiKeys {
+export enum AccountApiApiKeys {
 }
 
-export class AccountsApi {
+export class AccountApi {
     protected basePath = defaultBasePath;
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
@@ -138,16 +114,16 @@ export class AccountsApi {
         this._useQuerystring = value;
     }
 
-    public setApiKey(key: AccountsApiApiKeys, value: string) {
-        this.authentications[AccountsApiApiKeys[key]].apiKey = value;
+    public setApiKey(key: AccountApiApiKeys, value: string) {
+        this.authentications[AccountApiApiKeys[key]].apiKey = value;
     }
 
     /**
      * 
      * 
      */
-    public apiAccountsGet () : AxiosPromise {
-        const localVarPath = this.basePath + '/api/accounts';
+    public accountAccessDeniedGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/AccessDenied';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let formParams: any = {};
@@ -174,11 +150,871 @@ export class AccountsApi {
         }
         return axios(requestOptions);
     }
+    /**
+     * 
+     * 
+     * @param userId 
+     * @param code 
+     */
+    public accountConfirmEmailGet (userId?: string, code?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ConfirmEmail';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (userId !== undefined) {
+            queryParameters['userId'] = userId;
+        }
+
+        if (code !== undefined) {
+            queryParameters['code'] = code;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param returnUrl 
+     * @param remoteError 
+     */
+    public accountExternalLoginCallbackGet (returnUrl?: string, remoteError?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ExternalLoginCallback';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        if (remoteError !== undefined) {
+            queryParameters['remoteError'] = remoteError;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     * @param returnUrl 
+     */
+    public accountExternalLoginConfirmationPost (email: string, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ExternalLoginConfirmation';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling accountExternalLoginConfirmationPost.');
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param provider 
+     * @param returnUrl 
+     */
+    public accountExternalLoginPost (provider?: string, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ExternalLogin';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (provider !== undefined) {
+            queryParameters['provider'] = provider;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public accountForgotPasswordConfirmationGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ForgotPasswordConfirmation';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public accountForgotPasswordGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ForgotPassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     */
+    public accountForgotPasswordPost (email: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ForgotPassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling accountForgotPasswordPost.');
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public accountLockoutGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/Lockout';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param returnUrl 
+     */
+    public accountLoginGet (returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/Login';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     * @param password 
+     * @param rememberMe 
+     * @param returnUrl 
+     */
+    public accountLoginPost (email: string, password: string, rememberMe?: boolean, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/Login';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling accountLoginPost.');
+        }
+
+        // verify required parameter 'password' is not null or undefined
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling accountLoginPost.');
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        if (password !== undefined) {
+            queryParameters['Password'] = password;
+        }
+
+        if (rememberMe !== undefined) {
+            queryParameters['RememberMe'] = rememberMe;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param rememberMe 
+     * @param returnUrl 
+     */
+    public accountLoginWith2faGet (rememberMe?: boolean, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/LoginWith2fa';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (rememberMe !== undefined) {
+            queryParameters['rememberMe'] = rememberMe;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param twoFactorCode 
+     * @param rememberMachine 
+     * @param rememberMe 
+     * @param rememberMe2 
+     * @param returnUrl 
+     */
+    public accountLoginWith2faPost (twoFactorCode: string, rememberMachine?: boolean, rememberMe?: boolean, rememberMe2?: boolean, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/LoginWith2fa';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'twoFactorCode' is not null or undefined
+        if (twoFactorCode === null || twoFactorCode === undefined) {
+            throw new Error('Required parameter twoFactorCode was null or undefined when calling accountLoginWith2faPost.');
+        }
+
+        if (twoFactorCode !== undefined) {
+            queryParameters['TwoFactorCode'] = twoFactorCode;
+        }
+
+        if (rememberMachine !== undefined) {
+            queryParameters['RememberMachine'] = rememberMachine;
+        }
+
+        if (rememberMe !== undefined) {
+            queryParameters['RememberMe'] = rememberMe;
+        }
+
+        if (rememberMe2 !== undefined) {
+            queryParameters['rememberMe'] = rememberMe2;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param returnUrl 
+     */
+    public accountLoginWithRecoveryCodeGet (returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/LoginWithRecoveryCode';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param recoveryCode 
+     * @param returnUrl 
+     */
+    public accountLoginWithRecoveryCodePost (recoveryCode: string, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/LoginWithRecoveryCode';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'recoveryCode' is not null or undefined
+        if (recoveryCode === null || recoveryCode === undefined) {
+            throw new Error('Required parameter recoveryCode was null or undefined when calling accountLoginWithRecoveryCodePost.');
+        }
+
+        if (recoveryCode !== undefined) {
+            queryParameters['RecoveryCode'] = recoveryCode;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public accountLogoutPost () : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/Logout';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param returnUrl 
+     */
+    public accountRegisterGet (returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/Register';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     * @param password 
+     * @param confirmPassword 
+     * @param returnUrl 
+     */
+    public accountRegisterPost (email: string, password: string, confirmPassword?: string, returnUrl?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/Register';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling accountRegisterPost.');
+        }
+
+        // verify required parameter 'password' is not null or undefined
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling accountRegisterPost.');
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        if (password !== undefined) {
+            queryParameters['Password'] = password;
+        }
+
+        if (confirmPassword !== undefined) {
+            queryParameters['ConfirmPassword'] = confirmPassword;
+        }
+
+        if (returnUrl !== undefined) {
+            queryParameters['returnUrl'] = returnUrl;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public accountResetPasswordConfirmationGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ResetPasswordConfirmation';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param code 
+     */
+    public accountResetPasswordGet (code?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ResetPassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (code !== undefined) {
+            queryParameters['code'] = code;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     * @param password 
+     * @param confirmPassword 
+     * @param code 
+     */
+    public accountResetPasswordPost (email: string, password: string, confirmPassword?: string, code?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Account/ResetPassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling accountResetPasswordPost.');
+        }
+
+        // verify required parameter 'password' is not null or undefined
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling accountResetPasswordPost.');
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        if (password !== undefined) {
+            queryParameters['Password'] = password;
+        }
+
+        if (confirmPassword !== undefined) {
+            queryParameters['ConfirmPassword'] = confirmPassword;
+        }
+
+        if (code !== undefined) {
+            queryParameters['Code'] = code;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
 }
-export enum CharacterApiApiKeys {
+export enum AuthenticationApiApiKeys {
 }
 
-export class CharacterApi {
+export class AuthenticationApi {
     protected basePath = defaultBasePath;
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
@@ -204,65 +1040,24 @@ export class CharacterApi {
         this._useQuerystring = value;
     }
 
-    public setApiKey(key: CharacterApiApiKeys, value: string) {
-        this.authentications[CharacterApiApiKeys[key]].apiKey = value;
+    public setApiKey(key: AuthenticationApiApiKeys, value: string) {
+        this.authentications[AuthenticationApiApiKeys[key]].apiKey = value;
     }
 
     /**
      * 
      * 
-     * @param id 
+     * @param code 
      */
-    public apiCharactersByIdDelete (id: string) : AxiosPromise {
-        const localVarPath = this.basePath + '/api/characters/{id}'
-            .replace('{' + 'id' + '}', String(id));
+    public esicallbackGet (code?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/esicallback';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let formParams: any = {};
 
 
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling apiCharactersByIdDelete.');
-        }
-
-        let useFormData = false;
-
-        let requestOptions: AxiosRequestConfig = {
-            method: 'DELETE',
-            params: queryParameters,
-            headers: headerParams,
-            url: localVarPath,
-            responseType: 'json',
-        };
-
-        this.authentications.default.applyToRequest(requestOptions);
-
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.data = formParams;
-            }
-        }
-        return axios(requestOptions);
-    }
-    /**
-     * 
-     * 
-     * @param id 
-     */
-    public apiCharactersByIdGet (id: string) : AxiosPromise {
-        const localVarPath = this.basePath + '/api/characters/{id}'
-            .replace('{' + 'id' + '}', String(id));
-        let queryParameters: any = {};
-        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let formParams: any = {};
-
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling apiCharactersByIdGet.');
+        if (code !== undefined) {
+            queryParameters['code'] = code;
         }
 
         let useFormData = false;
@@ -286,6 +1081,40 @@ export class CharacterApi {
         }
         return axios(requestOptions);
     }
+}
+export enum EVEApiApiKeys {
+}
+
+export class EVEApi {
+    protected basePath = defaultBasePath;
+    protected defaultHeaders : any = {};
+    protected _useQuerystring : boolean = false;
+
+    protected authentications = {
+        'default': <Authentication>new VoidAuth(),
+    }
+
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        } else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername
+            }
+        }
+    }
+
+    set useQuerystring(value: boolean) {
+        this._useQuerystring = value;
+    }
+
+    public setApiKey(key: EVEApiApiKeys, value: string) {
+        this.authentications[EVEApiApiKeys[key]].apiKey = value;
+    }
+
     /**
      * 
      * 
@@ -321,10 +1150,169 @@ export class CharacterApi {
     /**
      * 
      * 
-     * @param character 
      */
-    public apiCharactersPost (character?: CharacterViewModel) : AxiosPromise {
-        const localVarPath = this.basePath + '/api/characters';
+    public mainGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/main';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+}
+export enum ManageApiApiKeys {
+}
+
+export class ManageApi {
+    protected basePath = defaultBasePath;
+    protected defaultHeaders : any = {};
+    protected _useQuerystring : boolean = false;
+
+    protected authentications = {
+        'default': <Authentication>new VoidAuth(),
+    }
+
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        } else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername
+            }
+        }
+    }
+
+    set useQuerystring(value: boolean) {
+        this._useQuerystring = value;
+    }
+
+    public setApiKey(key: ManageApiApiKeys, value: string) {
+        this.authentications[ManageApiApiKeys[key]].apiKey = value;
+    }
+
+    /**
+     * 
+     * 
+     */
+    public manageChangePasswordGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/ChangePassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param oldPassword 
+     * @param newPassword 
+     * @param confirmPassword 
+     * @param statusMessage 
+     */
+    public manageChangePasswordPost (oldPassword: string, newPassword: string, confirmPassword?: string, statusMessage?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/ChangePassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'oldPassword' is not null or undefined
+        if (oldPassword === null || oldPassword === undefined) {
+            throw new Error('Required parameter oldPassword was null or undefined when calling manageChangePasswordPost.');
+        }
+
+        // verify required parameter 'newPassword' is not null or undefined
+        if (newPassword === null || newPassword === undefined) {
+            throw new Error('Required parameter newPassword was null or undefined when calling manageChangePasswordPost.');
+        }
+
+        if (oldPassword !== undefined) {
+            queryParameters['OldPassword'] = oldPassword;
+        }
+
+        if (newPassword !== undefined) {
+            queryParameters['NewPassword'] = newPassword;
+        }
+
+        if (confirmPassword !== undefined) {
+            queryParameters['ConfirmPassword'] = confirmPassword;
+        }
+
+        if (statusMessage !== undefined) {
+            queryParameters['StatusMessage'] = statusMessage;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageDisable2faPost () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/Disable2fa';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let formParams: any = {};
@@ -338,7 +1326,687 @@ export class CharacterApi {
             headers: headerParams,
             url: localVarPath,
             responseType: 'json',
-            data: character,
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageDisable2faWarningGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/Disable2faWarning';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageEnableAuthenticatorGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/EnableAuthenticator';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param code 
+     */
+    public manageEnableAuthenticatorPost (code: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/EnableAuthenticator';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'code' is not null or undefined
+        if (code === null || code === undefined) {
+            throw new Error('Required parameter code was null or undefined when calling manageEnableAuthenticatorPost.');
+        }
+
+        if (code !== undefined) {
+            queryParameters['Code'] = code;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageExternalLoginsGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/ExternalLogins';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageGenerateRecoveryCodesPost () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/GenerateRecoveryCodes';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageGenerateRecoveryCodesWarningGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/GenerateRecoveryCodesWarning';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageIndexGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/Index';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     * @param username 
+     * @param isEmailConfirmed 
+     * @param phoneNumber 
+     * @param statusMessage 
+     */
+    public manageIndexPost (email: string, username?: string, isEmailConfirmed?: boolean, phoneNumber?: string, statusMessage?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/Index';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling manageIndexPost.');
+        }
+
+        if (username !== undefined) {
+            queryParameters['Username'] = username;
+        }
+
+        if (isEmailConfirmed !== undefined) {
+            queryParameters['IsEmailConfirmed'] = isEmailConfirmed;
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        if (phoneNumber !== undefined) {
+            queryParameters['PhoneNumber'] = phoneNumber;
+        }
+
+        if (statusMessage !== undefined) {
+            queryParameters['StatusMessage'] = statusMessage;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageLinkLoginCallbackGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/LinkLoginCallback';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param provider 
+     */
+    public manageLinkLoginPost (provider?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/LinkLogin';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (provider !== undefined) {
+            queryParameters['provider'] = provider;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param loginProvider 
+     * @param providerKey 
+     */
+    public manageRemoveLoginPost (loginProvider?: string, providerKey?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/RemoveLogin';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (loginProvider !== undefined) {
+            queryParameters['LoginProvider'] = loginProvider;
+        }
+
+        if (providerKey !== undefined) {
+            queryParameters['ProviderKey'] = providerKey;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageResetAuthenticatorPost () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/ResetAuthenticator';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageResetAuthenticatorWarningGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/ResetAuthenticatorWarning';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param email 
+     * @param username 
+     * @param isEmailConfirmed 
+     * @param phoneNumber 
+     * @param statusMessage 
+     */
+    public manageSendVerificationEmailPost (email: string, username?: string, isEmailConfirmed?: boolean, phoneNumber?: string, statusMessage?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/SendVerificationEmail';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'email' is not null or undefined
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling manageSendVerificationEmailPost.');
+        }
+
+        if (username !== undefined) {
+            queryParameters['Username'] = username;
+        }
+
+        if (isEmailConfirmed !== undefined) {
+            queryParameters['IsEmailConfirmed'] = isEmailConfirmed;
+        }
+
+        if (email !== undefined) {
+            queryParameters['Email'] = email;
+        }
+
+        if (phoneNumber !== undefined) {
+            queryParameters['PhoneNumber'] = phoneNumber;
+        }
+
+        if (statusMessage !== undefined) {
+            queryParameters['StatusMessage'] = statusMessage;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageSetPasswordGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/SetPassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param newPassword 
+     * @param confirmPassword 
+     * @param statusMessage 
+     */
+    public manageSetPasswordPost (newPassword: string, confirmPassword?: string, statusMessage?: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/SetPassword';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'newPassword' is not null or undefined
+        if (newPassword === null || newPassword === undefined) {
+            throw new Error('Required parameter newPassword was null or undefined when calling manageSetPasswordPost.');
+        }
+
+        if (newPassword !== undefined) {
+            queryParameters['NewPassword'] = newPassword;
+        }
+
+        if (confirmPassword !== undefined) {
+            queryParameters['ConfirmPassword'] = confirmPassword;
+        }
+
+        if (statusMessage !== undefined) {
+            queryParameters['StatusMessage'] = statusMessage;
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'POST',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageShowRecoveryCodesGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/ShowRecoveryCodes';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     */
+    public manageTwoFactorAuthenticationGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/Manage/TwoFactorAuthentication';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
         };
 
         this.authentications.default.applyToRequest(requestOptions);

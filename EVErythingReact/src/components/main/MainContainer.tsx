@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PilotsContainer from '../pilots/PilotsContainer';
+import CharactersContainer from '../characters/CharactersContainer';
 import * as routePaths from '../../models/constants/routePaths';
 import Routing from '../Routing';
 
@@ -25,7 +25,7 @@ class MainContainer extends React.Component<IMainContainerProps, IMainContainerS
                 and then switch the main content with a router depending on the route
                 <div className="container" style={{backgroundColor: 'lightblue'}}>
                     <Switch>
-                        <Routing path={routePaths.MainRoutes.Pilots} component={PilotsContainer} props={null}/>
+                        <Routing path={routePaths.MainRoutes.Characters} component={CharactersContainer} props={null}/>
                     </Switch>
                 </div>
             </div>

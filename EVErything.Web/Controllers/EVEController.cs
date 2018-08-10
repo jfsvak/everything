@@ -7,10 +7,10 @@ using EVErything.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Models;
-using WebApplication2.Models.ESIViewModels;
+using EVErything.Web.Models;
+using EVErything.Web.Models.ESIViewModels;
 
-namespace WebApplication2.Controllers
+namespace EVErything.Web.Controllers
 {
     public class EVEController : Controller
     {
@@ -30,7 +30,8 @@ namespace WebApplication2.Controllers
             return View();
         }
 
-        [Authorize]
+        //[Authorize]
+        [AllowCrossSiteJson]
         [HttpGet("/api/characters")]
         public async Task<IActionResult> GetCharacters()
         {

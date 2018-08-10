@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication2.Models.ESIViewModels
+namespace EVErything.Web.Models.ESIViewModels
 {
     public class VerifyViewModel
     {

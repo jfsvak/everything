@@ -53,9 +53,6 @@ task npm (dependsOn: ['npm_build']) {
 		ant.copy(todir:"../EVErything.Web/wwwroot" ) {
 			fileset( dir:"${rootDir}/dist" )
 		}
-		ant.copy(todir:"../WebApplication2/wwwroot" ) {
-			fileset( dir:"${rootDir}/dist" )
-		}
 	}
 
 task swagger_clean {

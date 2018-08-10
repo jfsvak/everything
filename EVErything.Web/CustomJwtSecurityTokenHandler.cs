@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 
-namespace WebApplication2
+namespace EVErything
 {
     public class CustomJwtSecurityTokenHandler : ISecurityTokenValidator
     {

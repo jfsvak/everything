@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WebApplication2.Data.Migrations
+namespace EVErything.Web.Data.Migrations
 {
     public partial class AddCharId : Migration
     {
