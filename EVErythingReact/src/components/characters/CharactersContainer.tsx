@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as characterActions from '../../actions/characterActions';
 import { bindActionCreators } from 'redux';
 import * as selectors from '../../reducers/selectors';
+import CharacterOverviewBar from './CharacterOverviewBar';
 
 export interface ICharactersState {
     
@@ -26,11 +27,17 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
     render() {
         const { characters } = this.props;
         return (
-            <div>
-                {characters && characters.map((item, idx) =>
-                    <div key={idx}>{item.id} - {item.name}</div>
-                )}
-            </div>
+            <section>
+                <h1>Characters</h1>
+                <ul className="list-group">
+                    {characters && characters.map((c, idx) =>
+                        <li className="list-group-item"><CharacterOverviewBar key={idx} character={c}/></li>
+                    )}
+                </ul>
+                <div className="float-right">
+                    <button type="button" className="btn btn-primary">Add</button>
+                </div>
+            </section>
         );
     }
 }

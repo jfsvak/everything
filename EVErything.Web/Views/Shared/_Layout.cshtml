@@ -29,23 +29,6 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">EVErything.Web</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
-                    }
-                    else
-                    {
-                        <li><a asp-controller="Home" asp-action="Login">EVE Login</a></li>
-                        <li><a asp-controller="Home" asp-action="EVESSoRedirect"><img style="max-height: 25px;" src="~/images/eve-sso-login-black-large.png" /></a></li>
-                    }
-                </ul>
-
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>

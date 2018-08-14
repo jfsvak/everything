@@ -14,6 +14,7 @@ class AccountList extends React.Component<IAccountListProps> {
         console.log("AccountList.accounts", this.props.accounts);
         return (
             <div className="account-list">
+                <h1>Accounts. Coming soon...</h1>
                 {this.props.accounts && this.props.accounts.map((account, index) => 
                     <AccountRow key={index} account={account}/>
                 )}

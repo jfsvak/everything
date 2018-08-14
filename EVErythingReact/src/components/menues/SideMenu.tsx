@@ -19,10 +19,10 @@ class SideMenu extends React.Component<ISideMenuProps> {
                         <a href="#">EVErything</a>
                     </li>
                     <li>
-                        <Link to={routePaths.MainRoutes.Accounts}>Accounts</Link>
+                        <Link to={routePaths.MainRoutes.Characters}>Characters</Link>
                     </li>
                     <li>
-                        <Link to={routePaths.MainRoutes.Characters}>Characters</Link>
+                        <Link to={routePaths.MainRoutes.Accounts}>Accounts</Link>
                     </li>
                     <li>
                         <a href="#">Dashboard</a>

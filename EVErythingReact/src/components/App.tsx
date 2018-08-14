@@ -7,7 +7,8 @@ import * as routePaths from '../models/constants/routePaths';
 import Loader from './common/Loader';
 import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
-import SideMenu from './sidemenu/SideMenu';
+import SideMenu from './menues/SideMenu';
+import TopMenu from './menues/TopMenu';
 
 import * as accountsActions from '../actions/accountsActions';
 
@@ -68,10 +69,12 @@ class App extends React.Component<IAppProps, IAppState>  {
         }
         return (
             <div id="fullpage-wrapper" className="toggled" ref={this.wrapperDiv}>
-                <SideMenu />
                 {/*
+                <TopMenu />
+
                 <button onClick={this.toggleMenu} className="btn btn-secondary" id="menu-toggle">Toggle Menu</button>
                 */}
+                <SideMenu />
 
                 <div id="page-content-wrapper">
                     <div className="container-fluid">

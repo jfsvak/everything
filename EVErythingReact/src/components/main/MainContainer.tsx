@@ -21,8 +21,7 @@ class MainContainer extends React.Component<IMainContainerProps, IMainContainerS
     render() {
         return (
             <div className="fullpage-wrapper" style={{backgroundColor: 'red', height: '300px'}}>
-                This guy should layout the top bar, side menu, footer etc.
-                and then switch the main content with a router depending on the route
+                <h1>Main...coming soon...</h1>
                 <div className="container" style={{backgroundColor: 'lightblue'}}>
                     <Switch>
                         <Routing path={routePaths.MainRoutes.Characters} component={CharactersContainer} props={null}/>
