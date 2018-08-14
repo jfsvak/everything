@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.AspNetCore.WebUtilities;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using EVErything.Web.Models;
 using EVErything.Web.Models.ESIViewModels;
+using Microsoft.Extensions.Configuration;
 
 namespace EVErything.Web.Controllers
 {
@@ -17,9 +19,12 @@ namespace EVErything.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager)
+        private IConfiguration Configuration { get; }
+
+        public HomeController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            Configuration = configuration;
         }
 
         public IActionResult Index()
@@ -85,6 +90,18 @@ namespace EVErything.Web.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult EVESSoRedirect()
+        {
+            var url = $"{Configuration["EVE:SSO.Url"]}/oauth/authorize";
+            var responseType = "code";
+            var redirectUri = Uri.EscapeDataString($"{Configuration["EVE:ESI.Callback.URL"]}");
+            var clientId = Configuration["EVE:clientId"];
+            var scope = Uri.EscapeDataString("characterAccountRead characterKillsRead characterSkillsRead esi-skills.read_skills.v1");
+            
+            return Redirect(url + "?response_type=" + responseType + "&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + scope);
         }
     }
 }

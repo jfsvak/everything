@@ -16,5 +16,6 @@
     <WebStackScaffolding_DbContextTypeFullName>EVErything.Business.Data.AppDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>EVErythingWeb - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

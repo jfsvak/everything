@@ -13,6 +13,7 @@ using EVErything.Web.Models.ESIViewModels;
 using EVErything.Business.Data;
 using EVErything.Business.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EVErything.Web.Controllers
 {
@@ -33,13 +34,17 @@ namespace EVErything.Web.Controllers
         private readonly ILogger _logger;
         private readonly AppDbContext _appDbContext;
 
+        private IConfiguration Configuration { get; }
+
         public AuthenticationController(
+            IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<AuthenticationController> logger,
             IHttpClientFactory clientFactory,
             AppDbContext appDbContext)
         {
+            Configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -57,10 +62,11 @@ namespace EVErything.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 "Basic",
-                Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "de2dbc0324ec4fc583a1aa0b18cfb08b", "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn"))));
+                //Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "de2dbc0324ec4fc583a1aa0b18cfb08b", "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn"))));
+                Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", Configuration["EVE:clientId"], Configuration["EVE:secretKey"]))));
 
             // Exchange the received auth code for a token list
-            HttpResponseMessage response = await client.PostAsync(new Uri("https://sisilogin.testeveonline.com/oauth/token"), new FormUrlEncodedContent(new[]
+            HttpResponseMessage response = await client.PostAsync(new Uri($"{Configuration["EVE:SSO.Url"]}/oauth/token"), new FormUrlEncodedContent(new[]
             {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", code)
@@ -74,7 +80,7 @@ namespace EVErything.Web.Controllers
             // Verify token
             var esiclient = _clientFactory.CreateClient();
             esiclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.access_token);
-            response = await esiclient.GetAsync("https://esi.evetech.net/verify?datasource=singularity");
+            response = await esiclient.GetAsync($"{Configuration["EVE:ESI.Url"]}/verify?datasource={Configuration["EVE:Cluster"]}");
 
             var verifyString = await response.Content.ReadAsStringAsync();
             _logger.LogInformation("character: " + verifyString);

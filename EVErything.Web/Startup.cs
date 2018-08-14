@@ -109,7 +109,7 @@ namespace EVErything
         {
             app.UseSwagger();
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("DockerLocal"))
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
