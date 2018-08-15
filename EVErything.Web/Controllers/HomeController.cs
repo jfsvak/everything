@@ -18,17 +18,24 @@ namespace EVErything.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         private IConfiguration Configuration { get; }
 
-        public HomeController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             Configuration = configuration;
         }
 
         public IActionResult Index()
         { 
+            if(_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction(nameof(EVEController.Index), "EVE");
+            }
+
             return View();
         }
 
@@ -50,23 +57,6 @@ namespace EVErything.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        //public IActionResult ExternalAuth()
-        //{
-        //    var callbackUrl = Url.Action("https://sisilogin.testeveonline.com/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5001%2Fesicallback&client_id=de2dbc0324ec4fc583a1aa0b18cfb08b&scope=characterAccountRead%20characterKillsRead%20characterSkillsRead%20esi-skills.read_skills.v1");
-
-        //    var props = new AuthenticationProperties
-        //    {
-        //        RedirectUri = callbackUrl,
-        //        Items =
-        //        {
-        //            { "scheme", "" },
-        //            { "returnUrl", "http://localhost:5001/esicallback" }
-        //        }
-        //    };
-
-        //    return Challenge("", props);
-        //}
 
         public async Task Login(string returnUrl = "http://localhost:5001/esicallback")
         {
@@ -92,7 +82,7 @@ namespace EVErything.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet("/Home/EVESSoRedirect")]
         public IActionResult EVESSoRedirect()
         {
             var url = $"{Configuration["EVE:SSO.Url"]}/oauth/authorize";

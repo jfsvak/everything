@@ -250,6 +250,14 @@ namespace EVErything.Web.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+        [HttpGet("/Account/Logout")]
+        public async Task<IActionResult> ExternalLogout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

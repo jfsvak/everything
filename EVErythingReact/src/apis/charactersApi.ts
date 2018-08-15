@@ -10,6 +10,13 @@ class CharactersApi {
         }
         return new EVEApi().apiCharactersGet();
     }
+
+    static removeCharacter(id: string) {
+        if (configs.type === 'LOCAL') {
+            return getPromise({});
+        }
+        return new EVEApi().apiCharactersByIdDelete(id);
+    }
 }
 
 export default CharactersApi;

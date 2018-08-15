@@ -25,13 +25,175 @@
 import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 
 //let defaultBasePath = 'https://localhost';
-let defaultBasePath = 'http://localhost:5001';
+let defaultBasePath = '';
+
+export class Account {
+    'id': string;
+    'name': string;
+    'characters': Array<Character>;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string"
+        },
+        {
+            "name": "characters",
+            "baseName": "characters",
+            "type": "Array<Character>"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return Account.attributeTypeMap;
+    }
+}
+
+export class Character {
+    'id': string;
+    'name': string;
+    'characterSetID': string;
+    'characterSet': CharacterSet;
+    'token': Token;
+    'accountID': string;
+    'account': Account;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string"
+        },
+        {
+            "name": "characterSetID",
+            "baseName": "characterSetID",
+            "type": "string"
+        },
+        {
+            "name": "characterSet",
+            "baseName": "characterSet",
+            "type": "CharacterSet"
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "Token"
+        },
+        {
+            "name": "accountID",
+            "baseName": "accountID",
+            "type": "string"
+        },
+        {
+            "name": "account",
+            "baseName": "account",
+            "type": "Account"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return Character.attributeTypeMap;
+    }
+}
+
+export class CharacterSet {
+    'id': string;
+    'mainCharacterID': string;
+    'mainCharacter': Character;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        },
+        {
+            "name": "mainCharacterID",
+            "baseName": "mainCharacterID",
+            "type": "string"
+        },
+        {
+            "name": "mainCharacter",
+            "baseName": "mainCharacter",
+            "type": "Character"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return CharacterSet.attributeTypeMap;
+    }
+}
+
+export class Token {
+    'characterID': string;
+    'character': Character;
+    'refreshToken': string;
+    'accessToken': string;
+    'tokenType': string;
+    'expiresIn': number;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "characterID",
+            "baseName": "characterID",
+            "type": "string"
+        },
+        {
+            "name": "character",
+            "baseName": "character",
+            "type": "Character"
+        },
+        {
+            "name": "refreshToken",
+            "baseName": "refreshToken",
+            "type": "string"
+        },
+        {
+            "name": "accessToken",
+            "baseName": "accessToken",
+            "type": "string"
+        },
+        {
+            "name": "tokenType",
+            "baseName": "tokenType",
+            "type": "string"
+        },
+        {
+            "name": "expiresIn",
+            "baseName": "expiresIn",
+            "type": "number"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return Token.attributeTypeMap;
+    }
+}
 
 
 let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "Account": Account,
+    "Character": Character,
+    "CharacterSet": CharacterSet,
+    "Token": Token,
 }
 
 
@@ -1115,6 +1277,77 @@ export class EVEApi {
         this.authentications[EVEApiApiKeys[key]].apiKey = value;
     }
 
+    /**
+     * 
+     * 
+     */
+    public apiCharactersAddGet () : AxiosPromise {
+        const localVarPath = this.basePath + '/api/characters/add';
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    public apiCharactersByIdDelete (id: string) : AxiosPromise {
+        const localVarPath = this.basePath + '/api/characters/{id}'
+            .replace('{' + 'id' + '}', String(id));
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling apiCharactersByIdDelete.');
+        }
+
+        let useFormData = false;
+
+        let requestOptions: AxiosRequestConfig = {
+            method: 'DELETE',
+            params: queryParameters,
+            headers: headerParams,
+            url: localVarPath,
+            responseType: 'json',
+        };
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.data = formParams;
+            }
+        }
+        return axios(requestOptions);
+    }
     /**
      * 
      * 

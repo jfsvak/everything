@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using EVErything.Web.Models;
 using EVErything.Web.Models.ESIViewModels;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace EVErything.Web.Controllers
 {
@@ -16,11 +18,15 @@ namespace EVErything.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppDbContext _appDbContext;
+        private readonly ILogger _logger;
+        private IConfiguration Configuration { get; }
 
-        public EVEController(UserManager<ApplicationUser> userManager, AppDbContext appDbContext)
+        public EVEController(UserManager<ApplicationUser> userManager, AppDbContext appDbContext, ILogger<EVEController> logger, IConfiguration configuration)
         {
             _userManager = userManager;
             _appDbContext = appDbContext;
+            _logger = logger;
+            Configuration = configuration;
         }
 
         [Authorize]
@@ -33,6 +39,7 @@ namespace EVErything.Web.Controllers
         //[Authorize]
         [AllowCrossSiteJson]
         [HttpGet("/api/characters")]
+        [ProducesResponseType(200, Type = typeof(List<Character>))]
         public async Task<IActionResult> GetCharacters()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -45,6 +52,15 @@ namespace EVErything.Web.Controllers
                 return Ok(characters);
             }
 
+        }
+
+        [Authorize]
+        [HttpDelete("/api/characters/{id}")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> DeleteCharacter([FromRoute] string id)
+        {
+            _logger.LogTrace($"Delete char with id [{id}]");
+            return Ok();
         }
     }
 }

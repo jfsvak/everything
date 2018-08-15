@@ -28,15 +28,11 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
         const { characters } = this.props;
         return (
             <section>
-                <h1>Characters</h1>
-                <ul className="list-group">
-                    {characters && characters.map((c, idx) =>
-                        <li className="list-group-item"><CharacterOverviewBar key={idx} character={c}/></li>
-                    )}
-                </ul>
-                <div className="float-right">
-                    <button type="button" className="btn btn-primary">Add</button>
-                </div>
+                <h1>Characters</h1><a href="/Home/EVESSoRedirect" className="btn btn-primary mb-3">Add</a>
+                
+                {characters && characters.map((c, idx) =>
+                    <CharacterOverviewBar key={idx} character={c}/>
+                )}
             </section>
         );
     }
@@ -50,7 +46,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getCharacters: bindActionCreators(characterActions.getCharacters as any, dispatch)
+        getCharacters: bindActionCreators(characterActions.getCharacters as any, dispatch),
     };
 }
 

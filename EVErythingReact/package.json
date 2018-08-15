@@ -7,9 +7,11 @@
 	"scripts": {
 		"build:dev": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0",
 		"build:production": "webpack --config webpack.config.prod.js",
+		"build:redux-test": "webpack --config webpack.config.redux-test.js && node redux-test-dist/app.js",
 		"build:offline": "webpack --config webpack.config.offline.js",
 		"clean": "rimraf ./dist",
 		"start": "npm run build:dev",
+		"redux-test": "npm run build:redux-test",
 		"build": "npm run clean && npm run build:production",
 		"offline": "npm run clean && npm run build:offline"
 	},

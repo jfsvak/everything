@@ -87,14 +87,64 @@ namespace EVErything.Web.Controllers
 
             var verify = JsonConvert.DeserializeObject<VerifyViewModel>(verifyString);
 
-            // if the verify object at this point contains the CharacterID, I know the auth went well, and I can start the local login flow:
-            // 1. Find the User with verify.CharacterID in my Identity database
-            //   1.a If found, then sign him in:
-            //   1.b If not found, create a new User with that CharacterID.
-            // 2. Find Character with CharacterID
-            //  2.a If not found -> create Character + new CharacterSet and set new Character as Main on set
-            // 3. Update tokens in AppDb
-            // 4. Sign in user as the last thing, so all subsequent requests are Authed against the signed in user, and token is updated
+            // If the verify object at this point contains the CharacterID, I know the auth went well, and I can start the local login or new character auth flow:
+
+            // If I am already logged in, the run new character auth flow
+            if (_signInManager.IsSignedIn(User))
+            {
+                return await AuthCharacter(token, verify);
+            }
+            else
+            // If I'm not signed in, sign me in
+            {
+                return await SignIn(token, verify);
+            }
+
+        }
+
+        private async Task<IActionResult> AuthCharacter(AccessToken token, VerifyViewModel verify)
+        {
+            using (_appDbContext)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var existingCharacter = _appDbContext.Characters.Find(user.CharacterId);
+
+                var character = _appDbContext.Characters.Find(verify.CharacterID);
+                
+                if (character == null)
+                    character = _appDbContext.Characters.Add(new Character { ID = verify.CharacterID, Name = verify.CharacterName, CharacterSetID = existingCharacter.CharacterSetID }).Entity;
+
+                var tokens = _appDbContext.Tokens.Find(character.ID);
+
+                if (tokens == null)
+                {
+                    _appDbContext.Tokens.Add(new Token { Character = character, AccessToken = token.access_token, RefreshToken = token.refresh_token, ExpiresIn = token.expires_in, TokenType = token.token_type });
+                }
+                else
+                {
+                    tokens.AccessToken = token.access_token;
+                    tokens.RefreshToken = token.refresh_token;
+                    tokens.ExpiresIn = token.expires_in;
+                    tokens.TokenType = token.token_type;
+                    _appDbContext.Entry(tokens).State = EntityState.Modified;
+                }
+                _appDbContext.SaveChanges();
+            }
+
+            // Should redirect to deep link in react app from where he came (possible the characters page)
+            return RedirectToAction(nameof(EVEController.Index), "EVE");
+        }
+
+        // *** SIGN IN FLOW ***
+        // 1. Find the User with verify.CharacterID in my Identity database
+        //   1.a If found, then sign him in:
+        //   1.b If not found, create a new User with that CharacterID.
+        // 2. Find Character with CharacterID
+        //  2.a If not found -> create Character + new CharacterSet and set new Character as Main on set
+        // 3. Update tokens in AppDb
+        // 4. Sign in user as the last thing, so all subsequent requests are Authed against the signed in user, and token is updated
+        private async Task<IActionResult> SignIn(AccessToken token, VerifyViewModel verify)
+        {
 
             var user = await _userManager.FindByNameAsync(verify.CharacterID);
 
@@ -113,7 +163,7 @@ namespace EVErything.Web.Controllers
                 var identityResult = await _userManager.CreateAsync(user, verify.CharacterID);
             }
 
-            using(_appDbContext)
+            using (_appDbContext)
             {
                 var character = _appDbContext.Characters.Find(verify.CharacterID);
 
@@ -124,8 +174,9 @@ namespace EVErything.Web.Controllers
 
                 if (tokens == null)
                 {
-                    _appDbContext.Tokens.Add(new Token { Character = character, AccessToken = token.access_token, RefreshToken = token.refresh_token, ExpiresIn = token.expires_in, TokenType = token.token_type});
-                } else
+                    _appDbContext.Tokens.Add(new Token { Character = character, AccessToken = token.access_token, RefreshToken = token.refresh_token, ExpiresIn = token.expires_in, TokenType = token.token_type });
+                }
+                else
                 {
                     tokens.AccessToken = token.access_token;
                     tokens.RefreshToken = token.refresh_token;

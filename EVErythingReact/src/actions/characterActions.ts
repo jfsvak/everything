@@ -1,9 +1,13 @@
 import * as types from '../models/constants/actionTypes';
 import CharactersApi from '../apis/charactersApi';
 
-export function addCharacter(character: string) {
+export function removeCharacter(id: string) {
     return dispatch => {
-        return dispatch({type: types.ADD_CHARACTER_SUCCESS, character });
+        return CharactersApi.removeCharacter(id)
+            .then(resp => {
+                dispatch({ type: types.REMOVE_CHARACTER_SUCCESS, id });
+            })
+            .catch(resp => dispatch({ type: types.REMOVE_CHARACTER_FAILURE, resp }));
     }
 }
 

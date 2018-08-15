@@ -1,7 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "EVErything";
+    Layout = null;
 }
 
-<div>
-    <h1>Welcome to EVE-rything</h1>
-</div>
+@using Microsoft.AspNetCore.Identity
+@using EVErything.Web.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    // shouldn't come here
+}
+else
+{
+    <div class="mx-auto">
+        <a asp-controller="Home" asp-action="EVESSoRedirect"><img src="~/images/eve-sso-login-black-large.png" /></a>
+    </div>
+}

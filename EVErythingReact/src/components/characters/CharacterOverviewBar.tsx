@@ -6,9 +6,12 @@ export interface ICharacterOverviewBarProps {
 
 function CharacterOverviewBar(props: ICharacterOverviewBarProps) {
     return (
-        <div className="container-fluid">
-            <img src="https://image.eveonline.com/Character/2113547503_64.jpg"/>{props.character.name}
-        </div>
+            <div className="card mb-3">
+                <div className="card-body">
+                    <img src={"https://image.eveonline.com/Character/" + props.character.id + "_64.jpg"}/>{props.character.name}
+                    <button type="button" className="btn btn-warning btn-sm">Remove</button>
+                </div>
+            </div>
     );
 }
 
