@@ -10,11 +10,16 @@ namespace EVErything.Test.Business
 {
     public class AccountRepositoryTest
     {
+        private AppDbContext ctx;
+
+        public AccountRepositoryTest()
+        {
+            ctx = GetSqlDbContext();
+        }
+
         [Fact]
         public void Add_CharactersNormalFlow()
         {
-            var ctx = GetSqlDbContext();
-
             // Create Character and new set
             var char1111 = ctx.Characters.Add(new Character
             {
@@ -63,7 +68,6 @@ namespace EVErything.Test.Business
         [Fact]
         public void Update_AccountGraph()
         {
-            var ctx = GetSqlDbContext();
             //var guid = System.Guid.NewGuid();
             //var charSetGuid = System.Guid.NewGuid();
             var charSet = new CharacterSet();// { ID = charSetGuid };
@@ -152,7 +156,7 @@ namespace EVErything.Test.Business
         private AppDbContext GetSqlDbContext()
         {
             var builder = new DbContextOptionsBuilder<AppDbContext>();
-            DbContextOptions<AppDbContext> options = builder.UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=EVErything.App.Unittest;Trusted_Connection=True;MultipleActiveResultSets=true").Options;
+            DbContextOptions<AppDbContext> options = builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EVErything.App.Unittest;Trusted_Connection=True;MultipleActiveResultSets=true").Options;
             AppDbContext ctx = new AppDbContext(options);
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();

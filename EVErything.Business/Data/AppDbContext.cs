@@ -1,18 +1,26 @@
 ﻿using EVErything.Business.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
 
 namespace EVErything.Business.Data
 {
-    //public class EVErythingDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
-    //{
-    //    public AppDbContext CreateDbContext(string[] args)
-    //    {
-    //        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+    public class EVErythingDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    {
+        public AppDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            Console.WriteLine("args: " + args);
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-    //        return new AppDbContext(optionsBuilder.Options);
-    //    }
-    //}
+            return new AppDbContext(optionsBuilder.Options);
+        }
+    }
 
     public class AppDbContext : DbContext
     {
@@ -27,12 +35,19 @@ namespace EVErything.Business.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer();
-        //    }
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Character>().OwnsOne(c => c.Token).ToTable("Tokens");
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            Console.WriteLine("optionsBuilder.IsConfigured: " + optionsBuilder.IsConfigured);
+
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    optionsBuilder.UseSqlServer();
+            //}
+        }
     }
 }
