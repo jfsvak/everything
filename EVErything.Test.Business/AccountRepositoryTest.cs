@@ -8,15 +8,8 @@ using Xunit;
 
 namespace EVErything.Test.Business
 {
-    public class AccountRepositoryTest
+    public class AccountRepositoryTest : AppDbTest
     {
-        private AppDbContext ctx;
-
-        public AccountRepositoryTest()
-        {
-            ctx = GetSqlDbContext();
-        }
-
         [Fact]
         public void Add_CharactersNormalFlow()
         {
@@ -151,27 +144,6 @@ namespace EVErything.Test.Business
             Assert.Equal("Acc1", acc.Name);
             Assert.Equal("Mulvi", char1.Name);
             Assert.Equal("Mulvi", char1.Name);
-        }
-
-        private AppDbContext GetSqlDbContext()
-        {
-            var builder = new DbContextOptionsBuilder<AppDbContext>();
-            DbContextOptions<AppDbContext> options = builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EVErything.App.Unittest;Trusted_Connection=True;MultipleActiveResultSets=true").Options;
-            AppDbContext ctx = new AppDbContext(options);
-            ctx.Database.EnsureDeleted();
-            ctx.Database.EnsureCreated();
-            return ctx;
-        }
-
-        private AppDbContext GetInMemoryDbContext()
-        {
-            var builder = new DbContextOptionsBuilder<AppDbContext>();
-            builder.UseInMemoryDatabase();
-            DbContextOptions<AppDbContext> options = builder.Options;
-            AppDbContext ctx = new AppDbContext(options);
-            ctx.Database.EnsureDeleted();
-            ctx.Database.EnsureCreated();
-            return ctx;
         }
 
         private Repository<Account> GetInMemoryAccountepository()

@@ -7,20 +7,22 @@ using System.IO;
 
 namespace EVErything.Business.Data
 {
-    public class EVErythingDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
-    {
-        public AppDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            Console.WriteLine("args: " + args);
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+    //public class EVErythingDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    //{
+    //    public AppDbContext CreateDbContext(string[] args)
+    //    {
+    //        Console.WriteLine("args: " + args);
+    //        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    //        Console.WriteLine("env: " + env);
+    //        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+    //        IConfigurationRoot configuration = new ConfigurationBuilder()
+    //            .SetBasePath(Directory.GetCurrentDirectory())
+    //            .AddJsonFile("appsettings.json")
+    //            .Build();
 
-            return new AppDbContext(optionsBuilder.Options);
-        }
-    }
+    //        return new AppDbContext(optionsBuilder.Options);
+    //    }
+    //}
 
     public class AppDbContext : DbContext
     {
@@ -37,7 +39,7 @@ namespace EVErything.Business.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Character>().OwnsOne(c => c.Token).ToTable("Tokens");
+            //modelBuilder.Entity<Character>().OwnsOne(c => c.Token).ToTable("Tokens");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
