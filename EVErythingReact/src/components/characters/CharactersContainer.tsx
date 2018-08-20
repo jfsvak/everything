@@ -27,7 +27,7 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
     render() {
         const { characters } = this.props;
         return (
-            <section>
+            <section style={{border: "solid 1px", borderColor: "black"}}>
                 <h1>Characters</h1><a href="/Home/EVESSoRedirect" className="btn btn-primary mb-3">Add</a>
                 
                 {characters && characters.map((c, idx) =>

@@ -7,9 +7,9 @@ import * as routePaths from '../models/constants/routePaths';
 import Loader from './common/Loader';
 import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
-import SideMenu from './menues/SideMenu';
+import SideBar from './menues/SideBar';
 import TopMenu from './menues/TopMenu';
-
+//import $ from "jquery";
 import * as accountsActions from '../actions/accountsActions';
 
 //Here we are asynchronous loading our components based on their path
@@ -29,8 +29,6 @@ export interface IAppState {
 }
 
 class App extends React.Component<IAppProps, IAppState>  {
-    private wrapperDiv: React.RefObject<HTMLDivElement>;
-
     constructor(props: any) {
         super(props);
 
@@ -40,9 +38,6 @@ class App extends React.Component<IAppProps, IAppState>  {
         }
 
         this.changeLang = this.changeLang.bind(this);
-        this.toggleMenu = this.toggleMenu.bind(this);
-
-        this.wrapperDiv = React.createRef();
     }
 
     componentDidMount(): void {
@@ -56,11 +51,6 @@ class App extends React.Component<IAppProps, IAppState>  {
         })
     }
 
-    toggleMenu(event) {
-        const wrap = this.wrapperDiv.current;
-        wrap.classList.toggle("toggled");
-    }
-
     render() {
         const propsToSend = {
             example: this.state.propExample,
@@ -68,16 +58,12 @@ class App extends React.Component<IAppProps, IAppState>  {
             changeLanguage: this.changeLang
         }
         return (
-            <div id="fullpage-wrapper" className="toggled" ref={this.wrapperDiv}>
-                {/*
-                <TopMenu />
+            <div className="wrapper" style={{backgroundColor: "lightGreen"}}>
+                <SideBar />
 
-                <button onClick={this.toggleMenu} className="btn btn-secondary" id="menu-toggle">Toggle Menu</button>
-                */}
-                <SideMenu />
-
-                <div id="page-content-wrapper">
-                    <div className="container-fluid">
+                <div id="content">
+                    <TopMenu />
+                    <div className="container">
                         <Switch>
                             <Routing path="/" exact component={CharactersContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Accounts} component={AccountsContainer} props={propsToSend}/>
