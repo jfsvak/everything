@@ -1,4 +1,5 @@
 import * as React from 'react';
+import $ from 'jquery';
 
 export interface ITopMenuProps {
 

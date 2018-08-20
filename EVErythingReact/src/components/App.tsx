@@ -9,7 +9,6 @@ import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
 import SideBar from './menues/SideBar';
 import TopMenu from './menues/TopMenu';
-//import $ from "jquery";
 import * as accountsActions from '../actions/accountsActions';
 
 //Here we are asynchronous loading our components based on their path
