@@ -62,9 +62,9 @@ class App extends React.Component<IAppProps, IAppState>  {
 
                 <div id="content">
                     <TopMenu />
-                    <div className="container">
+                    <div className="container-fluid">
                         <Switch>
-                            <Routing path="/" exact component={CharactersContainer} props={propsToSend}/>
+                            <Routing path="/" exact component={MainContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Accounts} component={AccountsContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Characters} component={CharactersContainer} props={propsToSend}/>
                         </Switch>

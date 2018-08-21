@@ -27,12 +27,17 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
     render() {
         const { characters } = this.props;
         return (
-            <section style={{border: "solid 1px", borderColor: "black"}}>
-                <h1>Characters</h1><a href="/Home/EVESSoRedirect" className="btn btn-primary mb-3">Add</a>
-                
-                {characters && characters.map((c, idx) =>
-                    <CharacterOverviewBar key={idx} character={c}/>
-                )}
+            <section>
+                 {/* style={{border: "solid 1px", borderColor: "black"}}> */}
+                <h2 className="d-flex justify-content-between mb-3">
+                    <span className="font-weight-bold">Characters</span>
+                    <a href="/Home/EVESSoRedirect"><i className="fas fa-user-plus"></i></a>
+                </h2>
+                <div id="characterCards" className="accordion">
+                    {characters && characters.map((c, idx) =>
+                        <CharacterOverviewBar key={idx} character={c}/>
+                    )}
+                </div>
             </section>
         );
     }

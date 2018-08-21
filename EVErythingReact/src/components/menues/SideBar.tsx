@@ -1,18 +1,27 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as selectors from '../../redux/selectors';
+import * as characterActions from '../../actions/characterActions';
 import * as routePaths from '../../models/constants/routePaths';
 
 export interface ISideBarProps {
     active: Boolean;
     characters: any;
+    getCharacters: Function;
 }
 
 class SideBar extends React.Component<ISideBarProps> {
 
     constructor(props: ISideBarProps) {
         super(props);
+
+        this.characterSubMenuHandler = this.characterSubMenuHandler.bind(this);
+    }
+
+    characterSubMenuHandler(event) {
+        this.props.getCharacters();
     }
 
     render() {
@@ -25,35 +34,42 @@ class SideBar extends React.Component<ISideBarProps> {
                     <h3>EVErything</h3>
                 </div>
 
-                <ul className="list-unstyled components">
+                <ul className="list-unstyled components" id="SideMenuGroup">
                     <li>
                         {/*style={{display: "inline", padding: "0px"}
                         <Link to={routePaths.MainRoutes.Characters}>
                         </Link>
                         */}
-                        <a href="#charactersSubMenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                        <Link to={routePaths.MainRoutes.Characters} >
                             <i className="fas fa-address-card"></i>
                             Characters
-                        </a>
-                        {characters &&
-                            <ul className="collapse list-unstyled" id="charactersSubMenu">
-                                {characters.map((c, idx) => 
-                                    <li key={idx}>
-                                        <a href="#">{c.name}</a>
-                                    </li>
-                                )}
-                            </ul>
-                        }
+                        </Link>
+                        {/* <a href="" onClick={this.characterSubMenuHandler} data-target="#charactersSubMenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                            <i className="fas fa-address-card"></i>
+                            Characters
+                        </a> 
+                        <ul className="collapse list-unstyled" id="charactersSubMenu" data-parent="#SideMenuGroup">
+                            {!characters && 
+                                <li><a>{"<no chars>"}</a></li>
+                            }
+                            {characters && characters.map((c, idx) => 
+                                <li key={idx}>
+                                    <a href={"/characters/" + c.id}>{c.name}</a>
+                                </li>
+                            )}
+                        </ul>
+                        */}
                     </li>
                     <li>
-                        <a href="#accountsSubMenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                        <Link to={routePaths.MainRoutes.Accounts} >
                             <i className="fas fa-folder"></i>
                             Accounts
-                        </a>
-                        {/*<a href="#accountsSubMenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-                        {routePaths.MainRoutes.Accounts}
-                        </a>*/}
-                        <ul className="collapse list-unstyled" id="accountsSubMenu">
+                        </Link>
+                        {/* <a href="" data-target="#accountsSubMenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" className="dropdown-toggle">
+                            <i className="fas fa-folder"></i>
+                            Accounts
+                        </a> 
+                        <ul className="collapse list-unstyled" id="accountsSubMenu" data-parent="#SideMenuGroup">
                             <li>
                                 <a href="#">Main</a>
                             </li>
@@ -64,11 +80,24 @@ class SideBar extends React.Component<ISideBarProps> {
                                 <a href="#">Titan alt</a>
                             </li>
                         </ul>
+                        */}
                     </li>
-                    <li>
+                    {/* <li>
                         <a href="/">
                             <i className="fas fa-tachometer-alt"></i>
                             Dashboard
+                        </a>
+                    </li> */}
+                    <li>
+                        <a href="#">
+                            <i className="fas fa-sign-out-alt"></i>
+                            Fittings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className="fas fa-sign-out-alt"></i>
+                            Shopping List
                         </a>
                     </li>
                     <li>
@@ -89,4 +118,10 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(SideBar);
+function mapDispatchToProps(dispatch) {
+    return {
+        getCharacters: bindActionCreators(characterActions.getCharacters as any, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
