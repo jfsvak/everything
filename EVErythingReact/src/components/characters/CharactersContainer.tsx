@@ -30,8 +30,8 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
             <section>
                  {/* style={{border: "solid 1px", borderColor: "black"}}> */}
                 <h2 className="d-flex justify-content-between mb-3">
-                    <span className="font-weight-bold">Characters</span>
-                    <a href="/Home/EVESSoRedirect"><i className="fas fa-user-plus"></i></a>
+                    <span className="font-weight-bold text-light">Characters</span>
+                    <a href="/Home/EVESSoRedirect" className="text-light"><i className="fas fa-user-plus"></i></a>
                 </h2>
                 <div id="characterCards" className="accordion">
                     {characters && characters.map((c, idx) =>

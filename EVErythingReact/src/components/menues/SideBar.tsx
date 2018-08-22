@@ -29,7 +29,7 @@ class SideBar extends React.Component<ISideBarProps> {
         console.log('characters: ', characters);
         return (
             
-            <nav id="sidebar">
+            <nav id="sidebar" className="active">
                 <div className="sidebar-header">
                     <h3>EVErything</h3>
                 </div>

@@ -21,16 +21,16 @@ class TopMenu extends React.Component<ITopMenuProps> {
 
     render() {
         return (
-            <nav id="topbar" className="navbar navbar-expand-sm navbar-light bg-light">
-                <button className="btn btn-dark d-inline-block d-sm-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <nav id="topbar" className="navbar navbar-expand-md">
+                <button className="btn btn-dark d-inline-block d-md-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     {/* <span className="navbar-toggler-icon"></span> */}
                     <i className="fas fa-align-justify"></i>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="nav navbar-nav">
+                    <ul className="nav navbar-nav mr-auto">
                         <li className="nav-item">    
-                            <button type="button" id="sidebarCollapse" onClick={this.toggleSideBar} className="btn btn-info">
-                                <i className="far fa-align-left"></i>
+                            <button type="button" id="sidebarCollapse" onClick={this.toggleSideBar} className="nav-link btn btn-info">
+                                <i className="fas fa-align-justify"></i>
                                 {/* <span>Toggle Sidebar</span> */}
                             </button>
                         </li>
@@ -42,26 +42,28 @@ class TopMenu extends React.Component<ITopMenuProps> {
                         </li>
                         <li className="nav-item">
                             <Link to={routePaths.MainRoutes.Accounts} >
-                                <i className="far fa-address-card"></i>
+                                <i className="fas fa-address-book"></i>
                                 Accounts
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="#" >
-                                <i className="far fa-address-card"></i>
+                                <i className="fas fa-ambulance"></i>
                                 My Fittings
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to={routePaths.MainRoutes.Characters} >
-                                <i className="far fa-shopping-cart"></i>
+                                <i className="fas fa-shopping-cart"></i>
                                 Shopping Lists
                             </Link>
                         </li>
-                        <li>
-                            <a href="/Account/Logout">
+                    </ul>
+                    <ul className="nav navbar-nav">
+                        <li className="nav-item">    
+                            <a href="/Account/Logout" className="nav-link">
                                 <i className="fas fa-sign-out-alt"></i>
-                                Sign out
+                                <span className="d-md-none">Sign Out</span>
                             </a>
                         </li>
                     </ul>

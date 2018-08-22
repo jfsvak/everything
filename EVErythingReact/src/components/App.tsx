@@ -60,7 +60,7 @@ class App extends React.Component<IAppProps, IAppState>  {
             <div className="wrapper" style={{backgroundColor: "lightGreen"}}>
                 <SideBar />
 
-                <div id="content">
+                <div id="content" className="active">
                     <TopMenu />
                     <div className="container-fluid">
                         <Switch>
