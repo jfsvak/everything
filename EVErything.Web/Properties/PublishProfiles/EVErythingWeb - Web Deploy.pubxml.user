@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVSyRHsxYYEe9rpeCs1N0swAAAAACAAAAAAAQZgAAAAEAACAAAADp416rWHVqZiUoGG8Z5I74etxMlkr8uIKBefoJGZjpSQAAAAAOgAAAAAIAACAAAAAlZtZwqsI84jaNn5pG5CwLlS7SzWzzLnkYKjArofFgU4AAAABeLpjQ5be+E29UlYkQPm1uwM6cDQx+K2U83XlBTotlet0vEUdcIpLp+k90zudsrgniMXjZ9EWqxE6d9vJfRJ/4mTfI2gkoiBhN6mNJLTJXHbv+jXOxdGYQCqRyx9A2kKLaQpJ0wVYZmOh3+7iMAN9u+ZR0QR8PykOtdctmb9EzBUAAAACc2O/5Dcx2sXggommpPcCkaztlJdUucVhDLQX04tLFNuPfLKFGLFLU9sRXPh4yCLHA2SHElzj5OlPV5fHEOBH7</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <AzureDBConnectionStrings Include="Server=tcp:everything-app.database.windows.net,1433;Initial Catalog=EVErything.App;Persist Security Info=False;User ID=evesa;Password=Hemmeligt88!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30" />
+    <AzureDBConnectionStrings Include="Server=tcp:everything-app.database.windows.net,1433;Initial Catalog=EVErything.Identity;Persist Security Info=False;User ID=evesa;Password=Hemmeligt88!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30" />
+  </ItemGroup>
+</Project>

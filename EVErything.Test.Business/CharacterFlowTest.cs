@@ -3,6 +3,7 @@ using EVErything.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using Xunit;
 
 namespace EVErything.Test.Business

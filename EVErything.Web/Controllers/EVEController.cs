@@ -36,7 +36,7 @@ namespace EVErything.Web.Controllers
             return View();
         }
 
-        //[Authorize]
+        [Authorize]
         [AllowCrossSiteJson]
         [HttpGet("/api/characters")]
         [ProducesResponseType(200, Type = typeof(List<Character>))]
