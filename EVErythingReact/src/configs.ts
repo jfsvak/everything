@@ -15,7 +15,7 @@ const configs = {
     delay: 500,
     socket: SOCKET_URL,
     toastDelay: 5000,
-    type: TYPE_LOCAL,
+    type: TYPE_REST,
     lang: LANG_EN,
     activateSW: false,
     verNo: 0.1
