@@ -6,7 +6,7 @@ export interface ICharacterOverviewBarProps {
 
 function CharacterOverviewBar(props: ICharacterOverviewBarProps) {
     return (
-            <div className="card mb-2">
+            <div className="card mb-2 p-1">
                 <div className="card-header p-1" id={"character_" + props.character.id + "_header"}>
                     <a data-toggle="collapse" data-target={"#character_"+ props.character.id + "_collapse"}>
 

@@ -15,6 +15,8 @@ import * as accountsActions from '../actions/accountsActions';
 const MainContainer = Loadable({ loader: () => import('./main/MainContainer'), loading: () => null});
 const AccountsContainer = Loadable({ loader: () => import('./accounts/AccountsContainer'), loading: () => null });
 const CharactersContainer = Loadable({ loader: () => import('./characters/CharactersContainer'), loading: () => null });
+const FittingsContainer = Loadable( { loader: () => import('./fittings/FittingsContainer'), loading: () => null } );
+const ShoppingListContainer = Loadable( { loader: () => import('./shoppingList/ShoppingListContainer'), loading: () => null } );
 const NotFound = Loadable({ loader: () => import('./common/NotFound'), loading: () => null });
 
 export interface IAppProps {
@@ -67,6 +69,8 @@ class App extends React.Component<IAppProps, IAppState>  {
                             <Routing path="/" exact component={MainContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Accounts} component={AccountsContainer} props={propsToSend}/>
                             <Routing path={routePaths.MainRoutes.Characters} component={CharactersContainer} props={propsToSend}/>
+                            <Routing path={routePaths.MainRoutes.Fittings} component={FittingsContainer} props={propsToSend}/>
+                            <Routing path={routePaths.MainRoutes.ShoppingList} component={ShoppingListContainer} props={propsToSend}/>
                         </Switch>
                     </div>
                 </div>

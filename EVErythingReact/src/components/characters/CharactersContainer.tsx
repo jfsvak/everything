@@ -27,9 +27,8 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
     render() {
         const { characters } = this.props;
         return (
-            <section>
-                 {/* style={{border: "solid 1px", borderColor: "black"}}> */}
-                <h2 className="d-flex justify-content-between mb-3">
+            <section className="p-2">
+                <h2 className="d-flex justify-content-between m-3">
                     <span className="font-weight-bold text-light">Characters</span>
                     <a href="/Home/EVESSoRedirect" className="text-light"><i className="fas fa-user-plus"></i></a>
                 </h2>

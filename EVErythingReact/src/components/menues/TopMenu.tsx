@@ -47,13 +47,13 @@ class TopMenu extends React.Component<ITopMenuProps> {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="#" >
+                            <Link to={routePaths.MainRoutes.Fittings} >
                                 <i className="fas fa-ambulance"></i>
                                 My Fittings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={routePaths.MainRoutes.Characters} >
+                            <Link to={routePaths.MainRoutes.ShoppingList} >
                                 <i className="fas fa-shopping-cart"></i>
                                 Shopping Lists
                             </Link>

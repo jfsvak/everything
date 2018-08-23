@@ -2,9 +2,11 @@
 //Code spliting happens at these points
 
 export const enum MainRoutes {
-    Dummy = '/dummy',
-    Dummy2 = "/dummy2",
+    // Dummy = '/dummy',
+    // Dummy2 = "/dummy2",
     Accounts = "/accounts",
-    Characters = "/characters"
+    Characters = "/characters",
+    Fittings = "/fittings",
+    ShoppingList = "/shoppingList"
 }
 

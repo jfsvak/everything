@@ -1,44 +1,31 @@
 @import "./variables.less";
 
 #topbar {
-    //overflow: hidden;
-    background-color: #333;
+    ul {
+        
+        li {
+            a {
+                padding: 10px;
+                font-size: 1.0em;
+                display: block;
+                color: #f2f2f2;
 
-    ul li a {
-        padding: 10px;
-        font-size: 1.1em;
-        display: block;
+                svg {
+                    margin-right: 5px;
+                    min-width: 30px;
+                }
+            }
 
-        svg {
-            margin-right: 5px;
-            min-width: 30px;
+            a:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
         }
-    }
-
-    a {
-        background-color: #333;
-        font-size: 1.1rm;
-        display: block;
-        padding: 10px;
-        float: left;
-        color: #f2f2f2;
-        text-align: center;
-        //text-decoration: none;
-
-        svg {
-            margin-right: 5px;
-            min-width: 30px;
-        }
-    }
-
-    a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-
-    a.active {
-        background-color: #4CAF50;
-        color: white;
     }
 }
 
