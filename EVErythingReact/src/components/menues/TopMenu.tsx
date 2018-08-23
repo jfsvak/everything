@@ -22,6 +22,7 @@ class TopMenu extends React.Component<ITopMenuProps> {
     render() {
         return (
             <nav id="topbar" className="navbar navbar-expand-md">
+                <a href="#" className="navbar-brand text-white-50">EVErything</a>
                 <button className="btn btn-dark d-inline-block d-md-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     {/* Burger menu on small screens */}
                     <i className="fas fa-align-justify"></i>
