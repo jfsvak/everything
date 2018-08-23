@@ -1,16 +1,19 @@
 //FONT-SIZES
-$largest: 30px;
-$larger: 25px;
-$large: 20px;
-$medium: 18px;
-$standard: 16px;
-$default: 14px;
-$small: 12px;
+$largest: 2.5em;
+$larger: 2em;
+$large: 1.8em;
+$medium: 1.3em;
+$standard: 1.1em;
+$default: 1em;
+$small: 0.8em;
+
 //COLORS
 $transparent-black: rgba(0, 0, 0, 0.4);
-$body-background: #eee;
+$body-background: rgb(24, 24, 24);
+$section-background: rgb(46, 46, 46);
 $main-purple: #693676;
 $menu-gray: #f1f1f1;
+$menu-font-dark: #8f8f8f;
 $menu-dark-gray: #424242;
 $light-gray: #d3d3d3;
 $strip-gray: #f9f9f9;

@@ -7,7 +7,7 @@ export interface ICharacterCardProps {
 class CharacterCard extends React.Component<ICharacterCardProps> {
     render() {
         return (
-            <div className="character-card">
+            <div className="card d-inline">
                 <p>id: {this.props.character.id}</p>
                 <p>Name: {this.props.character.name}</p>
             </div>

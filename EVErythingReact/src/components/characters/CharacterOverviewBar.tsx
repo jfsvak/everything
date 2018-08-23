@@ -6,7 +6,7 @@ export interface ICharacterOverviewBarProps {
 
 function CharacterOverviewBar(props: ICharacterOverviewBarProps) {
     return (
-            <div className="card mb-2 p-1">
+            <div className="card mb-2 p-1 text-white bg-dark">
                 <div className="card-header p-1" id={"character_" + props.character.id + "_header"}>
                     <a data-toggle="collapse" data-target={"#character_"+ props.character.id + "_collapse"}>
 
@@ -15,11 +15,14 @@ function CharacterOverviewBar(props: ICharacterOverviewBarProps) {
                                 <img src={"https://image.eveonline.com/Character/" + props.character.id + "_64.jpg"}/>
                             </div>
                             <div>
-                                <p>{props.character.name}</p>
+                                <p className="">{props.character.name}</p>
                                 <p>Wallet: 100.982.000,00 isk</p>
                                 <p>SP: 145.673</p>
                             </div>
-                            <a href="#" className="ml-auto"><i className="fas fa-trash-alt"></i></a>
+                            <div className="ml-auto">
+                                <a href="#" className="ml-auto mt-1 mr-2"><i className="fas fa-trash-alt"></i></a>
+                                <a href="#" className="ml-auto mt-1 mr-2"><i className="fas fa-sync-alt"></i></a>
+                            </div>
                         </div>
                     </a>
                 </div>

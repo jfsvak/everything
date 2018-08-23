@@ -13,12 +13,13 @@ class AccountList extends React.Component<IAccountListProps> {
     render() {
         console.log("AccountList.accounts", this.props.accounts);
         return (
-            <div className="account-list">
-                <h1>Accounts. Coming soon...</h1>
+            <section className="p-3">
+                <h1>Accounts</h1>
+                <p>Coming soon (TM)...</p>
                 {this.props.accounts && this.props.accounts.map((account, index) => 
                     <AccountRow key={index} account={account}/>
                 )}
-            </div>
+            </section>
         );
     }
 }

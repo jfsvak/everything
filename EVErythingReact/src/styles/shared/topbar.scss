@@ -6,25 +6,25 @@
         li {
             a {
                 padding: 10px;
-                font-size: 1.0em;
+                font-size: $standard;
                 display: block;
-                color: #f2f2f2;
+                color: $menu-font-dark;
 
                 svg {
-                    margin-right: 5px;
+                    margin-right: 2px;
                     min-width: 30px;
                 }
             }
 
             a:hover {
-                background-color: #ddd;
-                color: black;
+                background-color: $menu-gray;
+                color: $menu-dark-gray;
             }
 
-            a.active {
-                background-color: #4CAF50;
-                color: white;
-            }
+            // a.active {
+            //     background-color: #4CAF50;
+            //     color: white;
+            // }
         }
     }
 }

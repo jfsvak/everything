@@ -13,24 +13,37 @@
 
 body {
     font-family: 'FontAwesome', sans-serif;
-    background-color: rgb(24, 24, 24);
+    background-color: $body-background;
     //font: @default 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 section {
-    background-color: rgb(46, 46, 46);
+    background-color: $section-background;
     p {
         // opacity: .5;
         font-size: 0.8em;
-        color: #f2f2f2;
+        color: $gray-500;
     }
 }
 
+h1 {
+    font-size: $larger;
+    color: $gray-300;
+}
+
+h2 {
+    font-size: $medium;
+    color: $gray-300;
+}
+
+h3 {
+    font-size: $standard;
+}
 
 p {
     //font-family: 'FontAwesome', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
+    font-size: $small;
+    // font-weight: 300;
     line-height: 1.7em;
     //color: #999;
 }
@@ -40,8 +53,6 @@ a, a:hover, a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
-
-
 
 .app-container {
     background: $body-background;

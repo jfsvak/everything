@@ -23,19 +23,19 @@ class TopMenu extends React.Component<ITopMenuProps> {
         return (
             <nav id="topbar" className="navbar navbar-expand-md">
                 <button className="btn btn-dark d-inline-block d-md-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    {/* <span className="navbar-toggler-icon"></span> */}
+                    {/* Burger menu on small screens */}
                     <i className="fas fa-align-justify"></i>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="nav navbar-nav mr-auto">
-                        <li className="nav-item">    
-                            <button type="button" id="sidebarCollapse" onClick={this.toggleSideBar} className="nav-link btn btn-info">
+                        <li className="nav-item d-none">    
+                            <button className="nav-link btn btn-info" type="button" id="sidebarCollapse" onClick={this.toggleSideBar}>
+                                {/* Sidebar Toggle  */}
                                 <i className="fas fa-align-justify"></i>
-                                {/* <span>Toggle Sidebar</span> */}
                             </button>
                         </li>
                         <li className="nav-item active">
-                            <Link to={routePaths.MainRoutes.Characters} >
+                            <Link to={routePaths.MainRoutes.Characters}>
                                 <i className="fa fa-address-card"></i>
                                 Characters
                             </Link>
@@ -61,8 +61,8 @@ class TopMenu extends React.Component<ITopMenuProps> {
                     </ul>
                     <ul className="nav navbar-nav">
                         <li className="nav-item">    
-                            <a href="/Account/Logout" className="nav-link">
-                                <i className="fas fa-sign-out-alt"></i>
+                            <a href="/Account/Logout" className="nav-link pr-0">
+                                <i className="fas fa-sign-out-alt mr-0"></i>
                                 <span className="d-md-none">Sign Out</span>
                             </a>
                         </li>
