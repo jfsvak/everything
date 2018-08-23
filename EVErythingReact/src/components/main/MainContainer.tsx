@@ -20,14 +20,14 @@ class MainContainer extends React.Component<IMainContainerProps, IMainContainerS
 
     render() {
         return (
-            <div className="fullpage-wrapper" style={{backgroundColor: 'red', height: '300px'}}>
+            <section className="p-3">
                 <h1>Main...coming soon...</h1>
                 <div className="container" style={{backgroundColor: 'lightblue'}}>
-                    <Switch>
+                    {/* <Switch>
                         <Routing path={routePaths.MainRoutes.Characters} component={CharactersContainer} props={null}/>
-                    </Switch>
+                    </Switch> */}
                 </div>
-            </div>
+            </section>
         );
     }
 }
