@@ -39,7 +39,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader" },
-            { test: /(\.css|\.less)$/, loaders: ['style-loader', 'css-loader', 'less-loader'] },
+            { test: /(\.css|\.scss|\.sass)$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
             { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=assets/images/[name].[ext]' },
             { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
             { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader?prefix=font/&limit=5000&name=assets/fonts/[name].[ext]' },

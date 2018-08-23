@@ -3,22 +3,22 @@
 //Button 
 .btn {
     min-width: 140px;
-    font-size: @default;
+    font-size: $default;
     margin: 0px 5px;
     &.btn-primary {
-        background: @dark-green;
+        background: $dark-green;
     }
     &.btn-outline-primary {
         background: transparent;
-        color: @dark-green;
-        border-color: @dark-green;
+        color: $dark-green;
+        border-color: $dark-green;
     }
     &:active,
     &:hover {
         box-shadow: none !important;
-        background: @darker-green-btn  !important;
-        color: @white;
-        border-color: @dark-green  !important;
+        background: $darker-green-btn  !important;
+        color: $white;
+        border-color: $dark-green  !important;
     }
 }
 
@@ -27,18 +27,18 @@
     box-shadow: none !important;
     border: none;
     border-radius: 0px;
-    border-bottom: 1px solid @dark-green;
+    border-bottom: 1px solid $dark-green;
     padding-left: 2px;
-    color: @dark-green;
-    font-size: @default;
+    color: $dark-green;
+    font-size: $default;
     background: transparent;
 }
 
 .input-box:focus {
     outline: none;
-    color: @dark-green;
+    color: $dark-green;
     background: transparent;
-    border-bottom: 1px solid @dark-green;
+    border-bottom: 1px solid $dark-green;
 }
 
 .bar {
@@ -55,7 +55,7 @@
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: @dark-green;
+    background: $dark-green;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
@@ -79,14 +79,14 @@
 }
 
 .alert-danger {
-    color: @red;
+    color: $red;
     background: none;
     border: none;
-    border-top: 2px solid @red;
+    border-top: 2px solid $red;
     margin-top: -2px;
     width: 100%;
     border-radius: 0px;
-    font-size: @small;
+    font-size: $small;
 }
 
 .input-field.input-currency {
@@ -95,7 +95,7 @@
 
 .currency {
     padding-left: 10px;
-    font-size: @default;
+    font-size: $default;
 }
 
 //Checkbox --------------------
@@ -116,8 +116,8 @@
         left: 3px;
         width: 20px;
         height: 20px;
-        background-color: @white;
-        border: 1px solid @light-gray;
+        background-color: $white;
+        border: 1px solid $light-gray;
     }
     .custom-control-label::after {
         top: 0px;
@@ -126,10 +126,10 @@
         height: 25px;
     }
     .custom-control-input:checked~.custom-control-label::before {
-        background-color: @dark-green;
+        background-color: $dark-green;
     }
     .checkbox-label {
-        font-size: @standard;
+        font-size: $standard;
         position: absolute;
         top: 5px;
         left: 40px;
@@ -142,7 +142,7 @@
     position: relative;
     padding-left: 35px;
     margin: 10px 20px 10px 0px;
-    font-size: @standard;
+    font-size: $standard;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -156,7 +156,7 @@
         z-index: 2;
         cursor: pointer;
         &:hover+span {
-            border-color: @blue;
+            border-color: $blue;
         }
     }
     .checkmark {
@@ -165,12 +165,12 @@
         left: 0;
         height: 24px;
         width: 24px;
-        background-color: @white;
-        border: 1px solid @dark-gray;
+        background-color: $white;
+        border: 1px solid $dark-gray;
         border-radius: 50%;
     }
     input[type=radio]:checked~.checkmark {
-        background-color: @white;
+        background-color: $white;
     }
     .checkmark:after {
         content: "";
@@ -186,10 +186,10 @@
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background: @main-purple;
+        background: $main-purple;
     }
     .radio-description {
-        color: @gray-600;
+        color: $gray-600;
         display: block;
     }
 }
@@ -202,9 +202,9 @@
         vertical-align: top;
         .rangeslider {
             box-shadow: none;
-            background: @light-gray;
+            background: $light-gray;
             .rangeslider__fill {
-                background-color: @dark-green;
+                background-color: $dark-green;
             }
             .rangeslider__labels {
                 top: 5px;
@@ -215,9 +215,9 @@
                 -ms-user-select: none;
                 user-select: none;
                 .rangeslider__handle-tooltip {
-                    background-color: @dark-green;
+                    background-color: $dark-green;
                     &:after {
-                        border-top: 8px solid @dark-green;
+                        border-top: 8px solid $dark-green;
                     }
                 }
             }
@@ -239,8 +239,8 @@
             top: 5px;
             right: 0px;
             font-weight: bold;
-            color: @white;
-            background: @dark-green;
+            color: $white;
+            background: $dark-green;
             padding: 10px;
             border-radius: 3px;
         }

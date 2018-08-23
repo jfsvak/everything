@@ -6,10 +6,10 @@
     right: 0px;
     bottom: 0px;
     z-index: 101;
-    background-color: @transparent-black;
+    background-color: 4transparent-black;
     .loader {
-        border: 10px solid @white;
-        border-top: 10px solid @light-blue;
+        border: 10px solid $white;
+        border-top: 10px solid $light-blue;
         border-radius: 50%;
         width: 80px;
         height: 80px;

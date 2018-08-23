@@ -6,7 +6,7 @@ import configureStore from './store/configureStore';
 import configs from './configs';
 import App from './components/App';
 import './favicon.ico';
-import './styles/main.less';
+import './styles/main.scss';
 //import './styles/custom.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 

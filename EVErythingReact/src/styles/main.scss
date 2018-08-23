@@ -1,5 +1,5 @@
 @import './reset';
-@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../../node_modules/bootstrap/scss/bootstrap';
 //@import './shared/elements';
 //@import './shared/sharedForm';
 //@import './shared/loader';
@@ -44,7 +44,7 @@ a, a:hover, a:focus {
 
 
 .app-container {
-    background: @body-background;
+    background: $body-background;
 }
 
 .wrapper {
