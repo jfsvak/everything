@@ -6,9 +6,8 @@ function charactersById(state = initialState.characters.byId, action) {
     switch(action.type) {
         case types.GET_CHARACTERS_SUCCESS: 
         {
-            //[{id:"123", name:"Spai 1"}, {id:"123", name:"Spai 1"}]
             return action.resp.data.reduce(
-                (acc, character) => ({ ...acc, [character.id]: character }),
+                (accumulator, character) => ({ ...accumulator, [character.id]: character }),
                 {}
             );
         }
@@ -22,8 +21,14 @@ function charactersById(state = initialState.characters.byId, action) {
                 [characterId]: character
             };
         }
-        case types.ADD_CHARACTER_FAILURE:
-            return state;
+        case types.REMOVE_CHARACTER_SUCCESS:
+            // Reduce the object array only including the keys with key !== action.characterId 
+            return Object.keys(state).reduce((newState, characterId) => {
+                if (characterId !== action.id) {
+                    newState[characterId] = state[characterId];
+                }
+                return newState;
+            }, {});
         default:
             return state;
     }
@@ -31,9 +36,19 @@ function charactersById(state = initialState.characters.byId, action) {
 
 function allCharacters(state = initialState.characters.allIds, action) {
     switch(action.type) {
+        case types.GET_CHARACTERS_SUCCESS: 
+        {
+            return action.resp.data.reduce(
+                (acc, character) => [...acc, character.id],
+                []
+            );
+        }
         case types.ADD_CHARACTER_SUCCESS: 
             const characterId = action.character.id;
             return state.concat(characterId);
+        case types.REMOVE_CHARACTER_SUCCESS:
+            // slice the list of ids to exclude (remove) the action.characterId
+            return state.filter(id => id !== action.id);
         default:
             return state;
     }

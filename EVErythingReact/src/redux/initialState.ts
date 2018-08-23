@@ -4,6 +4,5 @@ import accountsInitialState from './initialStates/accountsInititialState';
 export default {
     accounts: accountsInitialState,
     characters: charactersInitialState,
-    ajaxCallsInProgress: 0,
-    dummyResponse: {}
+    ajaxCallsInProgress: 0
 };

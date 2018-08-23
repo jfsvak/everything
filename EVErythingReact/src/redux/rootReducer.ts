@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import ajaxCallsInProgress from './reducers/ajaxStatusReducer';
-import dummyResponse from './dummy/dummyReducer';
 import accountsReducer from './reducers/accountsReducer';
 import charactersReducer from './reducers/charactersReducer';
 
@@ -8,8 +7,7 @@ import charactersReducer from './reducers/charactersReducer';
 const rootReducer = combineReducers({
     accounts: accountsReducer,
     characters: charactersReducer,
-    ajaxCallsInProgress,
-    dummyResponse
+    ajaxCallsInProgress
 });
 
 export default rootReducer;

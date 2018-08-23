@@ -1,14 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import * as accountsActions from '../../actions/accountsActions';
+import * as selectors from '../../redux/selectors';
 import AccountRow from './AccountRow';
 import { bindActionCreators } from 'redux';
 
-export interface IAccountListProps {
+export interface IAccountsContainerProps {
     accounts: any;
+    getAccounts: Function;
 }
 
-class AccountList extends React.Component<IAccountListProps> {
+class AccountsContainer extends React.Component<IAccountsContainerProps> {
+    componentDidMount() {
+        this.props.getAccounts();
+    }
 
     render() {
         console.log("AccountList.accounts", this.props.accounts);
@@ -26,8 +31,14 @@ class AccountList extends React.Component<IAccountListProps> {
 
 function mapStateToProps(state) {
     return {
-        accounts: state.accounts
+        accounts: selectors.getAllAccounts(state)
     };
 };
 
-export default connect(mapStateToProps)(AccountList);
+function mapDispatchToProps(dispatch) {
+    return {
+        getAccounts: bindActionCreators(accountsActions.getAccounts as any, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountsContainer);

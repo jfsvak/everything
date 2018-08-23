@@ -1,4 +1,4 @@
-export default [
-    // byId: { }, 
-    // allIds: []
-]
+export default {
+    byId: { }, 
+    allIds: []
+}

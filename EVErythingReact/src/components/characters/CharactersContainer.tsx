@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as characterActions from '../../actions/characterActions';
 import { bindActionCreators } from 'redux';
-import * as selectors from '../../reducers/selectors';
+import * as selectors from '../../redux/selectors';
 import CharacterOverviewBar from './CharacterOverviewBar';
 
 export interface ICharactersState {
@@ -19,17 +19,10 @@ export interface ICharactersProps {
 class CharactersContainer extends React.Component<ICharactersProps, ICharactersState> {
     constructor(props: any) {
         super(props);
-        this.removeCharacter = this.removeCharacter.bind(this);
     }
 
     componentDidMount() {
         this.props.getCharacters();
-    }
-
-    removeCharacter(event) {
-        event.preventDefault();
-        console.log('remove char:' + event.currentTarget.getAttribute('data-item'));
-        this.props.removeCharacter(event.currentTarget.getAttribute('data-item'));
     }
 
     render() {

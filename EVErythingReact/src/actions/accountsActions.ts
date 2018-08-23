@@ -11,7 +11,10 @@ export function addAccount(name: string) {
                 dispatch({ type: types.ADD_ACCOUNT_SUCCESS, resp })
                 dispatch(ajaxCallEnded());
             })
-            .catch(resp => dispatch({ type: types.ADD_ACCOUNT_FAILURE, resp }));
+            .catch(resp => {
+                dispatch({ type: types.ADD_ACCOUNT_FAILURE, resp })
+                dispatch(ajaxCallEnded());
+            });
     };
 }
 
@@ -24,6 +27,9 @@ export function getAccounts() {
                 dispatch({ type: types.GET_ACCOUNTS_SUCCESS, resp })
                 dispatch(ajaxCallEnded());
             })
-            .catch(resp => dispatch({ type: types.GET_ACCOUNTS_FAILURE, resp }));
+            .catch(resp => {
+                dispatch({ type: types.GET_ACCOUNTS_FAILURE, resp })
+                dispatch(ajaxCallEnded());
+            });
     };
 }

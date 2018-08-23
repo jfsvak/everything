@@ -1,6 +1,6 @@
 import configureStore from './src/store/configureStore';
 import * as types from './src/models/constants/actionTypes';
-import * as selectors from './src/reducers/selectors';
+import * as selectors from './src/redux/selectors';
 import * as characterActions from './src/actions/characterActions';
 
 

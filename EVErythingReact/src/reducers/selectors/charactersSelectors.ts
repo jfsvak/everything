@@ -1,1 +1,0 @@
-export const getAllCharacters = (state) => Object.keys(state.byId).map(id => state.byId[id]);
