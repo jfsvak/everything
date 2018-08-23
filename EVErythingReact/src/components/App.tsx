@@ -58,8 +58,11 @@ class App extends React.Component<IAppProps, IAppState>  {
             language: this.state.language,
             changeLanguage: this.changeLang
         }
+        
         return (
             <div className="wrapper" style={{backgroundColor: "lightGreen"}}>
+                <Loader callsInProgress={this.props.progress}/>
+
                 <SideBar />
 
                 <div id="content" className="active">
@@ -74,7 +77,6 @@ class App extends React.Component<IAppProps, IAppState>  {
                         </Switch>
                     </div>
                 </div>
-                
             </div>
         );
     }
