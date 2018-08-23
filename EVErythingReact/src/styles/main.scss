@@ -54,6 +54,14 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+.avatar {
+    border-radius: 10%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
 .app-container {
     background: $body-background;
 }

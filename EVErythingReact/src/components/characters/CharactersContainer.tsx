@@ -11,30 +11,38 @@ export interface ICharactersState {
 }
 
 export interface ICharactersProps {
-    getCharacters: Function,
-    characters: any
+    getCharacters: Function;
+    removeCharacter: Function;
+    characters: any;
 }
 
 class CharactersContainer extends React.Component<ICharactersProps, ICharactersState> {
     constructor(props: any) {
         super(props);
+        this.removeCharacter = this.removeCharacter.bind(this);
     }
 
     componentDidMount() {
         this.props.getCharacters();
     }
 
+    removeCharacter(event) {
+        event.preventDefault();
+        console.log('remove char:' + event.currentTarget.getAttribute('data-item'));
+        this.props.removeCharacter(event.currentTarget.getAttribute('data-item'));
+    }
+
     render() {
         const { characters } = this.props;
         return (
             <section className="p-3">
-                <div className="d-flex justify-content-between mt-2 mb-2 align-items-baseline">
                     <h1>Characters</h1>
+                <div className="d-flex justify-content-end mt-2 mb-2 align-items-baseline">
                     <a href="/Home/EVESSoRedirect" className="text-light d-inline"><i className="fas fa-user-plus"></i></a>
                 </div>
                 <div id="characterCards" className="accordion">
                     {characters && characters.map((c, idx) =>
-                        <CharacterOverviewBar key={idx} character={c}/>
+                        <CharacterOverviewBar key={idx} character={c} removeCharacter={this.props.removeCharacter}/>
                     )}
                 </div>
             </section>
@@ -51,6 +59,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         getCharacters: bindActionCreators(characterActions.getCharacters as any, dispatch),
+        removeCharacter: bindActionCreators(characterActions.removeCharacter as any, dispatch)
     };
 }
 
