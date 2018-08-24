@@ -2,7 +2,7 @@ import * as types from '../../models/constants/actionTypes';
 import initialState from '../initialState';
 
 function actionTypeEndsInSuccess(type) {
-    return type.substring(type.length - 7) == '_ACTION';
+    return type.substring(type.length - 7) === '_ACTION';
 }
 
 export default function ajaxStatusReducer(state = initialState.ajaxCallsInProgress, action) {

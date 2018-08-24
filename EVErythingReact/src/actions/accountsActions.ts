@@ -7,7 +7,6 @@ export function addAccount(name: string) {
         dispatch(beginAjaxCall());
         return accountsApi.addAccount(name)
             .then(resp => {
-                console.log(types.ADD_ACCOUNT_SUCCESS + " callback", resp);
                 dispatch({ type: types.ADD_ACCOUNT_SUCCESS, resp })
                 dispatch(ajaxCallEnded());
             })
@@ -23,7 +22,6 @@ export function getAccounts() {
         dispatch(beginAjaxCall());
         return accountsApi.getAccounts()
             .then(resp => {
-                console.log(types.GET_ACCOUNTS_SUCCESS + " callback", resp);
                 dispatch({ type: types.GET_ACCOUNTS_SUCCESS, resp })
                 dispatch(ajaxCallEnded());
             })

@@ -4,9 +4,6 @@ import { combineReducers } from '../../../node_modules/redux';
 
 function accountsById(state = initialState.accounts.byId, action) {
     switch(action.type) {
-        case types.ADD_CHARACTER_SUCCESS:
-            console.log("!!! NOT IMPLEMENTED !!! Add the character id to the account:", action);
-            return state;
         case types.ADD_ACCOUNT_SUCCESS:
             console.log("In accountsReducer.ADD_ACCOUNT_SUCCESS: action.resp", action.resp);
             console.log("In accountsReducer.ADD_ACCOUNT_SUCCESS: action.resp", action.resp.data);
