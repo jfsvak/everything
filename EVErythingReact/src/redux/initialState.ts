@@ -1,5 +1,5 @@
-import charactersInitialState from './initialStates/charactersInititialState';
-import accountsInitialState from './initialStates/accountsInititialState';
+import charactersInitialState from './characters/inititialState';
+import accountsInitialState from './accounts/inititialState';
 
 export default {
     accounts: accountsInitialState,

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as selectors from '../../redux/selectors';
-import * as characterActions from '../../actions/characterActions';
+import * as characterActions from '../../redux/characters/actions';
 import * as routePaths from '../../models/constants/routePaths';
 
 export interface ISideBarProps {

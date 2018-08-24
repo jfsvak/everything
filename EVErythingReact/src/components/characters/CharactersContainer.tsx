@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as characterActions from '../../actions/characterActions';
+import * as characterActions from '../../redux/characters/actions';
 import { bindActionCreators } from 'redux';
 import * as selectors from '../../redux/selectors';
 import CharacterOverviewBar from './CharacterOverviewBar';

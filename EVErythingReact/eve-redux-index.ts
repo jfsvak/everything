@@ -1,7 +1,7 @@
 import configureStore from './src/store/configureStore';
 import * as types from './src/models/constants/actionTypes';
 import * as selectors from './src/redux/selectors';
-import * as characterActions from './src/actions/characterActions';
+import * as characterActions from './src/redux/characters/actions';
 
 
 const store = configureStore();

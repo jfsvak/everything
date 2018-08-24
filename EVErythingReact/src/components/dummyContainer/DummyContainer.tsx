@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as dummyActions from '../../actions/dummyActions';
+import * as dummyActions from '../../redux/common/actions/dummyActions';
 import TextInput from '../common/elements/TextInput';
 import Button from '../common/elements/Button';
 import { navigate } from '../../utils/navigateUtil';

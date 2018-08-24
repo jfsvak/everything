@@ -9,7 +9,7 @@ import { getLanguage, changeLanguage } from '../utils/languageUtil';
 import { AppLanguageText } from '../models/languageModel';
 import SideBar from './menues/SideBar';
 import TopMenu from './menues/TopMenu';
-import * as accountsActions from '../actions/accountsActions';
+import * as accountsActions from '../redux/accounts/actions';
 
 //Here we are asynchronous loading our components based on their path
 const MainContainer = Loadable({ loader: () => import('./main/MainContainer'), loading: () => null});

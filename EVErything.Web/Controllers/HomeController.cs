@@ -89,7 +89,7 @@ namespace EVErything.Web.Controllers
             var responseType = "code";
             var redirectUri = Uri.EscapeDataString($"{Configuration["EVE:ESI.Callback.URL"]}");
             var clientId = Configuration["EVE:clientId"];
-            var scope = Uri.EscapeDataString("characterAccountRead characterKillsRead characterSkillsRead esi-skills.read_skills.v1");
+            var scope = Uri.EscapeDataString("esi-skills.read_skillqueue.v1 esi-skills.read_skills.v1");
             
             return Redirect(url + "?response_type=" + responseType + "&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + scope);
         }

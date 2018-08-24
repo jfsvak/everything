@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as accountsActions from '../../actions/accountsActions';
+import * as accountsActions from '../../redux/accounts/actions';
 import * as selectors from '../../redux/selectors';
 import AccountRow from './AccountRow';
 import { bindActionCreators } from 'redux';

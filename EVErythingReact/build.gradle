@@ -57,9 +57,9 @@ task npm (dependsOn: ['npm_build']) {
 
 task swagger_clean {
 	doLast {
-		new File("${projectDir}/src/apis/generated").deleteDir()
+		new File("${projectDir}/src/redux/common/api/generated").deleteDir()
 		new File("${projectDir}/generated").deleteDir()
-		new File("${projectDir}/src/apis/generated").mkdirs()
+		new File("${projectDir}/src/redux/common/api/generated").mkdirs()
 	}
 }
 
@@ -72,7 +72,7 @@ task swagger_generate(type:JavaExec, dependsOn: ['swagger_clean']) {
 
 task swagger(dependsOn: ['swagger_generate']) {
 	doLast {
-		ant.copy(todir:"${projectDir}/src/apis/generated") {
+		ant.copy(todir:"${projectDir}/src/redux/common/api/generated") {
 			fileset(file:"${projectDir}/generated/api.ts")
 		}
 
