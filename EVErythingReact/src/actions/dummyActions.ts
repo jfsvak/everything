@@ -2,7 +2,7 @@ import dummyApi from '../apis/dummyApi';
 import * as types from '../models/constants/actionTypes';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
-export function dummyListAction() {
+export default function dummyListAction() {
     return dispatch => {
         dispatch(beginAjaxCall());
         return dummyApi.dummyList()
