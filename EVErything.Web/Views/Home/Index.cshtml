@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "EVErything";
-    Layout = null;
+    Layout = "_LayoutBootstrap";
 }
 
 @using Microsoft.AspNetCore.Identity
@@ -15,7 +15,9 @@
 }
 else
 {
-    <div class="mx-auto">
-        <a asp-controller="Home" asp-action="EVESSoRedirect"><img src="~/images/eve-sso-login-black-large.png" /></a>
+    <div class="container-fluid">
+           <div class="row ">
+                <a asp-controller="Home" asp-action="EVESSoRedirect"><img class="center-block" style="width: 80%;" src="~/images/eve-sso-login-black-large.png" /></a>
+           </div>
     </div>
 }
