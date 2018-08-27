@@ -4,6 +4,8 @@ export const enum jsonTypes {
     dummyAPI = "dummyAPI",
     GET_ACCOUNTS_API = "GET_ACCOUNTS_API",
     GET_CHARACTERS_API = "GET_CHARACTERS_API",
+    GET_SHOPPINGLISTS_API = "GET_SHOPPINGLISTS_API",
+    GET_FITTINGS_API = "GET_FITTINGS_API"
 }
 
 function getData(type: jsonTypes): any {
@@ -16,6 +18,11 @@ function getData(type: jsonTypes): any {
                 return require('./jsons/accounts.json');
             case jsonTypes.GET_CHARACTERS_API: 
                 return require('./jsons/characters.json');
+            case jsonTypes.GET_SHOPPINGLISTS_API: 
+                return require('./jsons/shoppingLists.json');
+                case jsonTypes.GET_FITTINGS_API: 
+                return require('./jsons/fittings.json');
+
         }
     }
     return data;

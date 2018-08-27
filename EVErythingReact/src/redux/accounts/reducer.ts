@@ -1,8 +1,8 @@
 import * as types from '../../models/constants/actionTypes';
-import initialState from '../initialState';
+import initialState from './initialState';
 import { combineReducers } from '../../../node_modules/redux';
 
-function accountsById(state = initialState.accounts.byId, action) {
+function accountsById(state = initialState.byId, action) {
     switch(action.type) {
         case types.ADD_ACCOUNT_SUCCESS:
             console.log("In accountsReducer.ADD_ACCOUNT_SUCCESS: action.resp", action.resp);
@@ -30,7 +30,7 @@ function accountsById(state = initialState.accounts.byId, action) {
     }
 }
 
-function allAccounts(state = initialState.accounts.allIds, action) {
+function allAccounts(state = initialState.allIds, action) {
     switch(action.type) {
         case types.ADD_ACCOUNT_SUCCESS:
         {

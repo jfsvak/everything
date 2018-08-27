@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import * as types from '../../models/constants/actionTypes';
-import initialState from '../initialState';
+import initialState from './initialState';
 
-function charactersById(state = initialState.characters.byId, action) {
+function charactersById(state = initialState.byId, action) {
     switch(action.type) {
         case types.GET_CHARACTERS_SUCCESS: 
         {
@@ -34,7 +34,7 @@ function charactersById(state = initialState.characters.byId, action) {
     }
 }
 
-function allCharacters(state = initialState.characters.allIds, action) {
+function allCharacters(state = initialState.allIds, action) {
     switch(action.type) {
         case types.GET_CHARACTERS_SUCCESS: 
         {
