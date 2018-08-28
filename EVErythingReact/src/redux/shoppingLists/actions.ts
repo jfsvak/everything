@@ -8,7 +8,7 @@ export function getShoppingLists() {
         return ShoppingListAPI.getFittings()
             .then(resp => {
                 dispatch({ type: types.GET_SHOPPINGLISTS_SUCCESS, resp});
-                dispatch(ajaxCallEnded());
+                // dispatch(ajaxCallEnded());
             })
             .catch(resp => dispatch({ type: types.GET_SHOPPINGLISTS_FAILURE}));
     }

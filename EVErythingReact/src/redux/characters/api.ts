@@ -1,12 +1,12 @@
 import configs from '../../configs';
 
-import { getJson, jsonTypes, getPromise } from '../common/api/mocks/mockService';
+import { getJsonAsPromise, jsonTypes, getPromise } from '../common/api/mocks/mockService';
 import { EVEApi } from '../common/api/generated/api';
 
 class CharactersApi {
     static getCharacters() {
         if (configs.type === 'LOCAL') {
-            return getJson(jsonTypes.GET_CHARACTERS_API);
+            return getJsonAsPromise(jsonTypes.GET_CHARACTERS_API);
         }
         return new EVEApi().apiCharactersGet();
     }

@@ -1,12 +1,12 @@
 import configs from '../../../configs';
 //APIs
-import { getJson, jsonTypes } from './mocks/mockService';
+import { getJsonAsPromise, jsonTypes } from './mocks/mockService';
 //import { CasecontrollerApi, CustomercontrollerApi } from './generated/api';
 
 const dummyListData = () => {
     console.log('im calling dummy api');
     if (configs.type === 'LOCAL') {
-        return getJson(jsonTypes.dummyAPI);
+        return getJsonAsPromise(jsonTypes.dummyAPI);
     }
     else {
         //let customerApi = new CustomercontrollerApi();

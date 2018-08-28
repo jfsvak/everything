@@ -8,11 +8,11 @@ export function addAccount(name: string) {
         return accountsApi.addAccount(name)
             .then(resp => {
                 dispatch({ type: types.ADD_ACCOUNT_SUCCESS, resp })
-                dispatch(ajaxCallEnded());
+                // dispatch(ajaxCallEnded());
             })
             .catch(resp => {
                 dispatch({ type: types.ADD_ACCOUNT_FAILURE, resp })
-                dispatch(ajaxCallEnded());
+                // dispatch(ajaxCallEnded());
             });
     };
 }
@@ -23,11 +23,11 @@ export function getAccounts() {
         return accountsApi.getAccounts()
             .then(resp => {
                 dispatch({ type: types.GET_ACCOUNTS_SUCCESS, resp })
-                dispatch(ajaxCallEnded());
+                // dispatch(ajaxCallEnded());
             })
             .catch(resp => {
                 dispatch({ type: types.GET_ACCOUNTS_FAILURE, resp })
-                dispatch(ajaxCallEnded());
+                // dispatch(ajaxCallEnded());
             });
     };
 }
