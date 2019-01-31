@@ -30,6 +30,7 @@ namespace EVErything.Business.Data
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterSet> CharacterSets { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<ESIDataCache> ESIDataCaches { get; set; }
 
         public AppDbContext() : base()
         { }
