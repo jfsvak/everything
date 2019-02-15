@@ -1,5 +1,6 @@
 ﻿using EVErything.Business.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,7 @@ namespace EVErything.Test.Business
         private AppDbContext GetSqlDbContext()
         {
             var builder = new DbContextOptionsBuilder<AppDbContext>();
-            DbContextOptions<AppDbContext> options = builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EVErything.App.Unittest;Trusted_Connection=True;MultipleActiveResultSets=true").Options;
+            DbContextOptions<AppDbContext> options = builder.UseSqlServer(@"Server=B3601194\SQLEXPRESS;Database=EVErything.App.Unittest;Trusted_Connection=True;MultipleActiveResultSets=true").Options;
             AppDbContext ctx = new AppDbContext(options);
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();

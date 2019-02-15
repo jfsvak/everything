@@ -62,5 +62,13 @@ namespace EVErything.Web.Controllers
             _logger.LogTrace($"Delete char with id [{id}]");
             return Ok();
         }
+
+        [Authorize]
+        [HttpPost("/esi")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> GetESIData([FromBody] string esipath)
+        {
+            return Ok("{result:'ok'}");
+        }
     }
 }

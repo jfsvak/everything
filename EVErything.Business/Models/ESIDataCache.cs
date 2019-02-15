@@ -8,39 +8,50 @@ namespace EVErything.Business.Models
     public class ESIDataCache
     {
         /// <summary>
+        /// Auto-generated primary key
+        /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public Guid ID { get; set; }
+
+        /// <summary>
         /// ID of character
         /// </summary>
-        public String CharacterID { get; set; }
+        [Required]
+        public string CharacterID { get; set; }
 
         [ForeignKey("CharacterID")]
         public Character Character { get; set; }
 
         /// <summary>
-        /// Key for the data saved in State.
-        /// Examples:
-        /// "attributes", "skillqueue" etc.
+        /// Specifies whether the data is from:
+        /// * tranquility 
+        /// * singularity
         /// </summary>
-        public string Key { get; set; }
+        [Required]
+        public string ESISource { get; set; }
 
-        [Column(TypeName = "text")]
-        public string? State { get; set; }
+        /// <summary>
+        /// The esi route for the ESI request used to get this piece of data.
+        /// Examples:
+        /// "/characters/{character_id}/"
+        /// "/characters/{character_id}/fatigue/"
+        /// "/corporations/{corporation_id}/assets/locations/"
+        /// "/alliances/{alliance_id}/icons/"
+        /// </summary>
+        [Required]
+        public string ESIRoute { get; set; }
 
         /// <summary>
         /// Timestamp for when this piece of data was last updated from the ESI source.
         /// </summary>
+        [Required]
         public DateTime LastUpdateTimestamp { get; set; }
 
         /// <summary>
-        /// Specifies wether the data is from tranquility or singularity
+        /// The actual data stored in the cache
         /// </summary>
-        public string ESISource { get; set; }
-
-        /// <summary>
-        /// The url for the ESI request used to get the data.
-        /// Examples:
-        /// "/characters/{character_id}"
-        /// "/characters/{character_id}/fatigue"
-        /// </summary>
-        public string URL { get; set; }
+        [StringLength(int.MaxValue)]
+        public string Data { get; set; }
     }
 }
