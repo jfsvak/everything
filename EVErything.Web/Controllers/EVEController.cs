@@ -64,7 +64,7 @@ namespace EVErything.Web.Controllers
         }
 
         [Authorize]
-        [HttpPost("/esi")]
+        [HttpPost("/api/esi")]
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetESIData([FromBody] string esipath)
         {

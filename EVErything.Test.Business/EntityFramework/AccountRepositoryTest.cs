@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace EVErything.Test.Business
+namespace EVErything.Test.Business.EntityFramework
 {
     public class AccountRepositoryTest : AppDbTest
     {

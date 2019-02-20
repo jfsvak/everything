@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EVErything.Test.Business
+namespace EVErything.Test.Business.EntityFramework
 {
     public abstract class AppDbTest
     {

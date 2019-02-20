@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace EVErything.Test.Business
+namespace EVErything.Test.Business.EntityFramework
 {
     public class ESIDataCacheTest : AppDbTest
     {
@@ -88,6 +88,7 @@ namespace EVErything.Test.Business
             ctx.SaveChanges();
         }
 
+        [Fact]
         public void FindAndUpdate_ESIDataCacheEntry()
         {
             // Create character
@@ -121,8 +122,8 @@ namespace EVErything.Test.Business
                                                           //Where(d => d.ESIRoute.Equals("/characters/1111/attributes")).ToList();
 
             // update cache entry
-            foundCacheEntry.Data = @"{ ""charisma"": 27, ""intelligence"": 19, ""memory"": 24, ""perception"": 23, ""willpower"": 22 }";
-            foundCacheEntry.LastUpdateTimestamp = DateTime.Now;
+            //foundCacheEntry.Data = @"{ ""charisma"": 27, ""intelligence"": 19, ""memory"": 24, ""perception"": 23, ""willpower"": 22 }";
+            //foundCacheEntry.LastUpdateTimestamp = DateTime.Now;
             ctx.ESIDataCaches.Update(cachedAttributes);
 
             ctx.SaveChanges();
