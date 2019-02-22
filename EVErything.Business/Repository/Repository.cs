@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
-namespace EVErything.Business
+namespace EVErything.Business.Repository
 {
     public class Repository<TEntity> where TEntity : class
     {
@@ -17,12 +18,35 @@ namespace EVErything.Business
             this.dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get()
+        public virtual IEnumerable<TEntity> Find(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "")
         {
-            return dbSet.ToList();
+            IQueryable<TEntity> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
         }
 
-        public virtual TEntity Get(Guid id)
+        public virtual TEntity GetByID(object id)
         {
             return dbSet.Find(id);
         }
@@ -32,9 +56,9 @@ namespace EVErything.Business
             return dbSet.Add(entity).Entity;
         }
 
-        public virtual void Delete(Guid id)
+        public virtual void Delete(object id)
         {
-            TEntity entity = Get(id);
+            TEntity entity = GetByID(id);
             Delete(entity);
         }
 

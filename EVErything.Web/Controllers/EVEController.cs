@@ -57,7 +57,7 @@ namespace EVErything.Web.Controllers
         [Authorize]
         [HttpDelete("/api/characters/{id}")]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> DeleteCharacter([FromRoute] string id)
+        public IActionResult DeleteCharacter([FromRoute] string id)
         {
             _logger.LogTrace($"Delete char with id [{id}]");
             return Ok();
@@ -66,7 +66,7 @@ namespace EVErything.Web.Controllers
         [Authorize]
         [HttpPost("/api/esi")]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> GetESIData([FromBody] string esipath)
+        public IActionResult GetESIData([FromBody] string esipath)
         {
             return Ok("{result:'ok'}");
         }

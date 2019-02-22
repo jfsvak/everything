@@ -1,6 +1,7 @@
 ﻿using EVErything.Business;
 using EVErything.Business.Data;
 using EVErything.Business.Models;
+using EVErything.Business.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -138,9 +139,9 @@ namespace EVErything.Test.Business.EntityFramework
 
             accountRepo.SaveChanges();
 
-            Assert.Single(accountRepo.Get().ToList());
-            Assert.Single(characterRepo.Get().ToList());
-            Assert.Single(characterSetRepo.Get().ToList());
+            Assert.Single(accountRepo.Find().ToList());
+            Assert.Single(characterRepo.Find().ToList());
+            Assert.Single(characterSetRepo.Find().ToList());
             Assert.Equal("Acc1", acc.Name);
             Assert.Equal("Mulvi", char1.Name);
             Assert.Equal("Mulvi", char1.Name);

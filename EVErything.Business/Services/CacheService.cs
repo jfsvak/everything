@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using EVErything.Business.Data;
 using EVErything.Business.Models;
+using EVErything.Business.Repository;
 
 namespace EVErything.Business.Services
 {
@@ -11,23 +12,24 @@ namespace EVErything.Business.Services
 
     public class CacheService
     {
-        private readonly AppDbContext _dbCtx;
+        private UnitOfWork unitOfWork;
 
         /// <summary>
         /// 
         /// </summary>
-        protected CacheService()
+        public CacheService()
         {
-            _dbCtx = new AppDbContext();
+            this.unitOfWork = new UnitOfWork();
         }
 
         /// <summary>
-        /// 
+        /// Constructor to allow this instance of the service to participate in an external UnitOfWork, 
+        /// e.g. shared between multiple services
         /// </summary>
-        /// <param name="appDbContext"></param>
-        public CacheService(AppDbContext appDbContext)
+        /// <param name="unitOfWork"></param>
+        public CacheService(UnitOfWork unitOfWork)
         {
-            _dbCtx = appDbContext;
+            this.unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -60,20 +62,20 @@ namespace EVErything.Business.Services
         /// <param name="source"></param>
         /// <param name="data"></param>
         /// <returns>true if the cache was updated, false if it wasn't</returns>
-        public bool UpdateCache(string characterID, string route, ESISource source, string data)
+        public bool UpdateCacheEntry(string characterID, string route, ESISource source, string data)
         {
             if (!HasData(characterID, route, source, false))
             {
-                var character = _dbCtx.Characters.Find(characterID);
+                var character = unitOfWork.CharacterRepository.GetByID(characterID);
 
-                var entryToUpdate = _dbCtx.ESIDataCaches.Add(new ESIDataCache
+                var entryToUpdate = unitOfWork.ESIDataCacheRepository.Insert(new ESIDataCache
                 {
                     Character = character,
                     ESIRoute = route,
                     ESISource = Enum.GetName(typeof(ESISource), source),
                     LastUpdateTimestamp = DateTime.Now,
                     Data = data
-                }).Entity;
+                });
             }
             else
             {
@@ -83,7 +85,7 @@ namespace EVErything.Business.Services
                 entryToUpdate.LastUpdateTimestamp = DateTime.Now;
             }
 
-            _dbCtx.SaveChanges();
+            unitOfWork.Save();
 
             return true;
         }
@@ -95,8 +97,9 @@ namespace EVErything.Business.Services
         /// <param name="route"></param>
         /// <param name="source"></param>
         /// <returns>true if the cache was deleted, false if it wasn't</returns>
-        public bool Delete(string characterID, string route, string source)
+        public bool DeleteCacheEntry(string characterID, string route, string source)
         {
+
             return false;
         }
 
@@ -119,7 +122,7 @@ namespace EVErything.Business.Services
         /// <returns></returns>
         private IEnumerable<ESIDataCache> _getCacheEntries(ESISource source)
         {
-            return _dbCtx.ESIDataCaches.Where(d => d.ESISource == Enum.GetName(typeof(ESISource), source));
+            return unitOfWork.ESIDataCacheRepository.Find(d => d.ESISource == Enum.GetName(typeof(ESISource), source));
         }
     }
 }
