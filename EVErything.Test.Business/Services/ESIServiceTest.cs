@@ -11,7 +11,7 @@ namespace EVErything.Test.Business.Services
     {
         public void Get_ESIData()
         {
-            string attributes = new EVEDataService(ctx).GetEVEData("1111", "/characters/1111/attributes");
+            string attributes = new EVEDataService(ctx, logger).GetEVEData("1111", "/characters/1111/attributes");
             Assert.Equal("", attributes);
         }
     }

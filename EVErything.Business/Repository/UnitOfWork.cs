@@ -8,10 +8,16 @@ namespace EVErything.Business.Repository
 {
     public class UnitOfWork : IDisposable
     {
-        private AppDbContext context = new AppDbContext();
+        private readonly AppDbContext _context;
         private Repository<ESIDataCache> esiDataCacheRepository;
         private Repository<Character> characterRepository;
         public bool disposed = false;
+
+        public UnitOfWork(AppDbContext context)
+        {
+            this._context = context;
+        }
+
 
         public Repository<ESIDataCache> ESIDataCacheRepository
         {
@@ -19,7 +25,7 @@ namespace EVErything.Business.Repository
             {
                 if (this.esiDataCacheRepository == null)
                 {
-                    this.esiDataCacheRepository = new Repository<ESIDataCache>(context);
+                    this.esiDataCacheRepository = new Repository<ESIDataCache>(_context);
                 }
 
                 return esiDataCacheRepository;
@@ -32,7 +38,7 @@ namespace EVErything.Business.Repository
             {
                 if (this.characterRepository == null)
                 {
-                    this.characterRepository = new Repository<Character>(context);
+                    this.characterRepository = new Repository<Character>(_context);
                 }
 
                 return characterRepository;
@@ -41,7 +47,7 @@ namespace EVErything.Business.Repository
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -50,7 +56,7 @@ namespace EVErything.Business.Repository
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
             this.disposed = true;

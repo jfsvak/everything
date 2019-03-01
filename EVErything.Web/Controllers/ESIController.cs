@@ -14,21 +14,22 @@ using Microsoft.Extensions.Logging;
 
 namespace EVErything.Web.Controllers
 {
-    [Route("api/")]
+    //[Route("api/")]
     [ApiController]
     public class ESIController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly AppDbContext _appDbContext;
         private readonly ILogger _logger;
+        private IEVEDataService _eveDataService;
+
         private IConfiguration Configuration { get; }
         public object ESIService { get; private set; }
 
-        public ESIController(UserManager<ApplicationUser> userManager, AppDbContext appDbContext, ILogger<EVEController> logger, IConfiguration configuration)
+        public ESIController(UserManager<ApplicationUser> userManager, ILogger<EVEController> logger, IConfiguration configuration, IEVEDataService eveDataService)
         {
             _userManager = userManager;
-            _appDbContext = appDbContext;
             _logger = logger;
+            _eveDataService = eveDataService;
             Configuration = configuration;
         }
 
@@ -38,18 +39,28 @@ namespace EVErything.Web.Controllers
         /// </summary>
         /// <param name="esipath"></param>
         /// <returns></returns>
-        [Authorize]
-        [HttpPost("api/esi")]
+        //[Authorize]
+        [HttpPost("api/esip")]
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> PostESIData([FromForm] string esipath)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            _logger.LogTrace("POST esipath: " + esipath);
+            _logger.LogTrace("eveDataService is null? " + (_eveDataService == null));
+            return Ok(_eveDataService.GetEVEData("1111", esipath));
+            //return Ok("{result:'ok post: " + esipath + "'}");
+        }
+
+        [HttpGet("api/esi")]
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetESIData([FromQuery] string esipath)
         {
             var user = await _userManager.GetUserAsync(User);
 
-            using (_appDbContext)
-            {
-                return Ok(new EVEDataService(_appDbContext).GetEVEData(user.CharacterId, esipath));
-            }
-            //return Ok("{result:'ok'}");
+            _logger.LogTrace("GET esipath: " + esipath);
+            return Ok(_eveDataService.GetEVEData("1111", esipath));
+            //return Ok("{result:'ok get: " + esipath + "'}");
         }
     }
 

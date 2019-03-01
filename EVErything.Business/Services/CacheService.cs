@@ -5,32 +5,43 @@ using System.Collections.Generic;
 using EVErything.Business.Data;
 using EVErything.Business.Models;
 using EVErything.Business.Repository;
+using Microsoft.Extensions.Logging;
 
 namespace EVErything.Business.Services
 {
     public enum ESISource { Tranquility, Singularity, Duality };
 
-    public class CacheService
+    public interface ICacheService
     {
-        private UnitOfWork unitOfWork;
+        bool HasData(string characterID, string route, ESISource source, bool considerExpiry);
+        ESIDataCache GetCacheEntry(string characterID, string route, ESISource source);
+        bool UpdateCacheEntry(string characterID, string route, ESISource source, string data);
+        bool DeleteCacheEntry(string characterID, string route, string source);
+    }
+
+    public class CacheService : ICacheService
+    {
+        private readonly UnitOfWork _unitOfWork;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// 
         /// </summary>
-        public CacheService()
+        public CacheService(AppDbContext context, ILogger logger)
         {
-            this.unitOfWork = new UnitOfWork();
+            this._unitOfWork = new UnitOfWork(context);
+            this._logger = logger;
         }
 
-        /// <summary>
-        /// Constructor to allow this instance of the service to participate in an external UnitOfWork, 
-        /// e.g. shared between multiple services
-        /// </summary>
-        /// <param name="unitOfWork"></param>
-        public CacheService(UnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+        ///// <summary>
+        ///// Constructor to allow this instance of the service to participate in an external UnitOfWork, 
+        ///// e.g. shared between multiple services
+        ///// </summary>
+        ///// <param name="unitOfWork"></param>
+        //public CacheService(UnitOfWork unitOfWork)
+        //{
+        //    this.unitOfWork = unitOfWork;
+        //}
 
         /// <summary>
         /// Checks to see if the cache contains the data and/or if it needs updating based on the parameter
@@ -39,6 +50,7 @@ namespace EVErything.Business.Services
         /// <returns>true if the cache contains the data or it needs updating based on checkForUpdate</returns>
         public bool HasData(string characterID, string route, ESISource source, bool considerExpiry)
         {
+            _logger.LogTrace("Finding cache entry for character[" + characterID + "], route[" + route + "], source[" + source + "]");
             return _getCacheEntries(characterID, route, source).Any();
         }
 
@@ -66,9 +78,9 @@ namespace EVErything.Business.Services
         {
             if (!HasData(characterID, route, source, false))
             {
-                var character = unitOfWork.CharacterRepository.GetByID(characterID);
+                var character = _unitOfWork.CharacterRepository.GetByID(characterID);
 
-                var entryToUpdate = unitOfWork.ESIDataCacheRepository.Insert(new ESIDataCache
+                var entryToUpdate = _unitOfWork.ESIDataCacheRepository.Insert(new ESIDataCache
                 {
                     Character = character,
                     ESIRoute = route,
@@ -85,7 +97,7 @@ namespace EVErything.Business.Services
                 entryToUpdate.LastUpdateTimestamp = DateTime.Now;
             }
 
-            unitOfWork.Save();
+            _unitOfWork.Save();
 
             return true;
         }
@@ -112,6 +124,7 @@ namespace EVErything.Business.Services
         /// <returns></returns>
         private IEnumerable<ESIDataCache> _getCacheEntries(string characterID, string route, ESISource source)
         {
+            
             return _getCacheEntries(source).Where(c => c.ESIRoute == route && c.CharacterID == characterID);
         }
 
@@ -122,7 +135,9 @@ namespace EVErything.Business.Services
         /// <returns></returns>
         private IEnumerable<ESIDataCache> _getCacheEntries(ESISource source)
         {
-            return unitOfWork.ESIDataCacheRepository.Find(d => d.ESISource == Enum.GetName(typeof(ESISource), source));
+            string sourceAsString = Enum.GetName(typeof(ESISource), source);
+            _logger.LogTrace("string representation of Enum [" + source + "]:" + sourceAsString);
+            return _unitOfWork.ESIDataCacheRepository.Find(d => d.ESISource == sourceAsString);
         }
     }
 }

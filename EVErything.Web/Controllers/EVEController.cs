@@ -68,6 +68,7 @@ namespace EVErything.Web.Controllers
         [ProducesResponseType(200)]
         public IActionResult GetESIData([FromBody] string esipath)
         {
+            
             return Ok("{result:'ok'}");
         }
     }

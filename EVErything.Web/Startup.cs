@@ -20,6 +20,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using EVErything.Business.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using EVErything.Business.Services;
 
 namespace EVErything
 {
@@ -92,8 +93,10 @@ namespace EVErything
             });
 
             services.AddAuthentication();
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IEVEDataService, EVEDataService>();
 
             services.AddMvc();
             services.AddHttpClient();
@@ -124,7 +127,7 @@ namespace EVErything
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
-
+            
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts API v1");

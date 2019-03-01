@@ -7,12 +7,14 @@ using EVErything.Business.Models;
 using EVErything.Business.Repository;
 using EVErything.Business.Services;
 using EVErything.Test.Business.EntityFramework;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace EVErything.Test.Business.Services
 {
-    public class CacheServiceTest
+    public class CacheServiceTest : AppDbTest
     {
         private readonly ITestOutputHelper _output;
 
@@ -24,9 +26,9 @@ namespace EVErything.Test.Business.Services
         [Fact]
         public void Get_CacheEntry()
         {
-            var unitOfWork = new UnitOfWork();
+            var unitOfWork = new UnitOfWork(ctx);
 
-            var newchar1111 = new UnitOfWork().CharacterRepository.Insert(new Character
+            var newchar1111 = new UnitOfWork(ctx).CharacterRepository.Insert(new Character
             {
                 ID = "1111",
                 Name = "Main Spai 1",
@@ -35,7 +37,7 @@ namespace EVErything.Test.Business.Services
             unitOfWork.Save();
 
             string data = @"{""a"":10}";
-            var service = new CacheService(unitOfWork);
+            var service = new CacheService(ctx, logger);
             bool updated = service.UpdateCacheEntry("1111", "characters/1111/attributes", ESISource.Singularity, data);
             _output.WriteLine("Cache was updated: [{0}]", updated);
 
