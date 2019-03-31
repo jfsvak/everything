@@ -19,7 +19,7 @@
     "EVErything.Web": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Dockerlocal"
       },
       "applicationUrl": "http://localhost:5001"
     }

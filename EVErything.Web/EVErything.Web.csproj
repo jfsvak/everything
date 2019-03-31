@@ -25,6 +25,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.Azure.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Dockerlocal.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Views\Home\CharacterDetails.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

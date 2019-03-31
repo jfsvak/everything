@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using EVErything.Business.Data;
+using EVErything.Business.Services;
 using EVErything.Web.Data;
 using EVErything.Web.Models;
 using EVErything.Web.Services;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using EVErything.Business.Data;
 using Swashbuckle.AspNetCore.Swagger;
-using EVErything.Business.Services;
+using System;
 
 namespace EVErything
 {
@@ -31,10 +22,12 @@ namespace EVErything
         public int expires_in { get; set; }
         public string refresh_token { get; set; }
     }
+
     public class Startup
     {
         private readonly ILogger<Startup> logger;
-        //private readonly IHttpClientFactory _clientFactory;
+
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration, ILoggerFactory loggerFactory) //, IHttpClientFactory clientFactory)
         {
@@ -43,7 +36,6 @@ namespace EVErything
             this.logger = loggerFactory.CreateLogger<Startup>();
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -105,6 +97,7 @@ namespace EVErything
             {
                 c.SwaggerDoc("v1", new Info { Title = "EVErything API", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

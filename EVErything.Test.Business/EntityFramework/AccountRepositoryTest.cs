@@ -1,8 +1,5 @@
-﻿using EVErything.Business;
-using EVErything.Business.Data;
-using EVErything.Business.Models;
+﻿using EVErything.Business.Models;
 using EVErything.Business.Repository;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
