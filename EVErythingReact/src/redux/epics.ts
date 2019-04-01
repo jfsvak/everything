@@ -7,7 +7,7 @@ import { GET_FITTINGS, GET_FITTINGS_SUCCESS } from '../models/constants/actionTy
 import { getFittingsSuccess, getFittingsFailure } from './fittings/actions';
 import { getJsonAsData, jsonTypes } from './common/api/mocks/mockService';
 
-const getFittingsEpic = actions$ => actions$.pipe(
+export const getFittingsEpic = actions$ => actions$.pipe(
     ofType(GET_FITTINGS),
     delay(500),
     mapTo({ type: GET_FITTINGS_SUCCESS, resp: {status: 200, data: getJsonAsData(jsonTypes.GET_FITTINGS_API)}})
@@ -21,6 +21,6 @@ const getFittingsEpic = actions$ => actions$.pipe(
         //         .catch(error => Observable.of(getFittingsFailure(error)))
         // );
 
-export const rootEpic = combineEpics(
+export default combineEpics(
     getFittingsEpic
 );
