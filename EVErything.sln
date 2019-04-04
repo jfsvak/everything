@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Web_OLD", "EVErything.Web_OLD\EVErything.Web_OLD.csproj", "{39028B54-19C9-4FD4-B4B7-07D4814891A6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Business", "EVErything.Business\EVErything.Business.csproj", "{CBE47138-C2E6-4221-8E8A-56AC53FB3925}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.ESI.Client", "EVErything.ESI.Client\EVErything.ESI.Client.csproj", "{5C485CD6-71BE-4A81-A2C2-868197E1AD2E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{F122AFFD-92B7-4E77-8030-B49AE5A8D842}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Web", "EVErything.Web\EVErything.Web.csproj", "{5A5CF637-F05A-41F5-ABD7-9373D013033E}"
 EndProject
@@ -17,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVErything.Test.Business", 
 	ProjectSection(ProjectDependencies) = postProject
 		{CBE47138-C2E6-4221-8E8A-56AC53FB3925} = {CBE47138-C2E6-4221-8E8A-56AC53FB3925}
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{5510E66B-F8B4-4D25-AB58-DE3FA8923300}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9029675-B404-4B10-A9BA-5007E685ADF8}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,22 +24,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{39028B54-19C9-4FD4-B4B7-07D4814891A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39028B54-19C9-4FD4-B4B7-07D4814891A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39028B54-19C9-4FD4-B4B7-07D4814891A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39028B54-19C9-4FD4-B4B7-07D4814891A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CBE47138-C2E6-4221-8E8A-56AC53FB3925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBE47138-C2E6-4221-8E8A-56AC53FB3925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBE47138-C2E6-4221-8E8A-56AC53FB3925}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBE47138-C2E6-4221-8E8A-56AC53FB3925}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C485CD6-71BE-4A81-A2C2-868197E1AD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C485CD6-71BE-4A81-A2C2-868197E1AD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C485CD6-71BE-4A81-A2C2-868197E1AD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C485CD6-71BE-4A81-A2C2-868197E1AD2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F122AFFD-92B7-4E77-8030-B49AE5A8D842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F122AFFD-92B7-4E77-8030-B49AE5A8D842}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F122AFFD-92B7-4E77-8030-B49AE5A8D842}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F122AFFD-92B7-4E77-8030-B49AE5A8D842}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A5CF637-F05A-41F5-ABD7-9373D013033E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A5CF637-F05A-41F5-ABD7-9373D013033E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A5CF637-F05A-41F5-ABD7-9373D013033E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,10 +36,6 @@ Global
 		{47170F04-79A4-4A5F-A669-E636808CB4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47170F04-79A4-4A5F-A669-E636808CB4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47170F04-79A4-4A5F-A669-E636808CB4C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5510E66B-F8B4-4D25-AB58-DE3FA8923300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5510E66B-F8B4-4D25-AB58-DE3FA8923300}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5510E66B-F8B4-4D25-AB58-DE3FA8923300}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5510E66B-F8B4-4D25-AB58-DE3FA8923300}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
