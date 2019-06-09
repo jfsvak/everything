@@ -40,6 +40,9 @@ namespace EVErything
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Console.WriteLine("EVErything.Identity.Connection={0}", Configuration.GetConnectionString("EVErything.Identity.Connection"));
+            Console.WriteLine("EVErything.App.Connection={0}", Configuration.GetConnectionString("EVErything.App.Connection"));
+
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EVErything.Identity.Connection")));
 
