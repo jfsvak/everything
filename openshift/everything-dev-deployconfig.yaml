@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: everything-dev
+  name: everything-dev
+  namespace: everything-dev
+spec:
+  replicas: 1
+  selector:
+    app: everything-dev
+    deploymentconfig: everything-dev
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: everything-dev
+        deploymentconfig: everything-dev
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_EVErything.App.Connection
+              value: server=mysql-57-centos7;user=everything_app;password=password;database=everything_app
+            - name: ASPNETCORE_EVErything.Identity.Connection
+              value: server=mysql-57-centos7;user=everything_identity;password=password;database=everything_identity
+          image: 172.30.1.1:5000/everything-dev/everything-dev
+          imagePullPolicy: Always
+          name: everything-dev
+          resources: {}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - everything-dev
+        from:
+          kind: ImageStreamTag
+          name: 'everything-dev:latest'
+          namespace: everything-dev

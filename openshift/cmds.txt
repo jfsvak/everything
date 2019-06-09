@@ -1,0 +1,34 @@
+## Getting the dotnet core image into local openshift registry
+docker pull mcr.microsoft.com/dotnet/core/sdk
+docker tag mcr.microsoft.com/dotnet/core/sdk 172.30.124.220:5000/openshift/dotnetsdk
+docker push 172.30.124.220:5000/openshift/dotnetsdk
+
+Switch to openshift registry:
+ > & minishift docker-env | Invoke-Expression
+Log into repo with user
+ > docker login -u developer -p $(oc whoami -t) $(minishift openshift registry)
+ 
+-------
+1) create BuildConfig + Image Stream: everything-dev
+ > Dockerfile: oc new-build --strategy docker --binary --docker-image "172.30.124.220:5000/openshift/dotnetsdk" --name everything-dev -n everything-dev -l app=everything-dev
+ > stdin: cat Dockerfile-everything-openshift | oc new-build -D - --strategy docker --binary --docker-image "172.30.124.220:5000/openshift/dotnetsdk" --name everything-dev -n everything-dev -l app=everything-dev
+ 
+2) trigger build with input from local: takes the input and runs dockerfile on top of openshift/dotnetsdk
+ > oc start-build everything-dev -n everything-dev --from-dir . --follow
+ 
+3) create new that implicitly uses that image stream with the same name (creates DeploymentConfig+Service+Pods)
+ > oc new-app everything-dev -n everything-dev --env-file everything-dev.env
+
+4) Expose the src route
+ > oc expose dc everything-dev --port=5000
+
+4) Go change code, build and publish to publish
+ > dotnet publish -c Debug -f netcoreapp2.2 -o publish efmysqltest.csproj
+ 
+5) ...trigger build as in step 2 again
+
+--oc set env dc/everything-dev -e everything-dev.env
+
+oc delete all -l app=everything-dev
+oc expose dc everything-dev --port=5000
+minishift openshift service everything-dev
