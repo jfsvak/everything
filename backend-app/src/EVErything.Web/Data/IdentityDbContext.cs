@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.Extensions;
 using EVErything.Web.Models;
 
 namespace EVErything.Web.Data

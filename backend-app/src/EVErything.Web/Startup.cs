@@ -10,8 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MySql.Data.EntityFrameworkCore.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Collections;
 
 namespace EVErything
 {
@@ -40,14 +42,14 @@ namespace EVErything
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Console.WriteLine("EVErything.Identity.Connection={0}", Configuration.GetConnectionString("EVErything.Identity.Connection"));
-            Console.WriteLine("EVErything.App.Connection={0}", Configuration.GetConnectionString("EVErything.App.Connection"));
+            foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+                Console.WriteLine($"{de.Key}={de.Value}");
 
-            services.AddDbContext<IdentityDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("EVErything.Identity.Connection")));
+            Console.WriteLine("EVErything_Identity_Connection={0}", Environment.GetEnvironmentVariable("EVErything_Identity_Connection"));
+            Console.WriteLine("EVErything_App_Connection={0}", Environment.GetEnvironmentVariable("EVErything_App_Connection"));
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("EVErything.App.Connection")));
+            services.AddDbContext<IdentityDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("EVErything_Identity_Connection")));
+            services.AddDbContext<AppDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("EVErything_App_Connection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>()

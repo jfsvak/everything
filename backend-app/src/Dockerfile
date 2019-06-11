@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/runtime
+FROM mcr.microsoft.com/dotnet/core/sdk
 WORKDIR /app
 
 COPY EVErything.Web/EVErything.Web.csproj ./EVErything.Web/
@@ -8,10 +8,8 @@ RUN dotnet restore EVErything.Web/EVErything.Web.csproj
 COPY ./EVErything.Web/. ./EVErything.Web/
 COPY ./EVErything.Business/. ./EVErything.Business/
 
-RUN dotnet publish -c Debug -f netcoreapp2.2 -o /app/publish EVErything.Web/EVErything.Web.csproj
+RUN dotnet build -f netcoreapp2.2 EVErything.Web/EVErything.Web.csproj
 
-# expose on port 5000. Anything below 1024 requires root, and we are not running as root
-EXPOSE 5000
-ENV ASPNETCORE_URLS=http://*:5000
-
-ENTRYPOINT ["dotnet", "publish/EVErything.Web.dll"]
+ENTRYPOINT ["dotnet", "ef", "database", "update", "--startup-project", "EVErything.Web", "--project", "EVErything.Business", "--context", "AppDbContext"]
+#RUN  ef database update --startup-project EVErything.Web --project EVErything.Business --context AppDbContext
+#RUN dotnet ef database update --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext

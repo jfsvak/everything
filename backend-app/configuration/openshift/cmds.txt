@@ -1,3 +1,10 @@
+create database everything_identity;
+create database everything_app;
+create user 'everything_app' identified by 'password';
+create user 'everything_identity' identified by 'password';
+grant all privileges on everything_app.* to 'everything_app'@'%' identified by 'password' with grant option;
+grant all privileges on everything_identity.* to 'everything_identity'@'%' identified by 'password' with grant option;
+
 ## Getting the dotnet core image into local openshift registry
 docker pull mcr.microsoft.com/dotnet/core/sdk
 docker tag mcr.microsoft.com/dotnet/core/sdk 172.30.124.220:5000/openshift/dotnetsdk
@@ -15,6 +22,7 @@ Log into repo with user
  
 2) trigger build with input from local: takes the input and runs dockerfile on top of openshift/dotnetsdk
  > oc start-build everything-dev -n everything-dev --from-dir . --follow
+ > oc start-build everything-dev -n everything-dev --from-archive=everything.tar --follow
  
 3) create new that implicitly uses that image stream with the same name (creates DeploymentConfig+Service+Pods)
  > oc new-app everything-dev -n everything-dev --env-file everything-dev.env
@@ -27,6 +35,12 @@ Log into repo with user
  
 5) ...trigger build as in step 2 again
 
+-----------------------
+BuildConfig for ef migration
+ > cat Dockerfile-ef-migration | oc new-build --strategy docker --binary --docker-image "172.30.124.220:5000/openshift/dotnetsdk" --name everything-ef-migration-dev -n everything-dev -l app=everything-dev
+ > oc start-build everything-ef-migration-dev -n everything-dev --from-archive=everything.tar --docker-image=mcr.microsoft.com/dotnet/core/sdk --docker-file=Dockerfile-ef-migration --follow
+ 
+ 
 --oc set env dc/everything-dev -e everything-dev.env
 
 oc delete all -l app=everything-dev

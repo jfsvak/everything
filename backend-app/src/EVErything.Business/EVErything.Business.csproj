@@ -9,6 +9,11 @@
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   
   <Target Name="SpicNSpan" AfterTargets="Clean"> <!-- common vars https://msdn.microsoft.com/en-us/library/c02as0cs.aspx?f=255&MSPPError=-2147217396 -->
