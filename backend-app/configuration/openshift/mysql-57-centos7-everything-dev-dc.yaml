@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: mysql-57-centos7
+  name: mysql-57-centos7
+  namespace: everything-dev
+spec:
+  selector:
+    app: mysql-57-centos7
+    deploymentconfig: mysql-57-centos7
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: mysql-57-centos7
+        deploymentconfig: mysql-57-centos7
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_PASSWORD
+              value: everythingpwd
+            - name: MYSQL_DATABASE
+              value: everything
+            - name: MYSQL_USER
+              value: everythinguser
+          image: >-
+            centos/mysql-57-centos7@sha256:8d750876687d9fb0adf46020e38cd43165b906208d2e81088b3a13213e751df3
+          imagePullPolicy: Always
+          name: mysql-57-centos7
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql/data
+              name: mysqldata
+      restartPolicy: Always
+      volumes:
+        - name: mysqldata
+          persistentVolumeClaim:
+            claimName: mysql-data-claim
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - mysql-57-centos7
+        from:
+          kind: ImageStreamTag
+          name: 'mysql-57-centos7:latest'
+          namespace: everything-dev
+        lastTriggeredImage: >-
+          centos/mysql-57-centos7@sha256:8d750876687d9fb0adf46020e38cd43165b906208d2e81088b3a13213e751df3
+      type: ImageChange
