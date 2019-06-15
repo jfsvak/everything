@@ -34,6 +34,12 @@ spec:
               value: server=mysql-57-centos7.everything-dev.svc;user=everything_app;password=password;database=everything_app
             - name: EVErything_Identity_Connection
               value: server=mysql-57-centos7.everything-dev.svc;user=everything_identity;password=password;database=everything_identity
+            - name: EVE_CLIENT_ID
+              value: d5e93faa39cf4db781cfd3b425d4993c
+            - name: EVE_SECRET_KEY
+              value: lNUDDifxO5E0HSDXTVgP1rPNe1MrKJ4gQe0Q9rU7
+            - name: ESI_CALLBACK_URL
+              value: http://everything-dev.192.168.99.100.nip.io/esicallback
           image: 172.30.1.1:5000/everything-dev/everything-dev
           imagePullPolicy: Always
           name: everything-dev

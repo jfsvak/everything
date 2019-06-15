@@ -62,8 +62,7 @@ namespace EVErything.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 "Basic",
-                //Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "de2dbc0324ec4fc583a1aa0b18cfb08b", "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn"))));
-                Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", Configuration["EVE:clientId"], Configuration["EVE:secretKey"]))));
+                Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", Environment.GetEnvironmentVariable("EVE_CLIENT_ID"), Environment.GetEnvironmentVariable("EVE_SECRET_KEY")))));
 
             // Exchange the received auth code for a token list
             HttpResponseMessage response = await client.PostAsync(new Uri($"{Configuration["EVE:SSO.Url"]}/oauth/token"), new FormUrlEncodedContent(new[]

@@ -6,14 +6,11 @@ metadata:
   name: everything-dev
   namespace: everything-dev
 spec:
-  clusterIP: 172.30.44.172
-  ports:
-    - port: 5000
-      protocol: TCP
-      targetPort: 5000
   selector:
     app: everything-dev
-    deploymentconfig: everything-dev
-  sessionAffinity: None
+  ports:
+  - name: http-80
+    port: 80
+    protocol: TCP
+    targetPort: 5000
   type: ClusterIP
-  

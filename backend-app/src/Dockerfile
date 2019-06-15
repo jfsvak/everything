@@ -14,4 +14,5 @@ RUN dotnet publish -c Debug -f netcoreapp2.2 -o /app/publish EVErything.Web/EVEr
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://*:5000
 
-ENTRYPOINT ["dotnet", "publish/EVErything.Web.dll"]
+WORKDIR /app/publish
+ENTRYPOINT ["dotnet", "EVErything.Web.dll"]
