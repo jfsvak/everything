@@ -26,3 +26,5 @@ spec:
         secret: r-B5FqyBPkmiowAWbiFx
       type: Generic
   postCommit: {}
+  successfulBuildsHistoryLimit: 3
+  failedBuildsHistoryLimit: 3

@@ -28,9 +28,11 @@ spec:
     spec:
       containers:
         - env:
-            - name: ASPNETCORE_EVErything.App.Connection
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Openshift
+            - name: EVErything_App_Connection
               value: server=mysql-57-centos7;user=everything_app;password=password;database=everything_app
-            - name: ASPNETCORE_EVErything.Identity.Connection
+            - name: EVErything_Identity_Connection
               value: server=mysql-57-centos7;user=everything_identity;password=password;database=everything_identity
           image: 172.30.1.1:5000/everything-dev/everything-dev
           imagePullPolicy: Always
