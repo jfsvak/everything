@@ -1,0 +1,46 @@
+create user 'everything_app' identified by 'password';
+create user 'everything_identity' identified by 'password';
+
+-- (Re)create everything_IDENTITY
+drop database everything_identity;
+create database everything_identity;
+grant all privileges on everything_identity.* to 'everything_identity'@'%' identified by 'password' with grant option;
+use everything_identity;
+CREATE TABLE `__EFMigrationsHistory` ( `MigrationId` nvarchar(150) NOT NULL, `ProductVersion` nvarchar(32) NOT NULL, PRIMARY KEY (`MigrationId`) );
+grant all privileges on everything_identity.* to 'everything_identity'@'%' identified by 'password' with grant option;
+
+
+
+-- (Re)create everything_APP
+drop database everything_app;
+create database everything_app;
+use everything_app;
+CREATE TABLE `__EFMigrationsHistory` ( `MigrationId` nvarchar(150) NOT NULL, `ProductVersion` nvarchar(32) NOT NULL, PRIMARY KEY (`MigrationId`) );
+grant all privileges on everything_app.* to 'everything_app'@'%' identified by 'password' with grant option;
+
+
+
+
+[MYSQL Shell]
+oc port-forward <podname> 13306:3306
+\connect --mysql everything_app:password@127.0.0.1:13306
+\sql
+use everything_app
+show tables;
+
+
+
+
+
+[Powershell]
+get-childitem Env:
+$Env:EVErything_App_Connection='server=127.0.0.1;port=13306;database=everything_app;user=everything_app;password=password'
+$Env:EVErything_Identity_Connection='server=127.0.0.1;port=13306;database=everything_identity;user=everything_identity;password=password'
+
+dotnet ef migrations add InitialCreate --startup-project EVErything.Web --project EVErything.Business --context AppDbContext
+dotnet ef database update --startup-project EVErything.Web --project EVErything.Business --context AppDbContext
+dotnet ef migrations remove --startup-project EVErything.Web --project EVErything.Business --context AppDbContext
+
+dotnet ef migrations add InitialCreate --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext
+dotnet ef database update --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext
+dotnet ef migrations remove --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext

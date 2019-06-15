@@ -1,10 +1,3 @@
-create database everything_identity;
-create database everything_app;
-create user 'everything_app' identified by 'password';
-create user 'everything_identity' identified by 'password';
-grant all privileges on everything_app.* to 'everything_app'@'%' identified by 'password' with grant option;
-grant all privileges on everything_identity.* to 'everything_identity'@'%' identified by 'password' with grant option;
-
 ## Getting the dotnet core image into local openshift registry
 docker pull mcr.microsoft.com/dotnet/core/sdk
 docker tag mcr.microsoft.com/dotnet/core/sdk 172.30.124.220:5000/openshift/dotnetsdk

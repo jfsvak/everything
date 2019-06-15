@@ -19,7 +19,9 @@
     "EVErything.Web": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Dockerlocal"
+        "EVErything_App_Connection": "server=127.0.0.1;port=13306;database=everything_app;user=everything_app;password=password",
+        "EVErything_Identity_Connection": "server=127.0.0.1;port=13306;database=everything_identity;user=everything_identity;password=password",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5001"
     }

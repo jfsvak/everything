@@ -51,7 +51,6 @@ namespace EVErything.Business.Models
         /// <summary>
         /// The actual data stored in the cache
         /// </summary>
-        [StringLength(int.MaxValue)]
         public string Data { get; set; }
     }
 }

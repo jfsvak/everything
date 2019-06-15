@@ -42,8 +42,8 @@ namespace EVErything
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
-                Console.WriteLine($"{de.Key}={de.Value}");
+            //foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+            //    Console.WriteLine($"{de.Key}={de.Value}");
 
             Console.WriteLine("EVErything_Identity_Connection={0}", Environment.GetEnvironmentVariable("EVErything_Identity_Connection"));
             Console.WriteLine("EVErything_App_Connection={0}", Environment.GetEnvironmentVariable("EVErything_App_Connection"));
