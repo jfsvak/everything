@@ -27,6 +27,9 @@ oc port-forward <podname> 13306:3306
 use everything_app
 show tables;
 
+set GLOBAL general_log = 'ON';
+set GLOBAL slow_query_log='ON';
+
 
 
 

@@ -39,3 +39,14 @@ BuildConfig for ef migration
 oc delete all -l app=everything-dev
 oc expose dc everything-dev --port=5000
 minishift openshift service everything-dev
+
+
+### Simple builds
+oc new-build --name simplebox --strategy=docker --binary=true
+oc start-build simplebox --from-dir=simplebox
+
+### Run to completion
+oc run simplebox --image=172.30.1.1:5000/everything-dev/simplebox --restart=Never
+
+### Run interactive and remove afterwards
+oc run simplebox -i -t --image=172.30.1.1:5000/everything-dev/simplebox --rm --restart=Never
