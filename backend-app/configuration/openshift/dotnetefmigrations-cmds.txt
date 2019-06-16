@@ -49,3 +49,8 @@ dotnet ef migrations remove --startup-project EVErything.Web --project EVErythin
 dotnet ef migrations add InitialCreate --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext
 dotnet ef database update --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext
 dotnet ef migrations remove --startup-project EVErything.Web --project EVErything.Web --context IdentityDbContext
+
+
+
+### Running a simple image in the cluster
+oc run -i -t ultimate-devbox --rm --image=172.30.1.1:5000/everything-dev/ultimate-devbox --restart=Never -- bash
