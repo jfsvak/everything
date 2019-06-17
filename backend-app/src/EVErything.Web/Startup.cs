@@ -115,6 +115,12 @@ namespace EVErything
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+
+                using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    scope.ServiceProvider.GetService<AppDbContext>().Database.Migrate();
+                    scope.ServiceProvider.GetService<IdentityDbContext>().Database.Migrate();
+                }
             }
             else
             {
