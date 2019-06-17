@@ -15,6 +15,9 @@ namespace EVErything.Business.Models
         [Required]
         public String Name { get; set; }
 
+        [Required]
+        public string RequiredField1 { get; set; }
+
         public List<Character> Characters { get; set; }
     }
 }

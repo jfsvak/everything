@@ -21,8 +21,8 @@
       "environmentVariables": {
         "ESI_CALLBACK_URL": "http://localhost:5001/esicallback",
         "Key": "Value",
-        "EVErything_App_Connection": "server=127.0.0.1;port=13306;database=everything_app;user=everything_app;password=password",
-        "EVErything_Identity_Connection": "server=127.0.0.1;port=13306;database=everything_identity;user=everything_identity;password=password",
+        "EVErything_App_Connection": "server=192.168.99.100;port=32768;database=everything_app;user=everything_app;password=password",
+        "EVErything_Identity_Connection": "server=192.168.99.100;port=32768;database=everything_identity;user=everything_identity;password=password",
         "EVE_SECRET_KEY": "4NLiCtkhHBeo8bmXYICVBfur9Oq5yAuNcDbTJYCn",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "EVE_CLIENT_ID": "de2dbc0324ec4fc583a1aa0b18cfb08b"
