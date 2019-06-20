@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/runtime
+FROM mcr.microsoft.com/dotnet/core/sdk
 WORKDIR /app
 
 COPY EVErything.Web/EVErything.Web.csproj ./EVErything.Web/
