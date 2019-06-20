@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  everything.web:
+    image: ${DOCKER_REGISTRY}everythingweb
+    build:
+      context: .
+      dockerfile: EVErything.Web/Dockerfile

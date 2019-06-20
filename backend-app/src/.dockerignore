@@ -1,0 +1,16 @@
+ConsoleApp1
+ConsoleApp2
+EVErything.ESI.Client
+packages
+WebApplication1
+WebApplication2
+.dockerignore
+.env
+.git
+.gitignore
+.vs
+.vscode
+docker-compose.yml
+docker-compose.*.yml
+**/bin
+**/obj

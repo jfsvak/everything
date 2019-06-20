@@ -1,0 +1,110 @@
+@import './reset';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+//@import './shared/elements';
+//@import './shared/sharedForm';
+@import './shared/loader';
+@import './shared/topbar';
+@import './shared/sidebar';
+@import './accounts/accounts';
+@import './characters/characters';
+//@import './dummy/dummyContainer';
+@import './googlepoppins.css';
+
+
+body {
+    font-family: 'FontAwesome', sans-serif;
+    background-color: $body-background;
+    //font: @default 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+section {
+    background-color: $section-background;
+    p {
+        // opacity: .5;
+        font-size: 0.8em;
+        color: $gray-500;
+    }
+}
+
+h1 {
+    font-size: $larger;
+    color: $gray-300;
+}
+
+h2 {
+    font-size: $medium;
+    color: $gray-300;
+}
+
+h3 {
+    font-size: $standard;
+}
+
+p {
+    //font-family: 'FontAwesome', sans-serif;
+    font-size: $small;
+    // font-weight: 300;
+    line-height: 1.7em;
+    //color: #999;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.avatar {
+    border-radius: 10%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.app-container {
+    background: $body-background;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    //align-items: stretch;
+}
+
+#content {
+    width: calc(100% - 250px);
+    padding: 10px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+
+
+// @media (max-width: 768px) {
+//     #sidebar {
+//         margin-left: -250px;
+//     }
+//     #sidebar.active {
+//         margin-left: 0;
+//     }
+//     #content {
+//         width: 100%;
+//     }
+//     #content.active {
+//         width: calc(100% - 250px);
+//     }
+//     #sidebarCollapse span {
+//         display: none;
+//     }
+//     #topbar span {
+//         display: inline;
+//     }
+// }

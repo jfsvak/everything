@@ -1,0 +1,32 @@
+@import "./variables";
+
+#topbar {
+    ul {
+        li {
+            a {
+                padding: 10px;
+                font-size: $default;
+                display: block;
+                color: $menu-font-dark;
+
+                svg {
+                    margin-right: 2px;
+                    min-width: 30px;
+                }
+            }
+
+            a:hover {
+                background-color: $menu-gray;
+                color: $menu-dark-gray;
+            }
+
+            // a.active {
+            //     background-color: #4CAF50;
+            //     color: white;
+            // }
+        }
+    }
+}
+
+  
+  

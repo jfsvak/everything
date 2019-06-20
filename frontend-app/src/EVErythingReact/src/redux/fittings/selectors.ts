@@ -1,0 +1,1 @@
+export const getAllFittings = (state) => state.allIds.map(id => state.byId[id]);

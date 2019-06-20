@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: everything-dev
+  name: everything-dev
+  namespace: everything-dev
+spec:
+  selector:
+    app: everything-dev
+  ports:
+  - name: http-80
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+  type: ClusterIP

@@ -1,0 +1,1 @@
+export const getAllShoppingLists = (state) => state.allIds.map(id => state.byId[id]);

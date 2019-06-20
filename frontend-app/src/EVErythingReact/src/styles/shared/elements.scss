@@ -1,0 +1,258 @@
+@import "./variables";
+//Overriding default/bootstrap styles--------------------------------------
+//Button 
+.btn {
+    min-width: 140px;
+    font-size: $default;
+    margin: 0px 5px;
+    &.btn-primary {
+        background: $dark-green;
+    }
+    &.btn-outline-primary {
+        background: transparent;
+        color: $dark-green;
+        border-color: $dark-green;
+    }
+    &:active,
+    &:hover {
+        box-shadow: none !important;
+        background: $darker-green-btn  !important;
+        color: $white;
+        border-color: $dark-green  !important;
+    }
+}
+
+//Input box---------------------
+.input-box {
+    box-shadow: none !important;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid $dark-green;
+    padding-left: 2px;
+    color: $dark-green;
+    font-size: $default;
+    background: transparent;
+}
+
+.input-box:focus {
+    outline: none;
+    color: $dark-green;
+    background: transparent;
+    border-bottom: 1px solid $dark-green;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+    top: 1px;
+}
+
+.bar:before,
+.bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: $dark-green;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+.input-box:focus~.bar:before,
+.input-box:focus~.bar:after {
+    width: 50%;
+}
+
+.alert {
+    padding: 0px 2px;
+}
+
+.alert-danger {
+    color: $red;
+    background: none;
+    border: none;
+    border-top: 2px solid $red;
+    margin-top: -2px;
+    width: 100%;
+    border-radius: 0px;
+    font-size: $small;
+}
+
+.input-field.input-currency {
+    display: inline-block;
+}
+
+.currency {
+    padding-left: 10px;
+    font-size: $default;
+}
+
+//Checkbox --------------------
+.custom-checkbox {
+    margin: 10px 20px 20px 0px;
+    .custom-control-input {
+        position: absolute;
+        z-index: 2;
+        opacity: 0;
+        height: 20px;
+        width: 20px;
+        top: 3px;
+        left: 3px;
+        cursor: pointer;
+    }
+    .custom-control-label::before {
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        background-color: $white;
+        border: 1px solid $light-gray;
+    }
+    .custom-control-label::after {
+        top: 0px;
+        left: 0px;
+        width: 25px;
+        height: 25px;
+    }
+    .custom-control-input:checked~.custom-control-label::before {
+        background-color: $dark-green;
+    }
+    .checkbox-label {
+        font-size: $standard;
+        position: absolute;
+        top: 5px;
+        left: 40px;
+    }
+}
+
+//Radio Btn---------------------
+.radio-item {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin: 10px 20px 10px 0px;
+    font-size: $standard;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    input[type=radio] {
+        position: absolute;
+        opacity: 0;
+        left: 1px;
+        height: 24px;
+        width: 24px;
+        z-index: 2;
+        cursor: pointer;
+        &:hover+span {
+            border-color: $blue;
+        }
+    }
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 24px;
+        width: 24px;
+        background-color: $white;
+        border: 1px solid $dark-gray;
+        border-radius: 50%;
+    }
+    input[type=radio]:checked~.checkmark {
+        background-color: $white;
+    }
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    input[type=radio]:checked~.checkmark:after {
+        display: block;
+    }
+    .checkmark:after {
+        top: 3px;
+        left: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: $main-purple;
+    }
+    .radio-description {
+        color: $gray-600;
+        display: block;
+    }
+}
+
+//Slider-----------------------
+.slider-input {
+    .slider-holder {
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        .rangeslider {
+            box-shadow: none;
+            background: $light-gray;
+            .rangeslider__fill {
+                background-color: $dark-green;
+            }
+            .rangeslider__labels {
+                top: 5px;
+            }
+            .rangeslider__handle {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                .rangeslider__handle-tooltip {
+                    background-color: $dark-green;
+                    &:after {
+                        border-top: 8px solid $dark-green;
+                    }
+                }
+            }
+            .rangeslider__handle:focus {
+                outline: none;
+            }
+        }
+        &.shorter {
+            width: 90%;
+        }
+    }
+    .custom-tooltip {
+        display: inline-block;
+        width: 10%;
+        vertical-align: top;
+        position: relative;
+        >span {
+            position: absolute;
+            top: 5px;
+            right: 0px;
+            font-weight: bold;
+            color: $white;
+            background: $dark-green;
+            padding: 10px;
+            border-radius: 3px;
+        }
+    }
+    @media only screen and (max-width: 820px) {
+        .slider-holder {
+            &.shorter {
+                width: 80%;
+            }
+        }
+        .custom-tooltip {
+            width: 20%;
+        }
+    }
+}

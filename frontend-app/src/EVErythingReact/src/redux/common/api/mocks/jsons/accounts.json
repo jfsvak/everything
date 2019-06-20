@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Acount 1",
+        "characterIds": [
+            { 
+                "id": 1,
+                "name": "Guderian" 
+            }
+        ]
+    },
+    {
+        "name": "Account 2",
+        "characterIds": [
+            { 
+                "id":2,
+                "name": "Mulvi" 
+            },
+            { 
+                "id": 3,
+                "name": "Character no 5"
+            }
+        ]
+    }
+
+]

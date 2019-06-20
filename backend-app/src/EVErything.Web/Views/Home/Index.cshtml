@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "EVErything";
+    Layout = "_LayoutBootstrap";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using EVErything.Web.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    // shouldn't come here
+}
+else
+{
+    <div class="container-fluid">
+           <div class="row ">
+                <a asp-controller="Home" asp-action="EVESSoRedirect"><img class="center-block" style="width: 80%;" src="~/images/eve-sso-login-black-large.png" /></a>
+           </div>
+    </div>
+}

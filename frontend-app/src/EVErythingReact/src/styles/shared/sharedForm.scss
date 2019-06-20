@@ -1,0 +1,51 @@
+@import "./variables";
+.input-holder {
+    margin: 10px 0px;
+    text-align: left;
+    .label-text {
+        display: inline-block;
+        vertical-align: top;
+        width: 200px;
+        font-size: $default;
+        text-align: left;
+        margin-top: 10px;
+    }
+    .form-group {
+        display: inline-block;
+        vertical-align: top;
+        width: 300px;
+        .larger-radio-field {
+            .radio-holder {
+                width: 100%;
+            }
+        }
+    }
+    .shorter-field {
+        width: 130px !important;
+    }
+    &.full-legnth {
+        .form-group {
+            width: 100%;
+        }
+    }
+}
+.checkbox-holder {
+    .input-field {
+        width: 49%;
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .input-holder {
+        .form-group {
+            width: 100%;
+        }
+    }
+    .checkbox-holder {
+        .input-field {
+            width: 100%;
+            display: block;
+        }
+    }
+}

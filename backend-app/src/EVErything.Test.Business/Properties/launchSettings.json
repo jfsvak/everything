@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "EVErything.Test.Business": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\devtools\\sandbox\\everything\\EVErything.Test.Business",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "test"
+      }
+    }
+  }
+}

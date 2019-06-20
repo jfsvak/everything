@@ -1,0 +1,36 @@
+﻿@model EVErything.Business.Models.Character
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Character</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterSet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CharacterSet.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Account.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
