@@ -29,9 +29,9 @@ class CharactersContainer extends React.Component<ICharactersProps, ICharactersS
         const { characters } = this.props;
         return (
             <section className="p-3">
-                    <h1>Characters</h1>
+                <h1>Characters</h1>
                 <div className="d-flex justify-content-end mt-2 mb-2 align-items-baseline">
-                    <a href="/Home/EVESSoRedirect" className="text-light d-inline"><i className="fas fa-user-plus"></i></a>
+                    <a href="http://localhost:5001/Home/EVESSoRedirect" className="text-light d-inline"><i className="fas fa-user-plus"></i></a>
                 </div>
                 <div id="characterCards" className="accordion">
                     {characters && characters.map((c, idx) =>

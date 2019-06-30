@@ -1,2 +1,10 @@
 # React Client for EVErything
-React client app for EVErything
+## How to run
+> npm start
+
+
+## Generate API
+> gradle 
+
+
+

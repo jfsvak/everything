@@ -25,7 +25,7 @@
 import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 
 //let defaultBasePath = 'https://localhost';
-let defaultBasePath = '';
+let defaultBasePath = 'http://localhost:5001';
 
 export class Account {
     'id': string;

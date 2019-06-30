@@ -28,6 +28,7 @@ namespace EVErything
     public class Startup
     {
         private readonly ILogger<Startup> logger;
+        private readonly string AllowAnyOrigins = "AllowAnyOrigins";
 
         public IConfiguration Configuration { get; }
 
@@ -42,8 +43,17 @@ namespace EVErything
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
-            //    Console.WriteLine($"{de.Key}={de.Value}");
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAnyOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
 
             Console.WriteLine("EVErything_Identity_Connection={0}", Environment.GetEnvironmentVariable("EVErything_Identity_Connection"));
             Console.WriteLine("EVErything_App_Connection={0}", Environment.GetEnvironmentVariable("EVErything_App_Connection"));
@@ -73,7 +83,6 @@ namespace EVErything
                 // User settings
                 options.User.RequireUniqueEmail = false;
             });
-
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -131,7 +140,7 @@ namespace EVErything
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
-            
+            app.UseCors(AllowAnyOrigins);
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts API v1");
