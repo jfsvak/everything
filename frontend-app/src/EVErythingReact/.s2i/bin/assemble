@@ -7,6 +7,8 @@
 #  https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-echo "---> Building build"
+echo "---> Building bundle"
 #cp -Rf /tmp/src/. ./
+pwd
+ls -al
 npm run build-prod
