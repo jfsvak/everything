@@ -11,6 +11,6 @@ cp -Rf /tmp/src/. ./
 #ls -al
 npm install
 echo "---> Building bundle"
-npm run build-prod
+npm run build-dev
 echo "---> Content of dist folder"
 ls -al dist
