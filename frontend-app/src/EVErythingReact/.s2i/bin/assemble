@@ -6,10 +6,10 @@
 # For more information refer to the documentation:
 #  https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
-
-echo "---> Building bundle"
-#cp -Rf /tmp/src/. ./
-pwd
+echo "---> Copying source from tmp"
+cp -Rf /tmp/src/. ./
 ls -al
-ls -al /tmp/src
+echo "---> Building bundle"
 npm run build-prod
+echo "---> Content of dist folder"
+ls -al dist
