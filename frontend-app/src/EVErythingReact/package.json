@@ -10,7 +10,7 @@
 		"build:production": "webpack --config webpack.config.prod.js",
 		"build:redux-test": "webpack --config webpack.config.redux-test.js && node redux-test-dist/app.js",
 		"build:offline": "webpack --config webpack.config.offline.js",
-		"clean": "rimraf ./dist",
+		"clean": "rmdir ./dist",
 		"start": "npm run run:dev-server",
 		"build-dev": "npm run clean && npm run build:dev",
 		"build-prod": "npm run clean && npm run build:production",
