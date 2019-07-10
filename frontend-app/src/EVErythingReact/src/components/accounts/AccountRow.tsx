@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CharacterCard from './characterCard';
+import CharacterCard from './CharacterCard';
 
 export interface IAccountRowProps {
     account: any;
