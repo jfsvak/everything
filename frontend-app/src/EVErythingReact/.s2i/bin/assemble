@@ -11,4 +11,5 @@ echo "---> Building bundle"
 #cp -Rf /tmp/src/. ./
 pwd
 ls -al
+ls -al /tmp/src
 npm run build-prod
