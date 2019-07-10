@@ -6,8 +6,10 @@ import { EVEApi } from '../common/api/generated/api';
 class CharactersApi {
     static getCharacters() {
         if (configs.type === 'LOCAL') {
+            console.log('getting chars from LOCAL');
             return getJsonAsPromise(jsonTypes.GET_CHARACTERS_API);
         }
+        console.log('getting chars from SERVICE');
         return new EVEApi().apiCharactersGet();
     }
 

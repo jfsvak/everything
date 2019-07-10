@@ -5,16 +5,19 @@
 	"author": "Jesper Svak",
 	"license": "ISC",
 	"scripts": {
-		"build:dev": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0",
+        "run:dev-server": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0",
+        "build:dev": "webpack --config webpack.config.dev.js",
 		"build:production": "webpack --config webpack.config.prod.js",
 		"build:redux-test": "webpack --config webpack.config.redux-test.js && node redux-test-dist/app.js",
 		"build:offline": "webpack --config webpack.config.offline.js",
 		"clean": "rimraf ./dist",
-		"start": "npm run build:dev",
+		"start": "npm run run:dev-server",
+        "build-dev": "npm run clean && npm run build:dev",
+        "build-prod": "npm run clean && npm run build:production",
 		"redux-test": "npm run build:redux-test",
-		"build": "npm run clean && npm run build:production",
 		"offline": "npm run clean && npm run build:offline",
-		"test": "jest"
+        "test": "jest",
+        "server": "node server.js"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",
