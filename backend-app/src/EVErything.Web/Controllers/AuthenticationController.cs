@@ -56,7 +56,7 @@ namespace EVErything.Web.Controllers
         [Route("esicallback")]
         public async Task<IActionResult> ESICallback([FromQuery] string code)
         {
-            _logger.LogInformation("Code from esi" + code);
+            Console.WriteLine("Code from esi" + code);
 
             var client = _clientFactory.CreateClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -73,8 +73,8 @@ namespace EVErything.Web.Controllers
 
             string contentResponse = await response.Content.ReadAsStringAsync();
             var token = JsonConvert.DeserializeObject<AccessToken>(contentResponse);
-            _logger.LogInformation("Content: " + contentResponse);
-            _logger.LogInformation("Access_token: " + token.access_token);
+            Console.WriteLine("Content: " + contentResponse);
+            Console.WriteLine("Access_token: " + token.access_token);
 
             // Verify token
             var esiclient = _clientFactory.CreateClient();
@@ -82,7 +82,7 @@ namespace EVErything.Web.Controllers
             response = await esiclient.GetAsync($"{Configuration["EVE:ESI.Url"]}/verify?datasource={Configuration["EVE:Cluster"]}");
 
             var verifyString = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("character: " + verifyString);
+            Console.WriteLine("character: " + verifyString);
 
             var verify = JsonConvert.DeserializeObject<VerifyViewModel>(verifyString);
 

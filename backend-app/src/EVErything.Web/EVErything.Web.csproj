@@ -9,8 +9,10 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" PrivateAssets="All" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.16" />
