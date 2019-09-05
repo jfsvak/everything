@@ -9,9 +9,6 @@ buildscript {
 
 repositories {
 	mavenCentral()
-	//maven {
-	//		url "https://repo.sebank.se/artifactory/central-cache"
-	//}
 }
 
 
