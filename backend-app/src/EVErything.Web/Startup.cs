@@ -112,11 +112,12 @@ namespace EVErything
 
             services.AddAuthentication(options =>
                 {
-                    options.DefaultAuthenticateScheme = DefaultAuthenticationTypes.ApplicationCookie;// CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultSignInScheme = DefaultAuthenticationTypes.ExternalCookie; //"ExternalCookie"; // CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = "EVESSO";
+                    options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+                    //options.DefaultAuthenticateScheme = DefaultAuthenticationTypes.ApplicationCookie;// CookieAuthenticationDefaults.AuthenticationScheme;
+                    //options.DefaultSignInScheme = DefaultAuthenticationTypes.ExternalCookie; //"ExternalCookie"; // CookieAuthenticationDefaults.AuthenticationScheme;
+                    //options.DefaultChallengeScheme = "EVESSO";
                 })
-                .AddCookie(DefaultAuthenticationTypes.ApplicationCookie)
+                //.AddCookie(DefaultAuthenticationTypes.ApplicationCookie)
                 .AddCookie(DefaultAuthenticationTypes.ExternalCookie)
                 //.AddApplicationCookie();
                 .AddOAuth("EVESSO", options => 
@@ -133,6 +134,7 @@ namespace EVErything
                     options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "CharacterID");
                     options.ClaimActions.MapJsonKey(ClaimTypes.Name, "CharacterName");
                     options.ClaimActions.MapJsonKey("characterid", "CharacterID");
+                    options.ClaimActions.MapJsonKey("charactername", "CharacterName");
                     options.SaveTokens = true;
                     options.Scope.Add("esi-skills.read_skillqueue.v1");
                     options.Scope.Add("esi-skills.read_skills.v1");
@@ -181,7 +183,7 @@ namespace EVErything
 
                             //    var identityResult = await _userManager.CreateAsync(user, verify.CharacterID);
                             //}
-                            await context.HttpContext.SignInAsync("Identity.Application", context.Principal);
+                            //await context.HttpContext.SignInAsync("Identity.Application", context.Principal);
                         },
                         OnTicketReceived = context =>
                         {
